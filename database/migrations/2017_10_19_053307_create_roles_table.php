@@ -24,7 +24,7 @@ class CreateRolesTable extends Migration
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 
-            $table->integer('role_id')->unsigned();
+            $table->integer('role_id')->unsigned()->unique();
             $table->foreign('role_id')->references('id')->on('roles')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
