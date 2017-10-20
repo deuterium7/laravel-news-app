@@ -22,3 +22,4 @@ Route::get('/test', function () {
 })->middleware('role:admin');
 
 Route::resource('articles', 'ArticleController');
+Route::resource('comments', 'CommentController');
