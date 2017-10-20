@@ -17,6 +17,16 @@ class Article extends Model
     }
 
     /**
+     * Связываем с таблицей пользователей
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function users()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
+
+    /**
      * Связываем с таблицей комментариев
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

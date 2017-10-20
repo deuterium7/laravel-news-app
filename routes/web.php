@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'ArticleController@index');
 
 Auth::routes();
 
@@ -22,3 +20,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/test', function () {
    return 'hello admin';
 })->middleware('role:admin');
+
+Route::resource('articles', 'ArticleController');

@@ -38,6 +38,16 @@ class User extends Authenticatable
     }
 
     /**
+     * Связываем с таблицей новостей
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function articles()
+    {
+        return $this->hasMany('App\Models\Article');
+    }
+
+    /**
      * Проверяем есть ли данная роль у пользователя
      *
      * @param $check
