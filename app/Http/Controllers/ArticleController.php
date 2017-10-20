@@ -72,8 +72,13 @@ class ArticleController extends Controller
     {
         $article = Article::find($id);
         $author = User::with('articles')->where('id', $article->user_id)->get();
+        $category = Category::with('articles')->where('id', $article->category_id)->get();
 
-        return view('articles.show', ['article' => $article, 'author' => $author[0]->name]);
+        return view('articles.show', [
+            'article' => $article,
+            'author' => $author[0]->name,
+            'category' => $category[0]->name
+        ]);
     }
 
     /**

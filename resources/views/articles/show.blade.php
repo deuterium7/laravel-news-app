@@ -6,7 +6,16 @@
             <div class="col-md-4"><img src="{{ $article->image }}"></div>
             <div class="col-md-8">
                 <h2 style="text-align: center">{{ $article->title }}</h2>
-                <h4>Автор статьи: {{ $author }}</h4>
+                <h4>Категория:
+                    <a href="#" title="{{ $category }}">
+                        {{ $category }}
+                    </a>
+                </h4>
+                <h4>Автор статьи:
+                    <a href="#" title="{{ $author }}">
+                        {{ $author }}
+                    </a>
+                </h4>
                 <p style="text-align: justify">{{ $article->body }}</p>
                 @if($article->created_at)
                     <div class="col-md-6">Дата создания: {{ $article->created_at }}</div>
