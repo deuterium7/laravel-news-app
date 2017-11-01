@@ -11,8 +11,18 @@ class Comment extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function articles()
+    public function article()
     {
         return $this->belongsTo('App\Models\Article');
+    }
+
+    /**
+     * Связываем с таблицей пользователей
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

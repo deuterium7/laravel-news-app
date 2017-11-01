@@ -48,6 +48,16 @@ class User extends Authenticatable
     }
 
     /**
+     * Связываем с таблицей комментариев
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    /**
      * Проверяем есть ли данная роль у пользователя
      *
      * @param $check

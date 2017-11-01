@@ -11,7 +11,7 @@ class Article extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function categories()
+    public function category()
     {
         return $this->belongsTo('App\Models\Category');
     }
@@ -21,7 +21,7 @@ class Article extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function users()
+    public function author()
     {
         return $this->belongsTo('App\Models\User');
     }
