@@ -61,6 +61,7 @@ class User extends Authenticatable
      * Проверяем есть ли данная роль у пользователя
      *
      * @param $check
+     *
      * @return bool
      */
     public function hasRole($check)
