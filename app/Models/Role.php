@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Role extends Model
 {
     /**
-     * Устанавливаем связь с таблицей пользователей
+     * Устанавливаем связь с таблицей пользователей.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */

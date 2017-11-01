@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Article extends Model
 {
     /**
-     * Связываем с таблицей категорий
+     * Связываем с таблицей категорий.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -17,7 +17,7 @@ class Article extends Model
     }
 
     /**
-     * Связываем с таблицей пользователей
+     * Связываем с таблицей пользователей.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -27,7 +27,7 @@ class Article extends Model
     }
 
     /**
-     * Связываем с таблицей комментариев
+     * Связываем с таблицей комментариев.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */

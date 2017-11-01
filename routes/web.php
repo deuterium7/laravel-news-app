@@ -23,3 +23,4 @@ Route::get('/test', function () {
 
 Route::resource('articles', 'ArticleController');
 Route::resource('comments', 'CommentController');
+Route::resource('categories', 'CategoryController');

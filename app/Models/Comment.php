@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Comment extends Model
 {
     /**
-     * Связываем с таблицей новостей
+     * Связываем с таблицей новостей.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -17,7 +17,7 @@ class Comment extends Model
     }
 
     /**
-     * Связываем с таблицей пользователей
+     * Связываем с таблицей пользователей.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

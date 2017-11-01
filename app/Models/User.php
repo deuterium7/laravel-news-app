@@ -28,7 +28,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * Связываем с таблицей ролей
+     * Связываем с таблицей ролей.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
@@ -38,7 +38,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Связываем с таблицей новостей
+     * Связываем с таблицей новостей.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
@@ -48,7 +48,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Связываем с таблицей комментариев
+     * Связываем с таблицей комментариев.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
@@ -58,7 +58,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Проверяем есть ли данная роль у пользователя
+     * Проверяем есть ли данная роль у пользователя.
      *
      * @param $check
      *

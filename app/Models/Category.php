@@ -6,8 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
+    public $timestamps = false;
+
     /**
-     * Связываем с таблицей новостей
+     * Связываем с таблицей новостей.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
