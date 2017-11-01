@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use App\Models\User;
 use App\Models\Article;
 use App\Models\Category;
@@ -22,7 +23,7 @@ class ArticleController extends Controller
             ->orderBy('updated_at', 'desc')
             ->simplePaginate(10);
 
-        return view('articles.index', ['articles' => $articles]);
+        return view('articles.index', compact('articles'));
     }
 
     /**
@@ -73,11 +74,13 @@ class ArticleController extends Controller
         $article = Article::find($id);
         $author = User::with('articles')->where('id', $article->user_id)->get();
         $category = Category::with('articles')->where('id', $article->category_id)->get();
+        $comments = Comment::with('user')->where('article_id', $id)->get();
 
         return view('articles.show', [
             'article' => $article,
             'author' => $author[0]->name,
-            'category' => $category[0]->name
+            'category' => $category[0]->name,
+            'comments' => $comments,
         ]);
     }
 
@@ -90,7 +93,7 @@ class ArticleController extends Controller
     public function edit($id)
     {
         $article = Article::find($id);
-        return view('articles.edit', ['article' => $article]);
+        return view('articles.edit', compact('article'));
     }
 
     /**

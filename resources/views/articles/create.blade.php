@@ -3,8 +3,9 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <h3 style="text-align: center;">Добавить новость</h3>
-            {!! Form::open(['route' => 'articles.store']) !!}
+            <div class="news-create" style="background-color: red; color: white;">
+                <h3 style="text-align: center;">Добавить новость</h3>
+                {!! Form::open(['route' => 'articles.store']) !!}
                 @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul>
@@ -41,7 +42,8 @@
                         {!! Form::submit('Create', ['class'=>'btn btn-primary']) !!}
                     </div>
                 </div>
-            {!! Form::close() !!}
+                {!! Form::close() !!}
+            </div>
         </div>
     </div>
 @endsection
