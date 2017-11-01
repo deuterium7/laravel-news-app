@@ -38,7 +38,7 @@
             <div class="comment-add" style="background-color: blue; color: white;">
                 <h4 style="text-align: center">Добавить комментарий</h4>
                 {!! Form::open(['route' => 'comments.store']) !!}
-                {!! Form::hidden('articles_id', $article->id) !!}
+                {!! Form::hidden('article_id', $article->id) !!}
                 <div class="form-group">
                     {!! Form::textarea('body', null, ['class'=>'form-control']) !!}
                 </div>
