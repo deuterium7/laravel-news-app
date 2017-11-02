@@ -21,7 +21,7 @@ class ArticleController extends Controller
     {
         $articles = DB::table('articles')
             ->orderBy('updated_at', 'desc')
-            ->simplePaginate(10);
+            ->paginate(10);
 
         return view('articles.index', compact('articles'));
     }

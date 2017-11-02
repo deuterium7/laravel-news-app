@@ -12,12 +12,13 @@ class OwnerRoles
      * @param $request
      * @param Closure $next
      * @param $role
+     *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|mixed
      */
     public function handle($request, Closure $next, $role)
     {
-        if (! $request->user()->hasRole($role)) {
-            return redirect()->back();
+        if (!\Auth::check() || !\Auth::user()->hasRole($role)) {
+            return redirect('/login');
         }
 
         return $next($request);

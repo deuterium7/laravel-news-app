@@ -29,5 +29,6 @@
                 @endforeach
             </div>
         </div>
+        <div style="text-align: center">{{ $articles->links() }}</div>
     </div>
 @endsection
