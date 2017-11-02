@@ -67,16 +67,15 @@ class ArticleController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  Article  $article
      *
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Article $article)
     {
-        $article = Article::find($id);
         $author = User::with('articles')->where('id', $article->user_id)->get();
         $category = Category::with('articles')->where('id', $article->category_id)->get();
-        $comments = Comment::with('user')->where('article_id', $id)->get();
+        $comments = Comment::with('user')->where('article_id', $article->id)->get();
 
         return view('articles.show', [
             'article' => $article,
@@ -89,13 +88,12 @@ class ArticleController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  Article  $article
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Article $article)
     {
-        $article = Article::find($id);
         return view('articles.edit', compact('article'));
     }
 
@@ -103,14 +101,12 @@ class ArticleController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  Article  $article
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Article $article)
     {
-        $article = Article::find($id);
-
         $article->title = $request->title;
         $article->image = $request->image;
         $article->body = $request->body;
@@ -122,15 +118,13 @@ class ArticleController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  Article  $article
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Article $article)
     {
-        $article = Article::find($id);
         $article->delete();
-
         return redirect('/articles');
     }
 }

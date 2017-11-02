@@ -9,7 +9,7 @@
                     <div class="col-md-8">
                         <h2>{{ $article->title }}</h2>
                         <h4>Категория:
-                            <a href="#" title="{{ $category }}">
+                            <a href="{{ route('categories.show', ['id' => $article->category_id]) }}" title="{{ $category }}">
                                 {{ $category }}
                             </a>
                         </h4>
