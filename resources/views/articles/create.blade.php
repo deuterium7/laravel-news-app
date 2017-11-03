@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="news-create" style="background-color: red; color: white;">
-                <h3 style="text-align: center;">Добавить новость</h3>
+                <h3 style="text-align: center;">@lang('catalog.addNews')</h3>
                 {!! Form::open(['route' => 'articles.store']) !!}
                 @if ($errors->any())
                     <div class="alert alert-danger">
@@ -16,7 +16,7 @@
                     </div>
                 @endif
                 <div class="form-group">
-                    {!! Form::label('category') !!}
+                    <label for="category">@lang('catalog.category')</label>
                     <select id="category" class="form-control" name="category" required>
                         @foreach($categories as $id => $name)
                             <option value="{{ $id }}" {{ (int)$id === (int) old('category') ? 'selected' : '' }}>
@@ -26,20 +26,20 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    {!! Form::label('title') !!}
+                    <label for="title">@lang('catalog.title')</label>
                     {!! Form::text('title', null, ['class'=>'form-control']) !!}
                 </div>
                 <div class="form-group">
-                    {!! Form::label('image') !!}
+                    <label for="image">@lang('catalog.image')</label>
                     {!! Form::text('image', null, ['class'=>'form-control']) !!}
                 </div>
                 <div class="form-group">
-                    {!! Form::label('body') !!}
+                    <label for="body">@lang('catalog.body')</label>
                     {!! Form::textarea('body', null, ['class'=>'form-control']) !!}
                 </div>
                 <div class="form-group">
                     <div style="text-align: center">
-                        {!! Form::submit('Create', ['class'=>'btn btn-primary']) !!}
+                        <input type="submit" value="{{ trans('catalog.create') }}" class="btn btn-primary">
                     </div>
                 </div>
                 {!! Form::close() !!}

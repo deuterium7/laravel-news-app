@@ -20,7 +20,7 @@
                                 </h3>
                                 <p style="text-align: justify">{{ mb_substr($article->body, 0, 300) . '...' }}</p>
                                 <a href="{{ route('articles.show', ['article' => $article->id]) }}" title="{{ $article->title }}">
-                                    Читать далее
+                                    @lang('catalog.read')
                                 </a>
                             </div>
                         </div>

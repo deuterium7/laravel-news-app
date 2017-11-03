@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>@lang('catalog.news')</title>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -29,22 +29,22 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
+                        @lang('catalog.news')
                     </a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        <li><a href="{{ route('categories.index') }}">Categories</a></li>
+                        <li><a href="{{ route('categories.index') }}">@lang('catalog.categories')</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         @guest
-                            <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
+                            <li><a href="{{ route('login') }}">@lang('catalog.login')</a></li>
+                            <li><a href="{{ route('register') }}">@lang('catalog.register')</a></li>
                         @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -56,7 +56,7 @@
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                            Logout
+                                            @lang('catalog.logout')
                                         </a>
 
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -66,6 +66,30 @@
                                 </ul>
                             </li>
                         @endguest
+                        <!-- Locales -->
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                {{ trans('catalog.locales') }} <span class="caret"></span>
+                            </a>
+
+                            <ul class="dropdown-menu" role="menu">
+                                @if(App::getLocale() !== 'ru')
+                                    <li>
+                                        <a href="{{ route('locales', ['locale' => 'ru']) }}">@lang('catalog.russian')</a>
+                                    </li>
+                                @endif
+                                @if(App::getLocale() !== 'uk')
+                                    <li>
+                                        <a href="{{ route('locales', ['locale' => 'uk']) }}">@lang('catalog.ukraine')</a>
+                                    </li>
+                                @endif
+                                @if(App::getLocale() !== 'en')
+                                    <li>
+                                        <a href="{{ route('locales', ['locale' => 'en']) }}">@lang('catalog.english')</a>
+                                    </li>
+                                @endif
+                            </ul>
+                        </li>
                     </ul>
                 </div>
             </div>

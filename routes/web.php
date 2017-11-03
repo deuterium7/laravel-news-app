@@ -29,5 +29,11 @@ Route::get('articles', 'ArticleController@index')->name('articles.index');
 Route::get('categories', 'CategoryController@index')->name('categories.index');
 Route::get('categories/{category}', 'CategoryController@show')->name('categories.show');
 Route::get('/', 'ArticleController@index');
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('home', 'HomeController@index')->name('home');
+Route::get('locale/{locale}', function ($locale) {
+    if (in_array($locale, Config::get('app.locales'))) {
+        Session::put('locale', $locale);
+        return redirect()->back();
+    }
+})->name('locales');
 Auth::routes();
