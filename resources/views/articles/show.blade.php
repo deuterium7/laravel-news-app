@@ -24,17 +24,6 @@
                     </div>
                 </div>
             </div>
-            <div class="comments" style="background-color: green; color: white;">
-                @foreach($comments as $comment)
-                    <h4>[<a href="#" title="{{ $comment->user_id }}">
-                            {{ $comment->user->name }}
-                        </a>]
-                    </h4>
-                    <p class="body" style="text-align: justify">{{ $comment->body }}</p>
-                    <div class="date-create">Дата создания: {{ $comment->created_at }}</div>
-                    <div class="date-update">Дата обновления: {{ $comment->updated_at }}</div>
-                @endforeach
-            </div>
             <div class="comment-add" style="background-color: blue; color: white;">
                 <h4 style="text-align: center">Добавить комментарий</h4>
                 {!! Form::open(['route' => 'comments.store']) !!}
@@ -47,6 +36,18 @@
                 </div>
                 {!! Form::close() !!}
             </div>
+            <div class="comments" style="background-color: green; color: white;">
+                @foreach($comments as $comment)
+                    <h4>[<a href="#" title="{{ $comment->user_id }}">
+                            {{ $comment->user->name }}
+                        </a>]
+                    </h4>
+                    <p class="body" style="text-align: justify">{{ $comment->body }}</p>
+                    <div class="date-create">Дата создания: {{ $comment->created_at }}</div>
+                    <div class="date-update">Дата обновления: {{ $comment->updated_at }}</div>
+                @endforeach
+            </div>
+            <div style="text-align: center">{{ $comments->links() }}</div>
         </div>
     </div>
 @endsection

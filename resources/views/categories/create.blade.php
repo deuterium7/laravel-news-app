@@ -20,6 +20,10 @@
                     {!! Form::text('name', null, ['class'=>'form-control']) !!}
                 </div>
                 <div class="form-group">
+                    {!! Form::label('image') !!}
+                    {!! Form::text('image', null, ['class'=>'form-control']) !!}
+                </div>
+                <div class="form-group">
                     <div style="text-align: center">
                         {!! Form::submit('Create', ['class'=>'btn btn-primary']) !!}
                     </div>

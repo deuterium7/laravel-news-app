@@ -89,6 +89,7 @@ class CategoryController extends Controller
     public function update(Request $request, Category $category)
     {
         $category->name = $request->name;
+        $category->image = $request->image;
         $category->save();
 
         return redirect('/categories');

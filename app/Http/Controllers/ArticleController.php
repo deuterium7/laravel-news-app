@@ -73,9 +73,16 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
-        $author = User::with('articles')->where('id', $article->user_id)->get();
-        $category = Category::with('articles')->where('id', $article->category_id)->get();
-        $comments = Comment::with('user')->where('article_id', $article->id)->get();
+        $author = User::with('articles')
+            ->where('id', $article->user_id)
+            ->get();
+        $category = Category::with('articles')
+            ->where('id', $article->category_id)
+            ->get();
+        $comments = Comment::with('user')
+            ->where('article_id', $article->id)
+            ->orderBy('updated_at', 'desc')
+            ->paginate(5);
 
         return view('articles.show', [
             'article' => $article,
