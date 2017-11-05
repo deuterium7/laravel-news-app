@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="news-single" style="background-color: red; color: white;">
+            <div class="article" style="background-color: red; color: white;">
                 <div class="clearfix">
                     <div class="col-md-4"><img src="{{ $article->image }}"></div>
                     <div class="col-md-8">
@@ -19,9 +19,10 @@
                             </a>
                         </h4>
                         <p style="text-align: justify">{{ $article->body }}</p>
-                        <div class="col-md-6">@lang('catalog.createdAt'): {{ $article->created_at }}</div>
-                        @if($article->updated_at > $article->created_at)
-                            <div class="col-md-6">@lang('catalog.updatedAt'): {{ $article->updated_at }}</div>
+                        @if($article->updated_at <= $article->created_at)
+                            <div>@lang('catalog.createdAt'): {{ $article->created_at }}</div>
+                        @else
+                            <div>@lang('catalog.updatedAt'): {{ $article->updated_at }}</div>
                         @endif
                     </div>
                 </div>
@@ -47,10 +48,11 @@
                             </a>]
                         </h5>
                         <p class="body" style="text-align: justify">{{ $comment->body }}</p>
-                        <div class="date-create" style="text-align: right">
-                            @lang('catalog.createdAt'): {{ $comment->created_at }}
-                        </div>
-                        @if($comment->updated_at > $comment->created_at)
+                        @if($comment->updated_at <= $comment->created_at)
+                            <div class="date-create" style="text-align: right">
+                                @lang('catalog.createdAt'): {{ $comment->created_at }}
+                            </div>
+                        @else
                             <div class="date-update" style="text-align: right">
                                 @lang('catalog.updatedAt'): {{ $comment->updated_at }}
                             </div>

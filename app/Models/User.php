@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
 {
@@ -67,5 +68,29 @@ class User extends Authenticatable
     public function hasRole($check)
     {
         return in_array($check, array_pluck($this->roles->toArray(), 'slug'));
+    }
+
+    /**
+     * Создать пользователя провайдером
+     *
+     * @param $providerUser
+     *
+     * @return mixed
+     */
+    public static function createBySocialProvider($providerUser)
+    {
+        $user = self::create([
+            'email' => $providerUser->getEmail(),
+            'username' => $providerUser->getNickname(),
+            'name' => $providerUser->getName(),
+            'password' => bcrypt('secret'),
+        ]);
+
+        DB::table('role_user')->insert([
+            'user_id' => $user->id,
+            'role_id' => 1,
+        ]);
+
+        return $user;
     }
 }

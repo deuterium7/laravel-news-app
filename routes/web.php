@@ -25,6 +25,8 @@ Route::middleware('role:user')->group(function () {
     Route::get('comments/{comment}/edit', 'CommentController@edit')->name('comments.edit');
 });
 
+Route::get('social/{provider}', 'SocialController@login');
+Route::get('social/callback/{provider}', 'SocialController@callback');
 Route::get('articles', 'ArticleController@index')->name('articles.index');
 Route::get('categories', 'CategoryController@index')->name('categories.index');
 Route::get('categories/{category}', 'CategoryController@show')->name('categories.show');
