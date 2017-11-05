@@ -3,9 +3,9 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="news">
+            <div class="articles">
                 @foreach($articles as $article)
-                    <div class="news-single" style="background-color: red; color: white;">
+                    <div class="article" style="background-color: red; color: white;">
                         <div class="clearfix">
                             <div class="col-md-4">
                                 <a href="{{ route('articles.show', ['article' => $article->id]) }}" title="{{ $article->title }}">

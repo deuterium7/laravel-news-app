@@ -65,7 +65,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Europe/Kiev',
 
     /*
     |--------------------------------------------------------------------------
@@ -170,6 +170,7 @@ return [
          */
         Recca0120\LaravelTracy\LaravelTracyServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
+        SocialiteProviders\Manager\ServiceProvider::class,
 
         /*
          * Application Service Providers...

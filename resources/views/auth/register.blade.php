@@ -12,7 +12,7 @@
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-4 control-label">@lang('catalog.name')</label>
+                            <label for="name" class="col-md-4 control-label">@lang('catalog.nameUser')</label>
 
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
@@ -66,6 +66,13 @@
                                 <button type="submit" class="btn btn-primary">
                                     @lang('catalog.register')
                                 </button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-4">
+                                <div class="col-md-4"><a href="{{ url('/social/vkontakte') }}">vk</a></div>
+                                <div class="col-md-4"><a href="{{ url('/social/google') }}">Google+</a></div>
+                                <div class="col-md-4"><a href="{{ url('/social/github') }}">Github</a></div>
                             </div>
                         </div>
                     </form>
