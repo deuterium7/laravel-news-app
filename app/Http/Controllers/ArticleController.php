@@ -76,7 +76,7 @@ class ArticleController extends Controller
     public function show(Article $article)
     {
         if ($article->visibility == false) {
-            return redirect()->back();
+            return redirect()->back()->with('message', trans('catalog.blockedNews'));
         }
 
         $author = User::with('articles')

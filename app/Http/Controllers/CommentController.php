@@ -42,11 +42,12 @@ class CommentController extends Controller
      */
     public function edit(Comment $comment)
     {
-        if (
-            Carbon::now()->diffInMinutes($comment->created_at) > 5
-            || \Auth::user()->id !== $comment->user_id
-        ) {
-            return redirect()->back();
+        if (\Auth::user()->id !== $comment->user_id) {
+            return redirect()->back()->with('message', trans('catalog.dontAccessOperation'));
+        }
+
+        if (Carbon::now()->diffInMinutes($comment->created_at) > 5) {
+            return redirect()->back()->with('message', trans('catalog.timeExpired'));
         }
 
         return view('comments.edit', compact('comment'));
