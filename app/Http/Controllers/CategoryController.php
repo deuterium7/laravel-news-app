@@ -60,9 +60,11 @@ class CategoryController extends Controller
     public function show(Category $category)
     {
         $articles = Article::with('category')
+            ->where('visibility', true)
             ->where('category_id', $category->id)
             ->orderBy('updated_at', 'desc')
             ->paginate(10);
+
         return view('categories.show', compact('articles'));
     }
 
