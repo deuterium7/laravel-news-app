@@ -17,15 +17,19 @@
                 @endif
                 <div class="form-group">
                     <label for="title">@lang('catalog.title')</label>
-                    {!! Form::text('title', $article->title, ['class'=>'form-control']) !!}
+                    {{ Form::text('title', $article->title, ['class'=>'form-control']) }}
                 </div>
                 <div class="form-group">
                     <label for="image">@lang('catalog.image')</label>
-                    {!! Form::text('image', $article->image, ['class'=>'form-control']) !!}
+                    {{ Form::text('image', $article->image, ['class'=>'form-control']) }}
                 </div>
                 <div class="form-group">
                     <label for="body">@lang('catalog.body')</label>
-                    {!! Form::textarea('body', $article->body, ['class'=>'form-control']) !!}
+                    {{ Form::textarea('body', $article->body, ['class'=>'form-control']) }}
+                </div>
+                <div class="form-group">
+                    <label for="visibility">@lang('catalog.visibility')</label>
+                    {{ Form::checkbox('visibility', 1, $article->visibility) }}
                 </div>
                 <div class="form-group">
                     <div style="text-align: center">

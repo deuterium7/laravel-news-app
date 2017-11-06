@@ -11,6 +11,13 @@ return [
     'logout' => 'Logout',
     'register' => 'Registration',
 
+    // Сообщения
+    'plsLogIn' => 'You do not have rights to this operation! Log In Please.',
+    'uHaveBan' => 'You have ban! Please Contact Us.',
+    'timeExpired' => 'We\'re sorry, but the time to edit this comment has expired.',
+    'dontAccessOperation' => 'You don\'t have access to this operation!',
+    'blockedNews' => 'This news is blocked!',
+
     // Другое
     'read' => 'Read more',
     'dashboard' => 'Dashboard',
@@ -42,4 +49,5 @@ return [
     'locales' => 'Locales',
     'russian' => 'Russian',
     'ukraine' => 'Ukraine',
+    'visibility' => 'Visibility',
 ];

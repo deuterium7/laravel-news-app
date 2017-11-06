@@ -12,6 +12,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="shortcut icon" href="{{ asset('favicon.png') }}">
 </head>
 <body>
     <div id="app">
@@ -94,6 +95,10 @@
                 </div>
             </div>
         </nav>
+
+        @if ( session()->has('message') )
+            <div class="alert alert-info">{{ session()->get('message') }}</div>
+        @endif
 
         @yield('content')
     </div>

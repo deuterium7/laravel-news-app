@@ -36,13 +36,20 @@ class CommentController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  Comment  $comment
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Comment $comment)
     {
-        $comment = Comment::find($id);
+        if (\Auth::user()->id !== $comment->user_id) {
+            return redirect()->back()->with('message', trans('catalog.dontAccessOperation'));
+        }
+
+        if (Carbon::now()->diffInMinutes($comment->created_at) > 5) {
+            return redirect()->back()->with('message', trans('catalog.timeExpired'));
+        }
+
         return view('comments.edit', compact('comment'));
     }
 
@@ -50,14 +57,12 @@ class CommentController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  Comment  $comment
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Comment $comment)
     {
-        $comment = Comment::find($id);
-
         $comment->body = $request->body;
         $comment->save();
 
@@ -67,15 +72,13 @@ class CommentController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  Comment  $comment
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Comment $comment)
     {
-        $comment = Comment::find($id);
         $comment->delete();
-
         return redirect()->back();
     }
 }

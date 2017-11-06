@@ -17,11 +17,11 @@
                 @endif
                 <div class="form-group">
                     <label for="name">@lang('catalog.nameCategory')</label>
-                    {!! Form::text('name', null, ['class'=>'form-control']) !!}
+                    {{ Form::text('name', null, ['class'=>'form-control']) }}
                 </div>
                 <div class="form-group">
                     <label for="name">@lang('catalog.image')</label>
-                    {!! Form::text('image', null, ['class'=>'form-control']) !!}
+                    {{ Form::text('image', null, ['class'=>'form-control']) }}
                 </div>
                 <div class="form-group">
                     <div style="text-align: center">

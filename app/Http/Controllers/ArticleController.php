@@ -20,6 +20,7 @@ class ArticleController extends Controller
     public function index()
     {
         $articles = DB::table('articles')
+            ->where('visibility', true)
             ->orderBy('updated_at', 'desc')
             ->paginate(10);
 
@@ -57,6 +58,7 @@ class ArticleController extends Controller
             'title' => $request->title,
             'image' => $request->image ? $request->image : 'http://www.veho.ru/img/photo_not_found.gif',
             'body' => $request->body,
+            'visibility' => $request->visibility !== null ? $request->visibility : false,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
@@ -73,6 +75,10 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
+        if ($article->visibility == false) {
+            return redirect()->back()->with('message', trans('catalog.blockedNews'));
+        }
+
         $author = User::with('articles')
             ->where('id', $article->user_id)
             ->get();
@@ -117,6 +123,7 @@ class ArticleController extends Controller
         $article->title = $request->title;
         $article->image = $request->image;
         $article->body = $request->body;
+        $article->visibility = $request->visibility !== null ? $request->visibility : false;
         $article->save();
 
         return redirect('/articles');
