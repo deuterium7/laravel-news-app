@@ -20,7 +20,7 @@ class OwnerRoles
     public function handle($request, Closure $next, $role)
     {
         if (!Auth::check() || !Auth::user()->hasRole($role)) {
-            return redirect('/login')->with('message', trans('catalog.plsLogIn'));
+            return redirect()->back()->with('message', trans('catalog.plsLogIn'));
         }
 
         if (
