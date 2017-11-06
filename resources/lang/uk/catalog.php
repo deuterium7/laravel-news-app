@@ -41,4 +41,5 @@ return [
     'locales' => 'Локалізація',
     'russian' => 'Російська',
     'english' => 'Англійська',
+    'visibility' => 'Видимість',
 ];

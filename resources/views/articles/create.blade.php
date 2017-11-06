@@ -27,15 +27,19 @@
                 </div>
                 <div class="form-group">
                     <label for="title">@lang('catalog.title')</label>
-                    {!! Form::text('title', null, ['class'=>'form-control']) !!}
+                    {{ Form::text('title', null, ['class'=>'form-control']) }}
                 </div>
                 <div class="form-group">
                     <label for="image">@lang('catalog.image')</label>
-                    {!! Form::text('image', null, ['class'=>'form-control']) !!}
+                    {{ Form::text('image', null, ['class'=>'form-control']) }}
                 </div>
                 <div class="form-group">
                     <label for="body">@lang('catalog.body')</label>
-                    {!! Form::textarea('body', null, ['class'=>'form-control']) !!}
+                    {{ Form::textarea('body', null, ['class'=>'form-control']) }}
+                </div>
+                <div class="form-group">
+                    <label for="visibility">@lang('catalog.visibility')</label>
+                    {{ Form::checkbox('visibility', 1, true) }}
                 </div>
                 <div class="form-group">
                     <div style="text-align: center">

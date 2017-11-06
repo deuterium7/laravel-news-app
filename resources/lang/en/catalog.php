@@ -42,4 +42,5 @@ return [
     'locales' => 'Locales',
     'russian' => 'Russian',
     'ukraine' => 'Ukraine',
+    'visibility' => 'Visibility',
 ];

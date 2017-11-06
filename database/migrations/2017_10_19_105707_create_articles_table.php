@@ -20,6 +20,7 @@ class CreateArticlesTable extends Migration
             $table->string('title', 255);
             $table->string('image', 255);
             $table->text('body');
+            $table->boolean('visibility')->default(true);
             $table->timestamps();
         });
 
