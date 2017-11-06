@@ -11,6 +11,10 @@ return [
     'logout' => 'Logout',
     'register' => 'Registration',
 
+    // Сообщения
+    'plsLogIn' => 'Log In Please!',
+    'uHaveBan' => 'You have ban! Please Contact Us.',
+
     // Другое
     'read' => 'Read more',
     'dashboard' => 'Dashboard',

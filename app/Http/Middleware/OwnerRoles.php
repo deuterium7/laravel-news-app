@@ -3,22 +3,31 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class OwnerRoles
 {
     /**
-     * Проверка на право доступа
+     * Проверка доступа
      *
      * @param $request
      * @param Closure $next
-     * @param $role
+     * @param $role ['user'|'admin']
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|mixed
      */
     public function handle($request, Closure $next, $role)
     {
-        if (!\Auth::check() || !\Auth::user()->hasRole($role)) {
-            return redirect('/login');
+        if (!Auth::check() || !Auth::user()->hasRole($role)) {
+            return redirect('/login')->with('message', trans('catalog.plsLogIn'));
+        }
+
+        if (
+            Auth::user()->ban !== null
+            && Carbon::now() < new Carbon(Auth::user()->ban)
+        ) {
+            return redirect()->back()->with('message', trans('catalog.uHaveBan'));
         }
 
         return $next($request);
