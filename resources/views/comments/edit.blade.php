@@ -17,7 +17,7 @@
                 @endif
                 <div class="form-group">
                     <label for="body">@lang('catalog.body')</label>
-                    {!! Form::textarea('body', $comment->body, ['class'=>'form-control']) !!}
+                    {{ Form::textarea('body', $comment->body, ['class'=>'form-control']) }}
                 </div>
                 <div class="form-group">
                     <div style="text-align: center">

@@ -17,7 +17,7 @@
                 @endif
                 <div class="form-group">
                     <label for="name">@lang('catalog.nameCategory')</label>
-                    {!! Form::text('name', $category->name, ['class'=>'form-control']) !!}
+                    {{ Form::text('name', $category->name, ['class'=>'form-control']) }}
                 </div>
                 <div class="form-group">
                     <div style="text-align: center">
