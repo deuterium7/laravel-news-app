@@ -8,6 +8,6 @@ $factory->define(\App\Models\Article::class, function (Faker $faker) {
         'user_id' => 1, // is: admin
         'title' => $faker->unique()->text,
         'image' => 'http://www.veho.ru/img/photo_not_found.gif',
-        'body' => $faker->paragraph(10),
+        'body' => $faker->realText(3000),
     ];
 });
