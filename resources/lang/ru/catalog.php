@@ -49,4 +49,12 @@ return [
     'english' => 'Английский',
     'ukraine' => 'Украинский',
     'visibility' => 'Видимость',
+    'thanksForRegistration' => 'Благодарим за регистрацию',
+    'yourContacts' => 'Ваши контактные данные',
+    'loginClickLink' => 'Для того чтобы залогиниться перейдите по',
+    'link' => 'ссылке',
+    'articleCreated' => 'Статья добавлена',
+    'articleContent' => 'Содержимое статьи',
+    'categoryCreated' => 'Категория добавлена',
+    'categoryContent' => 'Содержимое категории',
 ];

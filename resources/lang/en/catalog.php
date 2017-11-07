@@ -50,4 +50,12 @@ return [
     'russian' => 'Russian',
     'ukraine' => 'Ukraine',
     'visibility' => 'Visibility',
+    'thanksForRegistration' => 'Thank You For Registering',
+    'yourContacts' => 'Your Contact Information',
+    'loginClickLink' => 'In Order To Login Click On The',
+    'link' => 'Link',
+    'articleCreated' => 'Article Added',
+    'articleContent' => 'Content Of The Article',
+    'categoryCreated' => 'Category Added',
+    'categoryContent' => 'Content Of The Category',
 ];
