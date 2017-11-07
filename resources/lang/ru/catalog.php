@@ -57,4 +57,8 @@ return [
     'articleContent' => 'Содержимое статьи',
     'categoryCreated' => 'Категория добавлена',
     'categoryContent' => 'Содержимое категории',
+    'profile' => 'Профиль',
+    'lastComments' => 'Последние комментарии',
+    'in' => 'В',
+    'theme' => 'теме',
 ];

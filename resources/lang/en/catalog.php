@@ -58,4 +58,8 @@ return [
     'articleContent' => 'Content Of The Article',
     'categoryCreated' => 'Category Added',
     'categoryContent' => 'Content Of The Category',
+    'profile' => 'Profile',
+    'lastComments' => 'Latest Comments',
+    'in' => 'In The',
+    'theme' => 'Subject',
 ];

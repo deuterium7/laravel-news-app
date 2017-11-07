@@ -5,7 +5,7 @@
         <div class="row">
             <div class="articles">
                 @foreach($articles as $article)
-                    <div class="article" style="background-color: red; color: white;">
+                    <div class="article">
                         <div class="clearfix">
                             <div class="col-md-4">
                                 <a href="{{ route('articles.show', ['article' => $article->id]) }}" title="{{ $article->title }}">

@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="news-create" style="background-color: red; color: white;">
+            <div class="news-create">
                 <h3 style="text-align: center;">@lang('catalog.addNews')</h3>
                 {!! Form::open(['route' => 'articles.store']) !!}
                 @if ($errors->any())
@@ -26,7 +26,7 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="title">@lang('catalog.title')</label>
+                    <label for="title">@lang('catalog.title') *</label>
                     {{ Form::text('title', null, ['class'=>'form-control']) }}
                 </div>
                 <div class="form-group">
@@ -34,7 +34,7 @@
                     {{ Form::text('image', null, ['class'=>'form-control']) }}
                 </div>
                 <div class="form-group">
-                    <label for="body">@lang('catalog.body')</label>
+                    <label for="body">@lang('catalog.body') *</label>
                     {{ Form::textarea('body', null, ['class'=>'form-control']) }}
                 </div>
                 <div class="form-group">

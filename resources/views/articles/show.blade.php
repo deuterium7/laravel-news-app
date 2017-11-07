@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="article" style="background-color: red; color: white;">
+            <div class="article">
                 <div class="clearfix">
                     <div class="col-md-4"><img src="{{ $article->image }}"></div>
                     <div class="col-md-8">
@@ -14,7 +14,7 @@
                             </a>
                         </h4>
                         <h4>@lang('catalog.author'):
-                            <a href="#" title="{{ $author }}">
+                            <a href="{{ route('users.show', ['user' => $article->user_id]) }}" title="{{ $author }}">
                                 {{ $author }}
                             </a>
                         </h4>
@@ -27,7 +27,7 @@
                     </div>
                 </div>
             </div>
-            <div class="comment-add" style="background-color: blue; color: white;">
+            <div class="comment-add">
                 <h4 style="text-align: center">@lang('catalog.addComment')</h4>
                 {!! Form::open(['route' => 'comments.store']) !!}
                 {!! Form::hidden('article_id', $article->id) !!}
@@ -41,9 +41,9 @@
             </div>
             <div class="comments">
                 @foreach($comments as $comment)
-                    <div class="comment" style="background-color: green; color: white; margin-bottom: 8px;">
+                    <div class="comment">
                         <h5>
-                            [<a href="#" title="{{ $comment->user_id }}">
+                            [<a href="{{ route('users.show', ['user' => $comment->user_id]) }}" title="{{ $comment->user->name }}">
                                 {{ $comment->user->name }}
                             </a>]
                         </h5>

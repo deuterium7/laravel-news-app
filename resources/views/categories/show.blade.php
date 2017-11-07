@@ -5,7 +5,7 @@
         <div class="row">
             <div class="news">
                 @foreach($articles as $article)
-                    <div class="news-single" style="background-color: red; color: white;">
+                    <div class="news-single">
                         <div class="clearfix">
                             <div class="col-md-4">
                                 <a href="{{ route('articles.show', ['id' => $article->id]) }}" title="{{ $article->title }}">

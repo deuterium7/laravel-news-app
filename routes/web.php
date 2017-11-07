@@ -18,6 +18,7 @@ Route::middleware('role:admin')->group(function () {
 });
 
 Route::middleware('role:user')->group(function () {
+    Route::get('users/{user}', 'UserController@show')->name('users.show');
     Route::get('articles/{article}', 'ArticleController@show')->name('articles.show');
     Route::get('comments/create', 'CommentController@create')->name('comments.create');
     Route::post('comments', 'CommentController@store')->name('comments.store');

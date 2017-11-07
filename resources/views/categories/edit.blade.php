@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="category-update" style="background-color: red; color: white;">
+            <div class="category-update">
                 <h3 style="text-align: center;">@lang('catalog.updateCategory')</h3>
                 {!! Form::open(['route' => ['categories.update', $category], 'method' => 'PUT']) !!}
                 @if ($errors->any())
