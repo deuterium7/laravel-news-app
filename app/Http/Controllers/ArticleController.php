@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ArticleCreateShipped;
 use App\Models\Comment;
 use App\Models\User;
 use App\Models\Article;
@@ -9,6 +10,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class ArticleController extends Controller
 {
@@ -62,6 +64,8 @@ class ArticleController extends Controller
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
+
+        Mail::to(\Auth::user()->email)->send(new ArticleCreateShipped((object)$request->all()));
 
         return redirect('/articles');
     }

@@ -49,4 +49,12 @@ return [
     'russian' => 'Російська',
     'english' => 'Англійська',
     'visibility' => 'Видимість',
+    'thanksForRegistration' => 'Дякуємо за реєстрацію',
+    'yourContacts' => 'Ваші контактні дані',
+    'loginClickLink' => 'Для того щоб залогінитися перейдіть за',
+    'link' => 'посиланням',
+    'articleCreated' => 'Стаття додана',
+    'articleContent' => 'Вміст статті',
+    'categoryCreated' => 'Категорія додана',
+    'categoryContent' => 'Вміст категорії',
 ];

@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\CategoryCreateShipped;
 use App\Models\Article;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class CategoryController extends Controller
 {
@@ -45,7 +47,10 @@ class CategoryController extends Controller
 
         DB::table('categories')->insert([
             'name' => $request->name,
+            'image' => $request->image ? $request->image : 'http://img.image-storage.com/a1f3cecc7/DSCN1022d5d2ee6.JPG',
         ]);
+
+        Mail::to(\Auth::user()->email)->send(new CategoryCreateShipped((object)$request->all()));
 
         return redirect('/categories');
     }
