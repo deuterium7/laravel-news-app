@@ -19,6 +19,7 @@ class UserController extends Controller
     {
         $comments = Comment::with('user')
             ->where('user_id', $user->id)
+            ->orderBy('updated_at', 'desc')
             ->limit(5)
             ->get();
 
