@@ -68,6 +68,26 @@
                                     </li>
                                 </ul>
                             </li>
+                            <!-- Admins -->
+                            <li class="dropdown">
+                                @if(Auth::user()->hasRole('admin'))
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                        {{ trans('catalog.admin') }} <span class="caret"></span>
+                                    </a>
+
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li>
+                                            <a href="#">1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">2</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">3</a>
+                                        </li>
+                                    </ul>
+                                @endif
+                            </li>
                         @endguest
                         <!-- Locales -->
                         <li class="dropdown">

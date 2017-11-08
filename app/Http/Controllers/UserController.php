@@ -22,6 +22,6 @@ class UserController extends Controller
             ->limit(5)
             ->get();
 
-        return view('users.show', compact(['user', $user], ['comments', $comments]));
+        return view('users.show', compact('user', 'comments'));
     }
 }

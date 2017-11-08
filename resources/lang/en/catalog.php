@@ -11,6 +11,7 @@ return [
     'logout' => 'Logout',
     'register' => 'Registration',
     'contact' => 'Contact',
+    'admin' => 'Admin',
 
     // Сообщения
     'plsLogIn' => 'You do not have rights to this operation! Log In Please.',
@@ -68,4 +69,5 @@ return [
     'contactUs' => 'Contact Us',
     'message' => 'Message',
     'msgFromUser' => 'Message From User',
+    'edit' => 'Edit',
 ];

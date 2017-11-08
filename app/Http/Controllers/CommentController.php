@@ -66,7 +66,7 @@ class CommentController extends Controller
         $comment->body = $request->body;
         $comment->save();
 
-        return redirect()->back();
+        return redirect()->route('articles.show', ['article' => $comment->article->id]);
     }
 
     /**

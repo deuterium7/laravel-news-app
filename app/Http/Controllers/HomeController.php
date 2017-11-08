@@ -31,7 +31,7 @@ class HomeController extends Controller
     }
 
     /**
-     * Показать представление связи
+     * Показать контактную форму
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
