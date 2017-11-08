@@ -10,6 +10,7 @@ return [
     'login' => 'Login',
     'logout' => 'Logout',
     'register' => 'Registration',
+    'contact' => 'Contact',
 
     // Сообщения
     'plsLogIn' => 'You do not have rights to this operation! Log In Please.',
@@ -17,6 +18,7 @@ return [
     'timeExpired' => 'We\'re sorry, but the time to edit this comment has expired.',
     'dontAccessOperation' => 'You don\'t have access to this operation!',
     'blockedNews' => 'This news is blocked!',
+    'thxForMessage' => 'Thank You For Contact Us.',
 
     // Другое
     'read' => 'Read more',
@@ -62,4 +64,8 @@ return [
     'lastComments' => 'Latest Comments',
     'in' => 'In The',
     'theme' => 'Subject',
+    'send' => 'Send',
+    'contactUs' => 'Contact Us',
+    'message' => 'Message',
+    'msgFromUser' => 'Message From User',
 ];

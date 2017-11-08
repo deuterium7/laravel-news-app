@@ -13,6 +13,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="shortcut icon" href="{{ asset('favicon.png') }}">
+    <script src='https://www.google.com/recaptcha/api.js'></script>
 </head>
 <body>
     <div id="app">
@@ -38,6 +39,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                         <li><a href="{{ route('categories.index') }}">@lang('catalog.categories')</a></li>
+                        <li><a href="{{ route('home.contact') }}">@lang('catalog.contact')</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

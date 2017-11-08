@@ -18,6 +18,8 @@ Route::middleware('role:admin')->group(function () {
 });
 
 Route::middleware('role:user')->group(function () {
+    Route::get('contact', 'HomeController@contact')->name('home.contact');
+    Route::post('contact/send', 'HomeController@send')->name('home.send');
     Route::get('users/{user}', 'UserController@show')->name('users.show');
     Route::get('articles/{article}', 'ArticleController@show')->name('articles.show');
     Route::get('comments/create', 'CommentController@create')->name('comments.create');
