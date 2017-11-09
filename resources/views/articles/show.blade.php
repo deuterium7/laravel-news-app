@@ -9,13 +9,13 @@
                     <div class="col-md-8">
                         <h2>{{ $article->title }}</h2>
                         <h4>@lang('catalog.category'):
-                            <a href="{{ route('categories.show', ['id' => $article->category_id]) }}" title="{{ $category }}">
-                                {{ $category }}
+                            <a href="{{ route('categories.show', ['id' => $article->category_id]) }}" title="{{ $article->category->name }}">
+                                {{ $article->category->name }}
                             </a>
                         </h4>
                         <h4>@lang('catalog.author'):
-                            <a href="{{ route('users.show', ['user' => $article->user_id]) }}" title="{{ $author }}">
-                                {{ $author }}
+                            <a href="{{ route('users.show', ['user' => $article->user_id]) }}" title="{{ $article->user->name }}">
+                                {{ $article->user->name }}
                             </a>
                         </h4>
                         <p style="text-align: justify">{{ $article->body }}</p>
@@ -46,6 +46,11 @@
                             [<a href="{{ route('users.show', ['user' => $comment->user_id]) }}" title="{{ $comment->user->name }}">
                                 {{ $comment->user->name }}
                             </a>]
+                            @if(Auth::user()->id === $comment->user_id)
+                                :<a href="{{ route('comments.edit', ['comment' => $comment->id]) }}" title="{{ trans('catalog.updateComment') }}">
+                                    {{ trans('catalog.edit') }}
+                                </a>
+                            @endif
                         </h5>
                         <p class="body" style="text-align: justify">{{ $comment->body }}</p>
                         @if($comment->updated_at <= $comment->created_at)

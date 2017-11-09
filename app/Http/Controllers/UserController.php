@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Comment;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class UserController extends Controller
 {
@@ -19,9 +20,42 @@ class UserController extends Controller
     {
         $comments = Comment::with('user')
             ->where('user_id', $user->id)
+            ->orderBy('updated_at', 'desc')
             ->limit(5)
             ->get();
 
-        return view('users.show', compact(['user', $user], ['comments', $comments]));
+        return view('users.show', compact('user', 'comments'));
+    }
+
+    /**
+     * Показать форму для бана Пользователя.
+     *
+     * @param User $user
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function ban(User $user)
+    {
+        return view('users.ban', compact('user'));
+    }
+
+    /**
+     * Обновить статус пользователя.
+     *
+     * @param Request $request
+     * @param User $user
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function update(Request $request, User $user)
+    {
+        $validatedData = $request->validate([
+            'ban' => 'required|date|date_format:Y-m-d H:i:s',
+        ]);
+
+        $user->ban = $request->ban;
+        $user->save();
+
+        return redirect()->route('admin.users');
     }
 }

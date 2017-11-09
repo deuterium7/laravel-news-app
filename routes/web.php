@@ -15,10 +15,16 @@ Route::middleware('role:admin')->group(function () {
     Route::resource('articles', 'ArticleController');
     Route::resource('comments', 'CommentController');
     Route::resource('categories', 'CategoryController');
+    Route::get('users/{user}/ban', 'UserController@ban')->name('users.ban');
+    Route::put('users/{user}', 'UserController@update')->name('users.update');
+    Route::get('admin/news', 'AdminController@news')->name('admin.news');
+    Route::get('admin/categories', 'AdminController@categories')->name('admin.categories');
+    Route::get('admin/users', 'AdminController@users')->name('admin.users');
+    Route::get('admin/comments', 'AdminController@comments')->name('admin.comments');
+    Route::get('admin/logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index')->name('admin.logs');
 });
 
 Route::middleware('role:user')->group(function () {
-    Route::get('contact', 'HomeController@contact')->name('home.contact');
     Route::post('contact/send', 'HomeController@send')->name('home.send');
     Route::get('users/{user}', 'UserController@show')->name('users.show');
     Route::get('articles/{article}', 'ArticleController@show')->name('articles.show');
@@ -27,6 +33,8 @@ Route::middleware('role:user')->group(function () {
     Route::put('comments/{comment}', 'CommentController@update')->name('comments.update');
     Route::get('comments/{comment}/edit', 'CommentController@edit')->name('comments.edit');
 });
+
+Route::get('contact', 'HomeController@contact')->name('home.contact')->middleware('auth');
 
 Route::get('social/{provider}', 'SocialController@login');
 Route::get('social/callback/{provider}', 'SocialController@callback');

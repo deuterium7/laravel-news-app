@@ -172,6 +172,7 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         SocialiteProviders\Manager\ServiceProvider::class,
         Anhskohbo\NoCaptcha\NoCaptchaServiceProvider::class,
+        Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
 
         /*
          * Application Service Providers...

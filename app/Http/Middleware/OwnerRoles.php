@@ -27,7 +27,7 @@ class OwnerRoles
             Auth::user()->ban !== null
             && Carbon::now() < new Carbon(Auth::user()->ban)
         ) {
-            return redirect()->back()->with('message', trans('catalog.uHaveBan'));
+            return redirect()->route('home.contact')->with('message', trans('catalog.uHaveBan'));
         }
 
         return $next($request);

@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Carbon;
 
 class User extends Authenticatable
 {
@@ -55,7 +56,7 @@ class User extends Authenticatable
      */
     public function comments()
     {
-        return $this->hasMany(Comment::class);
+        return $this->hasMany('App\Models\Comment');
     }
 
     /**
@@ -81,9 +82,8 @@ class User extends Authenticatable
     {
         $user = self::create([
             'email' => $providerUser->getEmail(),
-            'username' => $providerUser->getNickname(),
             'name' => $providerUser->getName(),
-            'password' => bcrypt('secret'),
+            'password' => bcrypt('secret' . Carbon::now()),
         ]);
 
         DB::table('role_user')->insert([
