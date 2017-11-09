@@ -67,7 +67,7 @@ class ArticleController extends Controller
 
         Mail::to(\Auth::user()->email)->send(new ArticleCreateShipped((object)$request->all()));
 
-        return redirect('/articles');
+        return redirect()->route('admin.news');
     }
 
     /**
@@ -119,7 +119,7 @@ class ArticleController extends Controller
         $article->visibility = $request->visibility !== null ? $request->visibility : false;
         $article->save();
 
-        return redirect('/articles');
+        return redirect()->route('articles.index');
     }
 
     /**
@@ -132,6 +132,6 @@ class ArticleController extends Controller
     public function destroy(Article $article)
     {
         $article->delete();
-        return redirect('/articles');
+        return redirect()->back();
     }
 }

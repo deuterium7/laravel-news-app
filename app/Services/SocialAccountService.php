@@ -10,14 +10,14 @@ class SocialAccountService
     /**
      * Получить пользователя
      *
-     * @param $providerObj
+     * @param $providerObject
      * @param $providerName
      *
      * @return mixed
      */
-    public function createOrGetUser($providerObj, $providerName)
+    public function createOrGetUser($providerObject, $providerName)
     {
-        $providerUser = $providerObj->user();
+        $providerUser = $providerObject->user();
 
         $account = UserSocialAccount::whereProvider($providerName)
             ->whereProviderUserId($providerUser->getId())
@@ -28,7 +28,8 @@ class SocialAccountService
         } else {
             $account = new UserSocialAccount([
                 'provider_user_id' => $providerUser->getId(),
-                'provider' => $providerName]);
+                'provider' => $providerName
+            ]);
 
             $user = User::whereEmail($providerUser->getEmail())->first();
 

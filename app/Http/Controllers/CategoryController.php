@@ -52,7 +52,7 @@ class CategoryController extends Controller
 
         Mail::to(\Auth::user()->email)->send(new CategoryCreateShipped((object)$request->all()));
 
-        return redirect('/categories');
+        return redirect()->route('admin.categories');
     }
 
     /**
@@ -99,7 +99,7 @@ class CategoryController extends Controller
         $category->image = $request->image;
         $category->save();
 
-        return redirect('/categories');
+        return redirect()->route('admin.categories');
     }
 
     /**
@@ -112,6 +112,6 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         $category->delete();
-        return redirect('/categories');
+        return redirect()->back();
     }
 }

@@ -77,13 +77,19 @@
 
                                     <ul class="dropdown-menu" role="menu">
                                         <li>
-                                            <a href="#">1</a>
+                                            <a href="{{ route('admin.news') }}">@lang('catalog.news')</a>
                                         </li>
                                         <li>
-                                            <a href="#">2</a>
+                                            <a href="{{ route('admin.categories') }}">@lang('catalog.categories')</a>
                                         </li>
                                         <li>
-                                            <a href="#">3</a>
+                                            <a href="{{ route('admin.users') }}">@lang('catalog.users')</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('admin.comments') }}">@lang('catalog.comments')</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('admin.logs') }}">@lang('catalog.logs')</a>
                                         </li>
                                     </ul>
                                 @endif
