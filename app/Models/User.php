@@ -4,8 +4,8 @@ namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
 {
@@ -81,9 +81,9 @@ class User extends Authenticatable
     public static function createBySocialProvider($providerUser)
     {
         $user = self::create([
-            'email' => $providerUser->getEmail(),
-            'name' => $providerUser->getName(),
-            'password' => bcrypt('secret' . Carbon::now()),
+            'email'    => $providerUser->getEmail(),
+            'name'     => $providerUser->getName(),
+            'password' => bcrypt('secret'.Carbon::now()),
         ]);
 
         DB::table('role_user')->insert([

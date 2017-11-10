@@ -12,9 +12,9 @@ class RolesTableSeeder extends Seeder
     public function run()
     {
         $roles = collect(['user', 'admin']);
-        $roles->each(function($role) {
+        $roles->each(function ($role) {
             DB::table('roles')->insert([
-                'slug' => $role
+                'slug' => $role,
             ]);
         });
     }

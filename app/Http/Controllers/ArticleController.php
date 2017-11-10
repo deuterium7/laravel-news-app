@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Mail\ArticleCreateShipped;
-use App\Models\Comment;
-use App\Models\User;
 use App\Models\Article;
 use App\Models\Category;
+use App\Models\Comment;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -37,13 +37,14 @@ class ArticleController extends Controller
     public function create()
     {
         $categories = Category::all()->pluck('name', 'id');
+
         return view('articles.create', compact('categories'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      *
      * @return \Illuminate\Http\Response
      */
@@ -51,21 +52,21 @@ class ArticleController extends Controller
     {
         $request->validate([
             'title' => 'required|max:255',
-            'body' => 'required',
+            'body'  => 'required',
         ]);
 
         DB::table('articles')->insert([
             'category_id' => $request->category,
-            'user_id' => \Auth::user()->id,
-            'title' => $request->title,
-            'image' => $request->image ? $request->image : 'http://www.veho.ru/img/photo_not_found.gif',
-            'body' => $request->body,
-            'visibility' => $request->visibility !== null ? $request->visibility : false,
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'user_id'     => \Auth::user()->id,
+            'title'       => $request->title,
+            'image'       => $request->image ? $request->image : 'http://www.veho.ru/img/photo_not_found.gif',
+            'body'        => $request->body,
+            'visibility'  => $request->visibility !== null ? $request->visibility : false,
+            'created_at'  => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at'  => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
-        Mail::to(\Auth::user()->email)->send(new ArticleCreateShipped((object)$request->all()));
+        Mail::to(\Auth::user()->email)->send(new ArticleCreateShipped((object) $request->all()));
 
         return redirect()->route('admin.news');
     }
@@ -73,7 +74,7 @@ class ArticleController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  Article  $article
+     * @param Article $article
      *
      * @return \Illuminate\Http\Response
      */
@@ -94,7 +95,7 @@ class ArticleController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  Article  $article
+     * @param Article $article
      *
      * @return \Illuminate\Http\Response
      */
@@ -106,8 +107,8 @@ class ArticleController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  Article  $article
+     * @param \Illuminate\Http\Request $request
+     * @param Article                  $article
      *
      * @return \Illuminate\Http\Response
      */
@@ -125,13 +126,14 @@ class ArticleController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  Article  $article
+     * @param Article $article
      *
      * @return \Illuminate\Http\Response
      */
     public function destroy(Article $article)
     {
         $article->delete();
+
         return redirect()->back();
     }
 }

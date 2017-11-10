@@ -19,6 +19,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::get();
+
         return view('categories.index', compact('categories'));
     }
 
@@ -35,7 +36,7 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      *
      * @return \Illuminate\Http\Response
      */
@@ -46,11 +47,11 @@ class CategoryController extends Controller
         ]);
 
         DB::table('categories')->insert([
-            'name' => $request->name,
+            'name'  => $request->name,
             'image' => $request->image ? $request->image : 'http://img.image-storage.com/a1f3cecc7/DSCN1022d5d2ee6.JPG',
         ]);
 
-        Mail::to(\Auth::user()->email)->send(new CategoryCreateShipped((object)$request->all()));
+        Mail::to(\Auth::user()->email)->send(new CategoryCreateShipped((object) $request->all()));
 
         return redirect()->route('admin.categories');
     }
@@ -58,7 +59,7 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Category  $category
+     * @param \App\Models\Category $category
      *
      * @return \Illuminate\Http\Response
      */
@@ -76,7 +77,7 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Category  $category
+     * @param \App\Models\Category $category
      *
      * @return \Illuminate\Http\Response
      */
@@ -88,8 +89,8 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Category  $category
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Category     $category
      *
      * @return \Illuminate\Http\Response
      */
@@ -105,13 +106,14 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Category  $category
+     * @param \App\Models\Category $category
      *
      * @return \Illuminate\Http\Response
      */
     public function destroy(Category $category)
     {
         $category->delete();
+
         return redirect()->back();
     }
 }

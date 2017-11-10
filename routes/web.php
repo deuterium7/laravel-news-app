@@ -47,6 +47,7 @@ Route::get('home', 'HomeController@index')->name('home');
 Route::get('locale/{locale}', function ($locale) {
     if (in_array($locale, Config::get('app.locales'))) {
         Session::put('locale', $locale);
+
         return redirect()->back();
     }
 })->name('locales');

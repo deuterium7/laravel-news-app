@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 class OwnerRoles
 {
     /**
-     * Проверка доступа
+     * Проверка доступа.
      *
      * @param $request
      * @param Closure $next

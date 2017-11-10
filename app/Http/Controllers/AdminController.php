@@ -35,6 +35,7 @@ class AdminController extends Controller
     public function categories()
     {
         $categories = Category::orderBy('id', 'desc')->get();
+
         return view('admin.categories', compact('categories'));
     }
 
