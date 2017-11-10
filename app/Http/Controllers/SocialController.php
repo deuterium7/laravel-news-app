@@ -10,7 +10,7 @@ use Laravel\Socialite\Facades\Socialite;
 class SocialController extends Controller
 {
     /**
-     * Авторизация
+     * Авторизация.
      *
      * @param $provider
      *
@@ -22,7 +22,7 @@ class SocialController extends Controller
     }
 
     /**
-     * Получить ответ от провайдера
+     * Получить ответ от провайдера.
      *
      * @param SocialAccountService $service
      * @param $provider
@@ -31,7 +31,7 @@ class SocialController extends Controller
      */
     public function callback(SocialAccountService $service, $provider)
     {
-        $driver   = Socialite::driver($provider);
+        $driver = Socialite::driver($provider);
         $user = $service->createOrGetUser($driver, $provider);
         \Auth::login($user, true);
 

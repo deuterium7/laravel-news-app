@@ -10,7 +10,7 @@ class UserSocialAccount extends Model
     protected $fillable = ['user_id', 'provider_user_id', 'provider'];
 
     /**
-     * Устанавливаем связь с таблицей пользователей
+     * Устанавливаем связь с таблицей пользователей.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
