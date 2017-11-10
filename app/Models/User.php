@@ -72,7 +72,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Создать пользователя провайдером
+     * Создать пользователя провайдером.
      *
      * @param $providerUser
      *
