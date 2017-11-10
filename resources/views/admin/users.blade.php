@@ -15,6 +15,7 @@
                 <tr>
                     <th>@lang('catalog.name')</th>
                     <th>@lang('catalog.emailAddress')</th>
+                    <th>@lang('catalog.admin')</th>
                     <th>@lang('catalog.ban')</th>
                     <th>@lang('catalog.createdAt')</th>
                     <th>@lang('catalog.actions')</th>
@@ -26,6 +27,13 @@
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
                         <td>
+                            @if($user->hasRole('admin'))
+                                @lang('catalog.true')
+                            @else
+                                @lang('catalog.false')
+                            @endif
+                        </td>
+                        <td>
                             @if($user->ban)
                                 {{ $user->ban }}
                             @else
@@ -34,8 +42,13 @@
                         </td>
                         <td>{{ $user->created_at }}</td>
                         <td>
+                            @if(!$user->hasRole('admin'))
+                                {!! Form::open(['method' => 'Put', 'route' => ['users.admin', $user->id]]) !!}
+                                    <input type="submit" class="btn btn-warning" value="@lang('catalog.admin')">
+                                {!! Form::close() !!}
+                            @endif
                             {!! Form::open(['method' => 'Get', 'route' => ['users.ban', $user->id]]) !!}
-                                <input type="submit" class="btn btn-warning" value="@lang('catalog.ban')">
+                                <input type="submit" class="btn btn-danger" value="@lang('catalog.ban')">
                             {!! Form::close() !!}
                         </td>
                     </tr>

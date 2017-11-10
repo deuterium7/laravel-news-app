@@ -6,6 +6,7 @@ use App\Models\Comment;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -40,7 +41,7 @@ class UserController extends Controller
     }
 
     /**
-     * Обновить статус пользователя.
+     * Обновить статус Пользователя.
      *
      * @param Request $request
      * @param User $user
@@ -57,5 +58,22 @@ class UserController extends Controller
         $user->save();
 
         return redirect()->route('admin.users');
+    }
+
+    /**
+     * Дать пользователю права Администратора.
+     *
+     * @param User $user
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function admin(User $user)
+    {
+        DB::table('role_user')->insert([
+            'user_id' => $user->id,
+            'role_id' => 2
+        ]);
+        
+        return redirect()->back();
     }
 }

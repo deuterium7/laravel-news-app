@@ -17,6 +17,7 @@ Route::middleware('role:admin')->group(function () {
     Route::resource('categories', 'CategoryController');
     Route::get('users/{user}/ban', 'UserController@ban')->name('users.ban');
     Route::put('users/{user}', 'UserController@update')->name('users.update');
+    Route::put('users/{user}', 'UserController@admin')->name('users.admin');
     Route::get('admin/news', 'AdminController@news')->name('admin.news');
     Route::get('admin/categories', 'AdminController@categories')->name('admin.categories');
     Route::get('admin/users', 'AdminController@users')->name('admin.users');
