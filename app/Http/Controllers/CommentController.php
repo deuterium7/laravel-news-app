@@ -12,7 +12,7 @@ class CommentController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      *
      * @return \Illuminate\Http\Response
      */
@@ -24,8 +24,8 @@ class CommentController extends Controller
 
         DB::table('comments')->insert([
             'article_id' => $request->article_id,
-            'user_id' => \Auth::user()->id,
-            'body' => $request->body,
+            'user_id'    => \Auth::user()->id,
+            'body'       => $request->body,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
@@ -36,7 +36,7 @@ class CommentController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  Comment  $comment
+     * @param Comment $comment
      *
      * @return \Illuminate\Http\Response
      */
@@ -56,8 +56,8 @@ class CommentController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  Comment  $comment
+     * @param \Illuminate\Http\Request $request
+     * @param Comment                  $comment
      *
      * @return \Illuminate\Http\Response
      */
@@ -72,13 +72,14 @@ class CommentController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  Comment  $comment
+     * @param Comment $comment
      *
      * @return \Illuminate\Http\Response
      */
     public function destroy(Comment $comment)
     {
         $comment->delete();
+
         return redirect()->back();
     }
 }

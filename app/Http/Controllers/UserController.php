@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Comment;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
@@ -44,7 +43,7 @@ class UserController extends Controller
      * Обновить статус Пользователя.
      *
      * @param Request $request
-     * @param User $user
+     * @param User    $user
      *
      * @return \Illuminate\Http\RedirectResponse
      */
@@ -71,9 +70,9 @@ class UserController extends Controller
     {
         DB::table('role_user')->insert([
             'user_id' => $user->id,
-            'role_id' => 2
+            'role_id' => 2,
         ]);
-        
+
         return redirect()->back();
     }
 }

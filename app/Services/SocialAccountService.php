@@ -2,13 +2,13 @@
 
 namespace App\Services;
 
-use App\Models\UserSocialAccount;
 use App\Models\User;
+use App\Models\UserSocialAccount;
 
 class SocialAccountService
 {
     /**
-     * Получить пользователя
+     * Получить пользователя.
      *
      * @param $providerObject
      * @param $providerName
@@ -28,7 +28,7 @@ class SocialAccountService
         } else {
             $account = new UserSocialAccount([
                 'provider_user_id' => $providerUser->getId(),
-                'provider' => $providerName
+                'provider'         => $providerName,
             ]);
 
             $user = User::whereEmail($providerUser->getEmail())->first();
@@ -41,7 +41,6 @@ class SocialAccountService
             $account->save();
 
             return $user;
-
         }
     }
 }
