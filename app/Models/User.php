@@ -36,7 +36,7 @@ class User extends Authenticatable
      */
     public function roles()
     {
-        return $this->belongsToMany('App\Models\Role');
+        return $this->belongsToMany(Role::class);
     }
 
     /**
@@ -46,7 +46,7 @@ class User extends Authenticatable
      */
     public function articles()
     {
-        return $this->hasMany('App\Models\Article');
+        return $this->hasMany(Article::class);
     }
 
     /**
@@ -56,7 +56,7 @@ class User extends Authenticatable
      */
     public function comments()
     {
-        return $this->hasMany('App\Models\Comment');
+        return $this->hasMany(Comment::class);
     }
 
     /**

@@ -104,17 +104,17 @@
                             <ul class="dropdown-menu" role="menu">
                                 @if(App::getLocale() !== 'ru')
                                     <li>
-                                        <a href="{{ route('locales', ['locale' => 'ru']) }}">@lang('catalog.russian')</a>
+                                        <a href="{{ route('settings.locale', ['locale' => 'ru']) }}">@lang('catalog.russian')</a>
                                     </li>
                                 @endif
                                 @if(App::getLocale() !== 'uk')
                                     <li>
-                                        <a href="{{ route('locales', ['locale' => 'uk']) }}">@lang('catalog.ukraine')</a>
+                                        <a href="{{ route('settings.locale', ['locale' => 'uk']) }}">@lang('catalog.ukraine')</a>
                                     </li>
                                 @endif
                                 @if(App::getLocale() !== 'en')
                                     <li>
-                                        <a href="{{ route('locales', ['locale' => 'en']) }}">@lang('catalog.english')</a>
+                                        <a href="{{ route('settings.locale', ['locale' => 'en']) }}">@lang('catalog.english')</a>
                                     </li>
                                 @endif
                             </ul>

@@ -6,7 +6,6 @@ use App\Mail\ArticleCreateShipped;
 use App\Models\Article;
 use App\Models\Category;
 use App\Models\Comment;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -21,8 +20,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = DB::table('articles')
-            ->where('visibility', true)
+        $articles = Article::where('visibility', true)
             ->orderBy('updated_at', 'desc')
             ->paginate(10);
 

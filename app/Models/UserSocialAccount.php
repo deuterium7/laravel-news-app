@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class UserSocialAccount extends Model
 {
-    protected $table = 'user_social_account';
     protected $fillable = ['user_id', 'provider_user_id', 'provider'];
 
     /**
@@ -16,6 +15,6 @@ class UserSocialAccount extends Model
      */
     public function user()
     {
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo(User::class);
     }
 }

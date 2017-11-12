@@ -11,16 +11,16 @@ class ArticleCreateShipped extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
-    protected $request;
+    protected $data;
 
     /**
      * ArticleCreateShipped constructor.
      *
-     * @param $request
+     * @param $data
      */
-    public function __construct($request)
+    public function __construct($data)
     {
-        $this->request = $request;
+        $this->data = $data;
     }
 
     /**
@@ -31,6 +31,6 @@ class ArticleCreateShipped extends Mailable implements ShouldQueue
     public function build()
     {
         return $this->view('emails.article_create')
-            ->with('article', $this->request);
+            ->with('data', $this->data);
     }
 }

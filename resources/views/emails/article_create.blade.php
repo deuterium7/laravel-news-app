@@ -4,7 +4,7 @@
 <div>
     <div style="width: 50%; padding: 40px 25%; text-align: justify;">
         <h3>{{ trans('catalog.articleContent') }}:</h3>
-        <div>{{ trans('catalog.title') }} - <strong>{{ $article->title }}</strong></div>
-        <div>{{ trans('catalog.body') }} - <strong>{{ $article->body }}</strong></div>
+        <div>{{ trans('catalog.title') }} - <strong>{{ $data->title }}</strong></div>
+        <div>{{ trans('catalog.body') }} - <strong>{{ $data->body }}</strong></div>
     </div>
 </div>

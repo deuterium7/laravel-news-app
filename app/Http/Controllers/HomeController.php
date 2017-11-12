@@ -47,7 +47,7 @@ class HomeController extends Controller
      */
     public function send(Request $request)
     {
-        $validatedData = $request->validate([
+        $request->validate([
             'title'                => 'required|string|max:255',
             'message'              => 'required|string',
             'g-recaptcha-response' => 'required|captcha',
