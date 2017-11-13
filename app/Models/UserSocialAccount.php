@@ -1,15 +1,11 @@
 <?php
 
-namespace App\Entities;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Prettus\Repository\Contracts\Transformable;
-use Prettus\Repository\Traits\TransformableTrait;
 
-class UserSocialAccount extends Model implements Transformable
+class UserSocialAccount extends Model
 {
-    use TransformableTrait;
-
     protected $fillable = [
         'user_id', 'provider_user_id', 'provider'
     ];

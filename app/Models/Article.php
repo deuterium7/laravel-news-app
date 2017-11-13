@@ -1,17 +1,13 @@
 <?php
 
-namespace App\Entities;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Prettus\Repository\Contracts\Transformable;
-use Prettus\Repository\Traits\TransformableTrait;
 
-class Article extends Model implements Transformable
+class Article extends Model
 {
-    use TransformableTrait;
-
     protected $fillable = [
-        'category_id', 'title', 'image', 'body', 'visibility', 'user_id', 'created_at', 'updated_at'
+        'category_id', 'title', 'image', 'body', 'visibility'
     ];
 
     /**

@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Mail\ArticleCreateShipped;
-use App\Entities\Article;
-use App\Entities\Category;
-use App\Entities\Comment;
-use App\Repositories\ArticleRepository;
+use App\Models\Article;
+use App\Models\Category;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -14,13 +13,6 @@ use Illuminate\Support\Facades\Mail;
 
 class ArticleController extends Controller
 {
-    protected $repository;
-
-    public function __construct(ArticleRepository $repository)
-    {
-        $this->repository = $repository;
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -28,7 +20,9 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = $this->repository->paginate();
+        $articles = Article::where('visibility', true)
+            ->orderBy('updated_at', 'desc')
+            ->paginate(10);
 
         return view('articles.index', compact('articles'));
     }

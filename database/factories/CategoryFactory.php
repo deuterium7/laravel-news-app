@@ -2,7 +2,7 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(\App\Entities\Category::class, function (Faker $faker) {
+$factory->define(\App\Models\Category::class, function (Faker $faker) {
     return [
         'name'  => $faker->unique()->word,
         'image' => $faker->imageUrl(150, 150),

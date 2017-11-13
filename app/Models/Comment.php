@@ -1,15 +1,11 @@
 <?php
 
-namespace App\Entities;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Prettus\Repository\Contracts\Transformable;
-use Prettus\Repository\Traits\TransformableTrait;
 
-class Comment extends Model implements Transformable
+class Comment extends Model
 {
-    use TransformableTrait;
-
     protected $fillable = ['body'];
 
     /**
