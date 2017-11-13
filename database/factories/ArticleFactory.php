@@ -2,7 +2,7 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(\App\Models\Article::class, function (Faker $faker) {
+$factory->define(\App\Entities\Article::class, function (Faker $faker) {
     return [
         'category_id' => $faker->numberBetween(1, 10),
         'user_id'     => 1, // is: admin

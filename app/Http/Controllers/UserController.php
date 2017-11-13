@@ -49,7 +49,7 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        $validatedData = $request->validate([
+        $request->validate([
             'ban' => 'required|date|date_format:Y-m-d H:i:s',
         ]);
 

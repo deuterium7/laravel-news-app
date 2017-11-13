@@ -1,11 +1,19 @@
 <?php
 
-namespace App\Models;
+namespace App\Entities;
 
 use Illuminate\Database\Eloquent\Model;
+use Prettus\Repository\Contracts\Transformable;
+use Prettus\Repository\Traits\TransformableTrait;
 
-class Article extends Model
+class Article extends Model implements Transformable
 {
+    use TransformableTrait;
+
+    protected $fillable = [
+        'category_id', 'title', 'image', 'body', 'visibility', 'user_id', 'created_at', 'updated_at'
+    ];
+
     /**
      * Связываем с таблицей категорий.
      *
@@ -35,4 +43,5 @@ class Article extends Model
     {
         return $this->hasMany(Comment::class);
     }
+
 }

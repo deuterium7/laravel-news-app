@@ -1,12 +1,18 @@
 <?php
 
-namespace App\Models;
+namespace App\Entities;
 
 use Illuminate\Database\Eloquent\Model;
+use Prettus\Repository\Contracts\Transformable;
+use Prettus\Repository\Traits\TransformableTrait;
 
-class UserSocialAccount extends Model
+class UserSocialAccount extends Model implements Transformable
 {
-    protected $fillable = ['user_id', 'provider_user_id', 'provider'];
+    use TransformableTrait;
+
+    protected $fillable = [
+        'user_id', 'provider_user_id', 'provider'
+    ];
 
     /**
      * Устанавливаем связь с таблицей пользователей.
@@ -17,4 +23,5 @@ class UserSocialAccount extends Model
     {
         return $this->belongsTo(User::class);
     }
+
 }
