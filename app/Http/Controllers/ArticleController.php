@@ -30,8 +30,8 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-        $key = 'articles_page_' . $page;
+        $page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
+        $key = 'articles_page_'.$page;
 
         if (Cache::has($key)) {
             $articles = Cache::get($key);
