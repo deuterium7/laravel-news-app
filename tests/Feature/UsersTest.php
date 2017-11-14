@@ -5,7 +5,7 @@ namespace Tests\Unit;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Tests\TestCase;
 
-class UserControllerTest extends TestCase
+class UsersTest extends TestCase
 {
     use WithoutMiddleware;
 

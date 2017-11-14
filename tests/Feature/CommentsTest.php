@@ -6,7 +6,7 @@ use App\Models\Comment;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Tests\TestCase;
 
-class CommentControllerTest extends TestCase
+class CommentsTest extends TestCase
 {
     use WithoutMiddleware;
 
@@ -20,12 +20,6 @@ class CommentControllerTest extends TestCase
     {
         $request = [];
         $response = $this->call('POST', 'comments', $request);
-        $this->assertEquals(302, $response->status());
-    }
-
-    public function test_comment_destroy()
-    {
-        $response = $this->call('DELETE', 'comments/1');
         $this->assertEquals(302, $response->status());
     }
 }

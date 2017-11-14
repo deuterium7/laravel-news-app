@@ -6,7 +6,7 @@ use App\Models\Article;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Tests\TestCase;
 
-class ArticleControllerTest extends TestCase
+class ArticlesTest extends TestCase
 {
     use WithoutMiddleware;
 
@@ -32,12 +32,6 @@ class ArticleControllerTest extends TestCase
     public function test_article_show()
     {
         $response = $this->call('GET', 'articles/1');
-        $this->assertEquals(302, $response->status());
-    }
-
-    public function test_article_destroy()
-    {
-        $response = $this->call('DELETE', 'articles/1');
         $this->assertEquals(302, $response->status());
     }
 }
