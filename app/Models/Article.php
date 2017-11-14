@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Article extends Model
 {
     protected $fillable = [
-        'category_id', 'title', 'image', 'body', 'visibility'
+        'category_id', 'user_id', 'title', 'image', 'body', 'visibility'
     ];
 
     /**
@@ -39,5 +39,4 @@ class Article extends Model
     {
         return $this->hasMany(Comment::class);
     }
-
 }

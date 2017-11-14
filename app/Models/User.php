@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
 {
@@ -58,7 +57,7 @@ class User extends Authenticatable
         return in_array($check, array_pluck($this->roles->toArray(), 'slug'));
     }
     /**
-     * Создать пользователя провайдером.
+     * Создать пользователя через провайдер.
      *
      * @param $providerUser
      *
@@ -71,10 +70,12 @@ class User extends Authenticatable
             'name'     => $providerUser->getName(),
             'password' => bcrypt('secret'.Carbon::now()),
         ]);
-        DB::table('role_user')->insert([
+
+        RoleUser::create([
             'user_id' => $user->id,
             'role_id' => 1,
         ]);
+
         return $user;
     }
 }

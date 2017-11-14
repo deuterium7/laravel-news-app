@@ -2,13 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Comment;
 use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use App\Models\RoleUser;
+use App\Http\Requests\UserStatusRequest;
+use App\Repositories\Contracts\UserInterface;
 
 class UserController extends Controller
 {
+    protected $user;
+
+    public function __construct(UserInterface $user)
+    {
+        $this->user = $user;
+    }
+
     /**
      * Показать профиль Пользователя.
      *
@@ -18,11 +25,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        $comments = Comment::with('user')
-            ->where('user_id', $user->id)
-            ->orderBy('updated_at', 'desc')
-            ->limit(5)
-            ->get();
+        $comments = $this->user->getLastCommentsFromUser($user->id);
 
         return view('users.show', compact('user', 'comments'));
     }
@@ -42,19 +45,14 @@ class UserController extends Controller
     /**
      * Обновить статус Пользователя.
      *
-     * @param Request $request
-     * @param User    $user
+     * @param UserStatusRequest $request
+     * @param int $id
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, User $user)
+    public function update(UserStatusRequest $request, $id)
     {
-        $request->validate([
-            'ban' => 'required|date|date_format:Y-m-d H:i:s',
-        ]);
-
-        $user->ban = $request->ban;
-        $user->save();
+        $this->user->update($id, $request->all());
 
         return redirect()->route('admin.users');
     }
@@ -62,14 +60,14 @@ class UserController extends Controller
     /**
      * Дать пользователю права Администратора.
      *
-     * @param User $user
+     * @param int $id
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function admin(User $user)
+    public function admin($id)
     {
-        DB::table('role_user')->insert([
-            'user_id' => $user->id,
+        RoleUser::create([
+            'user_id' => $id,
             'role_id' => 2,
         ]);
 

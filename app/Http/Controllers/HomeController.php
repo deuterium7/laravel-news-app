@@ -3,15 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Mail\ContactShipped;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use App\Http\Requests\ContactRequest;
 
 class HomeController extends Controller
 {
     /**
-     * Create a new controller instance.
-     *
-     * @return void
+     * HomeController constructor.
      */
     public function __construct()
     {
@@ -41,18 +39,12 @@ class HomeController extends Controller
     /**
      * Отправить письмо.
      *
-     * @param Request $request
+     * @param ContactRequest $request
      *
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function send(Request $request)
+    public function send(ContactRequest $request)
     {
-        $request->validate([
-            'title'                => 'required|string|max:255',
-            'message'              => 'required|string',
-            'g-recaptcha-response' => 'required|captcha',
-        ]);
-
         Mail::to(env('MAIL_USERNAME'))->send(new ContactShipped((object) $request->all()));
 
         return redirect('/')->with('message', trans('catalog.thxForMessage'));
