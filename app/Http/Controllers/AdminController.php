@@ -2,14 +2,40 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Article;
-use App\Models\Category;
-use App\Models\Comment;
-use App\Models\User;
 use Illuminate\Http\Request;
+use App\Repositories\Contracts\UserInterface;
+use App\Repositories\Contracts\ArticleInterface;
+use App\Repositories\Contracts\CommentInterface;
+use App\Repositories\Contracts\CategoryInterface;
 
 class AdminController extends Controller
 {
+    protected $article;
+    protected $category;
+    protected $user;
+    protected $comment;
+
+    /**
+     * AdminController constructor.
+     *
+     * @param ArticleInterface $article
+     * @param CategoryInterface $category
+     * @param UserInterface $user
+     * @param CommentInterface $comment
+     */
+    public function __construct(
+        ArticleInterface $article,
+        CategoryInterface $category,
+        UserInterface $user,
+        CommentInterface $comment
+    )
+    {
+        $this->article = $article;
+        $this->category = $category;
+        $this->user = $user;
+        $this->comment = $comment;
+    }
+
     /**
      * Показать панель Новостей.
      *
@@ -19,10 +45,7 @@ class AdminController extends Controller
      */
     public function news(Request $request)
     {
-        $articles = Article::with('category')
-            ->where('title', 'LIKE', '%'.$request->keywords.'%')
-            ->orderBy('updated_at', 'desc')
-            ->paginate(10);
+        $articles = $this->article->getAllWithCategoryKeywordsAndPaginate($request->keywords);
 
         return view('admin.news', compact('articles'));
     }
@@ -34,7 +57,7 @@ class AdminController extends Controller
      */
     public function categories()
     {
-        $categories = Category::orderBy('id', 'desc')->get();
+        $categories = $this->category->getAll();
 
         return view('admin.categories', compact('categories'));
     }
@@ -48,10 +71,7 @@ class AdminController extends Controller
      */
     public function users(Request $request)
     {
-        $users = User::where('id', '<>', \Auth::user()->id)
-            ->where('name', 'LIKE', '%'.$request->keywords.'%')
-            ->orderBy('id', 'desc')
-            ->paginate(10);
+        $users = $this->user->getAllWithKeywordsAndPaginate($request->keywords);
 
         return view('admin.users', compact('users'));
     }
@@ -65,9 +85,7 @@ class AdminController extends Controller
      */
     public function comments(Request $request)
     {
-        $comments = Comment::where('body', 'LIKE', '%'.$request->keywords.'%')
-            ->orderBy('updated_at', 'desc')
-            ->paginate(10);
+        $comments = $this->comment->getAllWithKeywordsAndPaginate($request->keywords);
 
         return view('admin.comments', compact('comments'));
     }

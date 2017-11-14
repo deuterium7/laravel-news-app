@@ -20,8 +20,8 @@
                     {{ Form::text('name', null, ['class'=>'form-control']) }}
                 </div>
                 <div class="form-group">
-                    <label for="image">@lang('catalog.image')</label>
-                    {{ Form::text('image', null, ['class'=>'form-control']) }}
+                    <label for="image">@lang('catalog.image') *</label>
+                    {{ Form::text('image', 'http://img.image-storage.com/a1f3cecc7/DSCN1022d5d2ee6.JPG', ['class'=>'form-control']) }}
                 </div>
                 <div class="form-group">
                     <div style="text-align: center">

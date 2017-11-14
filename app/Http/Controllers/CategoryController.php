@@ -2,15 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\CategoryCreateShipped;
-use App\Models\Article;
 use App\Models\Category;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use App\Mail\CategoryCreateShipped;
 use Illuminate\Support\Facades\Mail;
+use App\Http\Requests\CategoryRequest;
+use App\Repositories\Contracts\CategoryInterface;
 
 class CategoryController extends Controller
 {
+    protected $category;
+
+    /**
+     * CategoryController constructor.
+     *
+     * @param CategoryInterface $category
+     */
+    public function __construct(CategoryInterface $category)
+    {
+        $this->category = $category;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -18,7 +29,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::get();
+        $categories = $this->category->getAll();
 
         return view('categories.index', compact('categories'));
     }
@@ -36,20 +47,13 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param CategoryRequest $request
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
-        $request->validate([
-            'name' => 'required|max:255',
-        ]);
-
-        DB::table('categories')->insert([
-            'name'  => $request->name,
-            'image' => $request->image ? $request->image : 'http://img.image-storage.com/a1f3cecc7/DSCN1022d5d2ee6.JPG',
-        ]);
+        $this->category->create($request->all());
 
         Mail::to(\Auth::user()->email)->send(new CategoryCreateShipped((object) $request->all()));
 
@@ -59,17 +63,13 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param \App\Models\Category $category
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
-    public function show(Category $category)
+    public function show($id)
     {
-        $articles = Article::with('category')
-            ->where('visibility', true)
-            ->where('category_id', $category->id)
-            ->orderBy('updated_at', 'desc')
-            ->paginate(10);
+        $articles = $this->category->getAllArticlesFromCategory($id);
 
         return view('categories.show', compact('articles'));
     }
@@ -89,16 +89,14 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Models\Category     $category
+     * @param CategoryRequest $request
+     * @param int $id
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, Category $category)
+    public function update(CategoryRequest $request, $id)
     {
-        $category->name = $request->name;
-        $category->image = $request->image;
-        $category->save();
+        $this->category->update($id, $request->all());
 
         return redirect()->route('admin.categories');
     }
@@ -106,13 +104,13 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\Models\Category $category
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy($id)
     {
-        $category->delete();
+        $this->category->delete($id);
 
         return redirect()->back();
     }

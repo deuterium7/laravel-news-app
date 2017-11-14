@@ -2,17 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\ArticleCreateShipped;
 use App\Models\Article;
-use App\Models\Category;
-use App\Models\Comment;
-use Illuminate\Http\Request;
-use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\DB;
+use App\Mail\ArticleCreateShipped;
 use Illuminate\Support\Facades\Mail;
+use App\Http\Requests\ArticleRequest;
+use App\Repositories\Contracts\ArticleInterface;
 
 class ArticleController extends Controller
 {
+    protected $article;
+
+    /**
+     * ArticleController constructor.
+     *
+     * @param ArticleInterface $article
+     */
+    public function __construct(ArticleInterface $article)
+    {
+        $this->article = $article;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -20,9 +29,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = Article::where('visibility', true)
-            ->orderBy('updated_at', 'desc')
-            ->paginate(10);
+        $articles = $this->article->getAllVisibleWithPagination();
 
         return view('articles.index', compact('articles'));
     }
@@ -34,7 +41,7 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        $categories = Category::all()->pluck('name', 'id');
+        $categories = $this->article->getAllCategories();
 
         return view('articles.create', compact('categories'));
     }
@@ -42,27 +49,13 @@ class ArticleController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param ArticleRequest $request
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(ArticleRequest $request)
     {
-        $request->validate([
-            'title' => 'required|max:255',
-            'body'  => 'required',
-        ]);
-
-        DB::table('articles')->insert([
-            'category_id' => $request->category,
-            'user_id'     => \Auth::user()->id,
-            'title'       => $request->title,
-            'image'       => $request->image ? $request->image : 'http://www.veho.ru/img/photo_not_found.gif',
-            'body'        => $request->body,
-            'visibility'  => $request->visibility !== null ? $request->visibility : false,
-            'created_at'  => Carbon::now()->format('Y-m-d H:i:s'),
-            'updated_at'  => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
+        $this->article->create($request->all());
 
         Mail::to(\Auth::user()->email)->send(new ArticleCreateShipped((object) $request->all()));
 
@@ -82,10 +75,7 @@ class ArticleController extends Controller
             return redirect()->back()->with('message', trans('catalog.blockedNews'));
         }
 
-        $comments = Comment::with('user')
-            ->where('article_id', $article->id)
-            ->orderBy('updated_at', 'desc')
-            ->paginate(5);
+        $comments = $this->article->getArticleComments($article->id);
 
         return view('articles.show', compact('article', 'comments'));
     }
@@ -105,18 +95,14 @@ class ArticleController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param Article                  $article
+     * @param ArticleRequest $request
+     * @param int $id
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, Article $article)
+    public function update(ArticleRequest $request, $id)
     {
-        $article->title = $request->title;
-        $article->image = $request->image;
-        $article->body = $request->body;
-        $article->visibility = $request->visibility !== null ? $request->visibility : false;
-        $article->save();
+        $this->article->update($id, $request->all());
 
         return redirect()->route('articles.index');
     }
@@ -124,13 +110,13 @@ class ArticleController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param Article $article
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Article $article)
+    public function destroy($id)
     {
-        $article->delete();
+        $this->article->delete($id);
 
         return redirect()->back();
     }

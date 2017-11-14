@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Session;
 class SettingController extends Controller
 {
     /**
-     * Сменить язык
+     * Сменить язык.
      *
      * @param string $locale
      *

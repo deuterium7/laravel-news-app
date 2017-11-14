@@ -11,6 +11,9 @@ class ArticlesTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(\App\Models\Article::class, 150)->create();
+        factory(
+            \App\Models\Article::class,
+            \Illuminate\Support\Facades\Config::get('constants.ARTICLES_SEED')
+        )->create();
     }
 }
