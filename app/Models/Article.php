@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Article extends Model
 {
+    protected $fillable = [
+        'category_id', 'user_id', 'title', 'image', 'body', 'visibility'
+    ];
+
     /**
      * Связываем с таблицей категорий.
      *
@@ -13,7 +17,7 @@ class Article extends Model
      */
     public function category()
     {
-        return $this->belongsTo('App\Models\Category');
+        return $this->belongsTo(Category::class);
     }
 
     /**
@@ -23,7 +27,7 @@ class Article extends Model
      */
     public function user()
     {
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo(User::class);
     }
 
     /**
@@ -33,6 +37,6 @@ class Article extends Model
      */
     public function comments()
     {
-        return $this->hasMany('App\Models\Comment');
+        return $this->hasMany(Comment::class);
     }
 }

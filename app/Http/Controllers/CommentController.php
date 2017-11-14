@@ -3,32 +3,34 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
-use Illuminate\Http\Request;
+use App\Repositories\Contracts\CommentInterface;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\DB;
+use App\Http\Requests\CommentRequest;
 
 class CommentController extends Controller
 {
+    protected $comment;
+
+    /**
+     * CommentController constructor.
+     *
+     * @param CommentInterface $comment
+     */
+    public function __construct(CommentInterface $comment)
+    {
+        $this->comment = $comment;
+    }
+
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param CommentRequest $request
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(CommentRequest $request)
     {
-        $request->validate([
-            'body' => 'required',
-        ]);
-
-        DB::table('comments')->insert([
-            'article_id' => $request->article_id,
-            'user_id'    => \Auth::user()->id,
-            'body'       => $request->body,
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
+        $this->comment->create($request->all());
 
         return redirect()->back();
     }
@@ -56,15 +58,14 @@ class CommentController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param Comment                  $comment
+     * @param CommentRequest $request
+     * @param Comment $comment
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, Comment $comment)
+    public function update(CommentRequest $request, Comment $comment)
     {
-        $comment->body = $request->body;
-        $comment->save();
+        $this->comment->update($comment->id, $request->all());
 
         return redirect()->route('articles.show', ['article' => $comment->article->id]);
     }
@@ -72,13 +73,13 @@ class CommentController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param Comment $comment
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Comment $comment)
+    public function destroy($id)
     {
-        $comment->delete();
+        $this->comment->delete($id);
 
         return redirect()->back();
     }

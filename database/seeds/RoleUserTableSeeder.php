@@ -11,16 +11,16 @@ class RoleUserTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('role_user')->insert([
-            'user_id' => 1,
-            'role_id' => 1,
-        ]);
+        for ($i = 1; $i <= \Illuminate\Support\Facades\Config::get('constants.USERS_SEED'); $i++) {
+            DB::table('role_user')->insert([
+                'user_id' => $i,
+                'role_id' => 1,
+            ]);
+        }
 
         DB::table('role_user')->insert([
             'user_id' => 1,
             'role_id' => 2,
         ]);
-
-        factory('App\Models\RoleUser', 29)->create();
     }
 }

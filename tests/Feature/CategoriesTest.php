@@ -6,7 +6,7 @@ use App\Models\Category;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Tests\TestCase;
 
-class CategoryControllerTest extends TestCase
+class CategoriesTest extends TestCase
 {
     use WithoutMiddleware;
 
@@ -33,11 +33,5 @@ class CategoryControllerTest extends TestCase
     {
         $response = $this->call('GET', 'categories/1');
         $this->assertEquals(200, $response->status());
-    }
-
-    public function test_category_destroy()
-    {
-        $response = $this->call('DELETE', 'categories/1');
-        $this->assertEquals(302, $response->status());
     }
 }

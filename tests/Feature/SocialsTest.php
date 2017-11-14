@@ -4,7 +4,7 @@ namespace Tests\Unit;
 
 use Tests\TestCase;
 
-class SocialControllerTest extends TestCase
+class SocialsTest extends TestCase
 {
     public function test_social_login()
     {

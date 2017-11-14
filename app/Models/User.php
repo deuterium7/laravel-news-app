@@ -5,26 +5,15 @@ namespace App\Models;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
 {
     use Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password'
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
     protected $hidden = [
         'password', 'remember_token',
     ];
@@ -36,9 +25,8 @@ class User extends Authenticatable
      */
     public function roles()
     {
-        return $this->belongsToMany('App\Models\Role');
+        return $this->belongsToMany(Role::class);
     }
-
     /**
      * Связываем с таблицей новостей.
      *
@@ -46,9 +34,8 @@ class User extends Authenticatable
      */
     public function articles()
     {
-        return $this->hasMany('App\Models\Article');
+        return $this->hasMany(Article::class);
     }
-
     /**
      * Связываем с таблицей комментариев.
      *
@@ -56,9 +43,8 @@ class User extends Authenticatable
      */
     public function comments()
     {
-        return $this->hasMany('App\Models\Comment');
+        return $this->hasMany(Comment::class);
     }
-
     /**
      * Проверяем есть ли данная роль у пользователя.
      *
@@ -70,9 +56,8 @@ class User extends Authenticatable
     {
         return in_array($check, array_pluck($this->roles->toArray(), 'slug'));
     }
-
     /**
-     * Создать пользователя провайдером.
+     * Создать пользователя через провайдер.
      *
      * @param $providerUser
      *
@@ -86,7 +71,7 @@ class User extends Authenticatable
             'password' => bcrypt('secret'.Carbon::now()),
         ]);
 
-        DB::table('role_user')->insert([
+        RoleUser::create([
             'user_id' => $user->id,
             'role_id' => 1,
         ]);

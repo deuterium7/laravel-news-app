@@ -5,14 +5,14 @@ namespace Tests\Unit;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Tests\TestCase;
 
-class HomeControllerTest extends TestCase
+class HomeTest extends TestCase
 {
     use WithoutMiddleware;
 
     public function test_home_index()
     {
         $responce = $this->call('GET', 'home');
-        $responce->assertViewIs('home');
+        $this->assertEquals(200, $responce->status());
     }
 
     public function test_home_send()

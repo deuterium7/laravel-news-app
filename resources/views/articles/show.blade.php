@@ -27,16 +27,21 @@
                     </div>
                 </div>
             </div>
+            @if ($errors->any())
+                @component('components.alert')
+                @endcomponent
+            @endif
             <div class="comment-add">
                 <h4 style="text-align: center">@lang('catalog.addComment')</h4>
                 {!! Form::open(['route' => 'comments.store']) !!}
-                {!! Form::hidden('article_id', $article->id) !!}
-                <div class="form-group">
-                    {!! Form::textarea('body', null, ['class'=>'form-control']) !!}
-                </div>
-                <div class="form-group" style="text-align: center">
-                    <input type="submit" value="{{ trans('catalog.create') }}" class="btn btn-primary">
-                </div>
+                    {!! Form::hidden('article_id', $article->id) !!}
+                    {!! Form::hidden('user_id', Auth::user()->id) !!}
+                    <div class="form-group">
+                        {!! Form::textarea('body', null, ['class'=>'form-control']) !!}
+                    </div>
+                    <div class="form-group" style="text-align: center">
+                        <input type="submit" value="{{ trans('catalog.create') }}" class="btn btn-primary">
+                    </div>
                 {!! Form::close() !!}
             </div>
             <div class="comments">

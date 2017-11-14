@@ -21,17 +21,6 @@ class NavbarLinksTest extends TestCase
         $response->assertViewIs('categories.index');
     }
 
-    public function test_uri_locale()
-    {
-        $response = $this->get('locale/en');
-        $response->assertSessionHas('locale', 'en')
-            ->assertRedirect();
-
-        $response = $this->get('locale/uk');
-        $response->assertSessionHas('locale', 'uk')
-            ->assertRedirect();
-    }
-
     public function test_uri_logout()
     {
         $response = $this->get('logout');

@@ -18,9 +18,8 @@
                                 <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
 
                                 @if ($errors->has('name'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('name') }}</strong>
-                                    </span>
+                                    @component('components.errors.name')
+                                    @endcomponent
                                 @endif
                             </div>
                         </div>
@@ -32,9 +31,8 @@
                                 <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
 
                                 @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
+                                    @component('components.errors.email')
+                                    @endcomponent
                                 @endif
                             </div>
                         </div>
@@ -46,9 +44,8 @@
                                 <input id="password" type="password" class="form-control" name="password" required>
 
                                 @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
+                                    @component('components.errors.password')
+                                    @endcomponent
                                 @endif
                             </div>
                         </div>
@@ -69,11 +66,8 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <div class="col-md-4"><a href="{{ url('/social/vkontakte') }}">vk</a></div>
-                                <div class="col-md-4"><a href="{{ url('/social/google') }}">Google+</a></div>
-                                <div class="col-md-4"><a href="{{ url('/social/github') }}">Github</a></div>
-                            </div>
+                            @component('components.social')
+                            @endcomponent
                         </div>
                     </form>
                 </div>

@@ -11,6 +11,9 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        factory('App\Models\User', 300000)->create();
+        factory(
+            \App\Models\User::class,
+            \Illuminate\Support\Facades\Config::get('constants.USERS_SEED')
+        )->create();
     }
 }

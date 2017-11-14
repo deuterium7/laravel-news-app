@@ -4,6 +4,6 @@
 <div>
     <div style="width: 50%; padding: 40px 25%; text-align: justify;">
         <h3>{{ trans('catalog.categoryContent') }}:</h3>
-        <div>{{ trans('catalog.title') }} - <strong>{{ $category->name }}</strong></div>
+        <div>{{ trans('catalog.title') }} - <strong>{{ $data->name }}</strong></div>
     </div>
 </div>

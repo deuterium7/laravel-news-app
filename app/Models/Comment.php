@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
 {
+    protected $fillable = [
+        'article_id', 'user_id','body'
+    ];
+
     /**
      * Связываем с таблицей новостей.
      *
@@ -13,7 +17,7 @@ class Comment extends Model
      */
     public function article()
     {
-        return $this->belongsTo('App\Models\Article');
+        return $this->belongsTo(Article::class);
     }
 
     /**
@@ -23,6 +27,7 @@ class Comment extends Model
      */
     public function user()
     {
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo(User::class);
     }
+
 }

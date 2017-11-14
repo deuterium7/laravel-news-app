@@ -2,7 +2,6 @@
 
 namespace App\Mail;
 
-use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -12,16 +11,16 @@ class RegistrationShipped extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
-    protected $user;
+    protected $data;
 
     /**
      * RegistrationShipped constructor.
      *
-     * @param User $user
+     * @param $data
      */
-    public function __construct(User $user)
+    public function __construct($data)
     {
-        $this->user = $user;
+        $this->data = $data;
     }
 
     /**
@@ -32,6 +31,6 @@ class RegistrationShipped extends Mailable implements ShouldQueue
     public function build()
     {
         return $this->view('emails.registration')
-            ->with('user', $this->user);
+            ->with('data', $this->data);
     }
 }

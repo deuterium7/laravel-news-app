@@ -42,13 +42,7 @@ Route::get('social/callback/{provider}', 'SocialController@callback');
 Route::get('articles', 'ArticleController@index')->name('articles.index');
 Route::get('categories', 'CategoryController@index')->name('categories.index');
 Route::get('categories/{category}', 'CategoryController@show')->name('categories.show');
-Route::get('/', 'ArticleController@index');
+Route::get('locales/{locale}', 'SettingController@locale')->name('settings.locale');
 Route::get('home', 'HomeController@index')->name('home');
-Route::get('locale/{locale}', function ($locale) {
-    if (in_array($locale, Config::get('app.locales'))) {
-        Session::put('locale', $locale);
-
-        return redirect()->back();
-    }
-})->name('locales');
+Route::get('/', 'ArticleController@index');
 Auth::routes();
