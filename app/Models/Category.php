@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     protected $fillable = [
-        'name', 'image'
+        'name', 'image',
     ];
 
     public $timestamps = false;
@@ -21,5 +21,4 @@ class Category extends Model
     {
         return $this->hasMany(Article::class);
     }
-
 }

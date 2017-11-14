@@ -2,15 +2,15 @@
 
 namespace App\Providers;
 
+use App\Repositories\ArticleRepository;
+use App\Repositories\CategoryRepository;
+use App\Repositories\CommentRepository;
+use App\Repositories\Contracts\ArticleInterface;
+use App\Repositories\Contracts\CategoryInterface;
+use App\Repositories\Contracts\CommentInterface;
+use App\Repositories\Contracts\UserInterface;
 use App\Repositories\UserRepository;
 use Illuminate\Support\ServiceProvider;
-use App\Repositories\ArticleRepository;
-use App\Repositories\CommentRepository;
-use App\Repositories\CategoryRepository;
-use App\Repositories\Contracts\UserInterface;
-use App\Repositories\Contracts\ArticleInterface;
-use App\Repositories\Contracts\CommentInterface;
-use App\Repositories\Contracts\CategoryInterface;
 
 class RepositoryServiceProvider extends ServiceProvider
 {

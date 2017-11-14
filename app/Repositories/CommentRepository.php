@@ -18,7 +18,7 @@ class CommentRepository extends EloquentRepository implements CommentInterface
     }
 
     /**
-     * Получить комментарии по ключевым словам с пагинацией
+     * Получить комментарии по ключевым словам с пагинацией.
      *
      * @param string $keywords
      *

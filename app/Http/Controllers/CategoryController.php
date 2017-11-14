@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
-use App\Mail\CategoryCreateShipped;
-use Illuminate\Support\Facades\Mail;
 use App\Http\Requests\CategoryRequest;
+use App\Mail\CategoryCreateShipped;
+use App\Models\Category;
 use App\Repositories\Contracts\CategoryInterface;
+use Illuminate\Support\Facades\Mail;
 
 class CategoryController extends Controller
 {
@@ -90,7 +90,7 @@ class CategoryController extends Controller
      * Update the specified resource in storage.
      *
      * @param CategoryRequest $request
-     * @param int $id
+     * @param int             $id
      *
      * @return \Illuminate\Http\RedirectResponse
      */

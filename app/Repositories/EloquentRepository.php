@@ -56,7 +56,7 @@ abstract class EloquentRepository implements RepositoryInterface
     /**
      * Обновить запись из репозитория.
      *
-     * @param int $id
+     * @param int   $id
      * @param array $attributes
      *
      * @return Model
@@ -71,7 +71,7 @@ abstract class EloquentRepository implements RepositoryInterface
      *
      * @param int $id
      *
-     * @return boolean
+     * @return bool
      */
     public function delete(int $id)
     {

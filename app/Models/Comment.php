@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Comment extends Model
 {
     protected $fillable = [
-        'article_id', 'user_id','body'
+        'article_id', 'user_id', 'body',
     ];
 
     /**
@@ -29,5 +29,4 @@ class Comment extends Model
     {
         return $this->belongsTo(User::class);
     }
-
 }

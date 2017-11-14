@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CommentRequest;
 use App\Models\Comment;
 use App\Repositories\Contracts\CommentInterface;
 use Illuminate\Support\Carbon;
-use App\Http\Requests\CommentRequest;
 
 class CommentController extends Controller
 {
@@ -59,7 +59,7 @@ class CommentController extends Controller
      * Update the specified resource in storage.
      *
      * @param CommentRequest $request
-     * @param Comment $comment
+     * @param Comment        $comment
      *
      * @return \Illuminate\Http\RedirectResponse
      */

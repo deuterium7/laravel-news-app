@@ -11,7 +11,7 @@ class User extends Authenticatable
     use Notifiable;
 
     protected $fillable = [
-        'name', 'email', 'password'
+        'name', 'email', 'password',
     ];
 
     protected $hidden = [
@@ -27,6 +27,7 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Role::class);
     }
+
     /**
      * Связываем с таблицей новостей.
      *
@@ -36,6 +37,7 @@ class User extends Authenticatable
     {
         return $this->hasMany(Article::class);
     }
+
     /**
      * Связываем с таблицей комментариев.
      *
@@ -45,6 +47,7 @@ class User extends Authenticatable
     {
         return $this->hasMany(Comment::class);
     }
+
     /**
      * Проверяем есть ли данная роль у пользователя.
      *
@@ -56,6 +59,7 @@ class User extends Authenticatable
     {
         return in_array($check, array_pluck($this->roles->toArray(), 'slug'));
     }
+
     /**
      * Создать пользователя через провайдер.
      *

@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Repositories\Contracts\UserInterface;
 use App\Repositories\Contracts\ArticleInterface;
-use App\Repositories\Contracts\CommentInterface;
 use App\Repositories\Contracts\CategoryInterface;
+use App\Repositories\Contracts\CommentInterface;
+use App\Repositories\Contracts\UserInterface;
+use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
@@ -18,18 +18,17 @@ class AdminController extends Controller
     /**
      * AdminController constructor.
      *
-     * @param ArticleInterface $article
+     * @param ArticleInterface  $article
      * @param CategoryInterface $category
-     * @param UserInterface $user
-     * @param CommentInterface $comment
+     * @param UserInterface     $user
+     * @param CommentInterface  $comment
      */
     public function __construct(
         ArticleInterface $article,
         CategoryInterface $category,
         UserInterface $user,
         CommentInterface $comment
-    )
-    {
+    ) {
         $this->article = $article;
         $this->category = $category;
         $this->user = $user;

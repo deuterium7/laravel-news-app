@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ContactRequest;
 use App\Mail\ContactShipped;
 use Illuminate\Support\Facades\Mail;
-use App\Http\Requests\ContactRequest;
 
 class HomeController extends Controller
 {
