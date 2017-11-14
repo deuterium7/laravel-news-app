@@ -7,13 +7,8 @@
                 <h3 style="text-align: center;">@lang('catalog.updateComment')</h3>
                 {!! Form::open(['route' => ['comments.update', $comment->id], 'method' => 'PUT']) !!}
                 @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
+                    @component('components.alert')
+                    @endcomponent
                 @endif
                 <div class="form-group">
                     <label for="body">@lang('catalog.body')</label>

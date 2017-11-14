@@ -27,6 +27,10 @@
                     </div>
                 </div>
             </div>
+            @if ($errors->any())
+                @component('components.alert')
+                @endcomponent
+            @endif
             <div class="comment-add">
                 <h4 style="text-align: center">@lang('catalog.addComment')</h4>
                 {!! Form::open(['route' => 'comments.store']) !!}
