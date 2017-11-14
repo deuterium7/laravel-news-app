@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class UserSocialAccount extends Model
 {
     protected $fillable = [
-        'user_id', 'provider_user_id', 'provider'
+        'user_id', 'provider_user_id', 'provider',
     ];
 
     /**
@@ -19,5 +19,4 @@ class UserSocialAccount extends Model
     {
         return $this->belongsTo(User::class);
     }
-
 }

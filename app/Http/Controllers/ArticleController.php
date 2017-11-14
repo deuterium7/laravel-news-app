@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Article;
-use App\Mail\ArticleCreateShipped;
-use Illuminate\Support\Facades\Mail;
 use App\Http\Requests\ArticleRequest;
+use App\Mail\ArticleCreateShipped;
+use App\Models\Article;
 use App\Repositories\Contracts\ArticleInterface;
+use Illuminate\Support\Facades\Mail;
 
 class ArticleController extends Controller
 {
@@ -96,7 +96,7 @@ class ArticleController extends Controller
      * Update the specified resource in storage.
      *
      * @param ArticleRequest $request
-     * @param int $id
+     * @param int            $id
      *
      * @return \Illuminate\Http\RedirectResponse
      */

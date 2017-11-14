@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use App\Models\RoleUser;
 use App\Http\Requests\UserStatusRequest;
+use App\Models\RoleUser;
+use App\Models\User;
 use App\Repositories\Contracts\UserInterface;
 
 class UserController extends Controller
@@ -46,7 +46,7 @@ class UserController extends Controller
      * Обновить статус Пользователя.
      *
      * @param UserStatusRequest $request
-     * @param int $id
+     * @param int               $id
      *
      * @return \Illuminate\Http\RedirectResponse
      */
