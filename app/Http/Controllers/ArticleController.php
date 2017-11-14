@@ -6,6 +6,7 @@ use App\Http\Requests\ArticleRequest;
 use App\Mail\ArticleCreateShipped;
 use App\Models\Article;
 use App\Repositories\Contracts\ArticleInterface;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Mail;
 
 class ArticleController extends Controller
@@ -29,7 +30,15 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = $this->article->getAllVisibleWithPagination();
+        $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+        $key = 'articles_page_' . $page;
+
+        if (Cache::has($key)) {
+            $articles = Cache::get($key);
+        } else {
+            $articles = $this->article->getAllVisibleWithPagination();
+            Cache::put($key, $articles, 10);
+        }
 
         return view('articles.index', compact('articles'));
     }
