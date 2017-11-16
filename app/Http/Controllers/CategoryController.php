@@ -2,24 +2,28 @@
 
 namespace App\Http\Controllers;
 
+use App\Contracts\ArticleInterface;
 use App\Http\Requests\CategoryRequest;
-use App\Mail\CategoryCreateShipped;
+use App\Mail\CategoryCreate;
 use App\Models\Category;
-use App\Repositories\Contracts\CategoryInterface;
+use App\Contracts\CategoryInterface;
 use Illuminate\Support\Facades\Mail;
 
 class CategoryController extends Controller
 {
-    protected $category;
+    protected $categories;
+    protected $articles;
 
     /**
      * CategoryController constructor.
      *
-     * @param CategoryInterface $category
+     * @param CategoryInterface $categories
+     * @param ArticleInterface $articles
      */
-    public function __construct(CategoryInterface $category)
+    public function __construct(CategoryInterface $categories, ArticleInterface $articles)
     {
-        $this->category = $category;
+        $this->categories = $categories;
+        $this->articles = $articles;
     }
 
     /**
@@ -29,7 +33,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = $this->category->getAll();
+        $categories = $this->categories->all();
 
         return view('categories.index', compact('categories'));
     }
@@ -53,9 +57,9 @@ class CategoryController extends Controller
      */
     public function store(CategoryRequest $request)
     {
-        $this->category->create($request->all());
+        $this->categories->create($request->all());
 
-        Mail::to(\Auth::user()->email)->send(new CategoryCreateShipped((object) $request->all()));
+        Mail::to(\Auth::user()->email)->send(new CategoryCreate((object) $request->all()));
 
         return redirect()->route('admin.categories');
     }
@@ -69,7 +73,7 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        $articles = $this->category->getAllArticlesFromCategory($id);
+        $articles = $this->articles->getArticlesFromCategory($id);
 
         return view('categories.show', compact('articles'));
     }
@@ -90,13 +94,13 @@ class CategoryController extends Controller
      * Update the specified resource in storage.
      *
      * @param CategoryRequest $request
-     * @param int             $id
+     * @param int $id
      *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function update(CategoryRequest $request, $id)
     {
-        $this->category->update($id, $request->all());
+        $this->categories->update($id, $request->all());
 
         return redirect()->route('admin.categories');
     }
@@ -110,7 +114,7 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $this->category->delete($id);
+        $this->categories->delete($id);
 
         return redirect()->back();
     }

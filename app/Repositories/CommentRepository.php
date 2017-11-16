@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Comment;
-use App\Repositories\Contracts\CommentInterface;
+use App\Contracts\CommentInterface;
 
 class CommentRepository extends EloquentRepository implements CommentInterface
 {
@@ -18,15 +18,46 @@ class CommentRepository extends EloquentRepository implements CommentInterface
     }
 
     /**
+     * Получить все комментарии новости.
+     *
+     * @param $id
+     *
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
+    public function getCommentsFromArticle($id)
+    {
+        return $this->model->with('user')
+            ->where('article_id', $id)
+            ->orderBy('updated_at', 'desc')
+            ->paginate(5);
+    }
+
+    /**
+     * Получить последние комментарии пользователя.
+     *
+     * @param $id
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
+    public function getLastCommentsFromUser($id)
+    {
+        return $this->model->with('user')
+            ->where('user_id', $id)
+            ->orderBy('updated_at', 'desc')
+            ->limit(5)
+            ->get();
+    }
+
+    /**
      * Получить комментарии по ключевым словам с пагинацией.
      *
      * @param string $keywords
      *
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public function getAllWithKeywordsAndPaginate($keywords)
+    public function getWithKeywordsAndPagination($keywords)
     {
-        return Comment::where('body', 'LIKE', '%'.$keywords.'%')
+        return $this->model->where('body', 'LIKE', '%'.$keywords.'%')
             ->orderBy('updated_at', 'desc')
             ->paginate(10);
     }

@@ -4,21 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CommentRequest;
 use App\Models\Comment;
-use App\Repositories\Contracts\CommentInterface;
-use Illuminate\Support\Carbon;
+use App\Contracts\CommentInterface;
 
 class CommentController extends Controller
 {
-    protected $comment;
+    protected $comments;
 
     /**
      * CommentController constructor.
      *
-     * @param CommentInterface $comment
+     * @param CommentInterface $comments
      */
-    public function __construct(CommentInterface $comment)
+    public function __construct(CommentInterface $comments)
     {
-        $this->comment = $comment;
+        $this->comments = $comments;
     }
 
     /**
@@ -30,7 +29,7 @@ class CommentController extends Controller
      */
     public function store(CommentRequest $request)
     {
-        $this->comment->create($request->all());
+        $this->comments->create($request->all());
 
         return redirect()->back();
     }
@@ -44,13 +43,7 @@ class CommentController extends Controller
      */
     public function edit(Comment $comment)
     {
-        if (\Auth::user()->id !== $comment->user_id) {
-            return redirect()->back()->with('message', trans('catalog.dontAccessOperation'));
-        }
-
-        if (Carbon::now()->diffInMinutes($comment->created_at) > 5) {
-            return redirect()->back()->with('message', trans('catalog.timeExpired'));
-        }
+        $this->authorize($comment);
 
         return view('comments.edit', compact('comment'));
     }
@@ -65,7 +58,7 @@ class CommentController extends Controller
      */
     public function update(CommentRequest $request, Comment $comment)
     {
-        $this->comment->update($comment->id, $request->all());
+        $this->comments->update($comment->id, $request->all());
 
         return redirect()->route('articles.show', ['article' => $comment->article->id]);
     }
@@ -79,7 +72,7 @@ class CommentController extends Controller
      */
     public function destroy($id)
     {
-        $this->comment->delete($id);
+        $this->comments->delete($id);
 
         return redirect()->back();
     }

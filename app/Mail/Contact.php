@@ -7,20 +7,20 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class ContactShipped extends Mailable implements ShouldQueue
+class Contact extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
-    protected $data;
+    protected $contact;
 
     /**
-     * ContactShipped constructor.
+     * Contact constructor.
      *
-     * @param $data
+     * @param $contact
      */
-    public function __construct($data)
+    public function __construct($contact)
     {
-        $this->data = $data;
+        $this->contact = $contact;
     }
 
     /**
@@ -31,6 +31,6 @@ class ContactShipped extends Mailable implements ShouldQueue
     public function build()
     {
         return $this->view('emails.contact')
-            ->with('data', $this->data);
+            ->with('contact', $this->contact);
     }
 }

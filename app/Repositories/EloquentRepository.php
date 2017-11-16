@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Repositories\Contracts\RepositoryInterface;
+use App\Contracts\RepositoryInterface;
 use Illuminate\Database\Eloquent\Model;
 
 abstract class EloquentRepository implements RepositoryInterface
@@ -24,21 +24,9 @@ abstract class EloquentRepository implements RepositoryInterface
      *
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
-    public function getAll()
+    public function all()
     {
         return $this->model->all();
-    }
-
-    /**
-     * Получить одну запись из репозитория.
-     *
-     * @param int $id
-     *
-     * @return Model
-     */
-    public function getById(int $id)
-    {
-        return $this->model->find($id);
     }
 
     /**

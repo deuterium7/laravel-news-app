@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\RegistrationShipped;
 use App\Services\SocialAccountService;
-use Illuminate\Support\Facades\Mail;
 use Laravel\Socialite\Facades\Socialite;
 
 class SocialController extends Controller
@@ -32,10 +30,8 @@ class SocialController extends Controller
     public function callback(SocialAccountService $service, $provider)
     {
         $driver = Socialite::driver($provider);
-        $user = $service->createOrGetUser($driver, $provider);
+        $user = $service->getUser($driver, $provider);
         \Auth::login($user, true);
-
-        Mail::to($user->email)->send(new RegistrationShipped($user));
 
         return redirect()->intended('/home');
     }

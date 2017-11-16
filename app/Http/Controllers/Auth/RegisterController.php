@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Mail\RegistrationShipped;
+use App\Mail\Registration;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\DB;
@@ -78,7 +78,7 @@ class RegisterController extends Controller
             'role_id' => 1,
         ]);
 
-        Mail::to($data['email'])->send(new RegistrationShipped($user));
+        Mail::to($data['email'])->send(new Registration($user));
 
         return $user;
     }

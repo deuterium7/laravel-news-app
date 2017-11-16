@@ -2,25 +2,32 @@
 
 namespace App\Http\Controllers;
 
+use App\Contracts\CategoryInterface;
+use App\Contracts\CommentInterface;
 use App\Http\Requests\ArticleRequest;
-use App\Mail\ArticleCreateShipped;
+use App\Mail\ArticleCreate;
 use App\Models\Article;
-use App\Repositories\Contracts\ArticleInterface;
-use Illuminate\Support\Facades\Cache;
+use App\Contracts\ArticleInterface;
 use Illuminate\Support\Facades\Mail;
 
 class ArticleController extends Controller
 {
-    protected $article;
+    protected $articles;
+    protected $categories;
+    protected $comments;
 
     /**
      * ArticleController constructor.
      *
-     * @param ArticleInterface $article
+     * @param ArticleInterface $articles
+     * @param CategoryInterface $categories
+     * @param CommentInterface $comments
      */
-    public function __construct(ArticleInterface $article)
+    public function __construct(ArticleInterface $articles, CategoryInterface $categories, CommentInterface $comments)
     {
-        $this->article = $article;
+        $this->articles = $articles;
+        $this->categories = $categories;
+        $this->comments = $comments;
     }
 
     /**
@@ -30,15 +37,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
-        $key = 'articles_page_'.$page;
-
-        if (Cache::has($key)) {
-            $articles = Cache::get($key);
-        } else {
-            $articles = $this->article->getAllVisibleWithPagination();
-            Cache::put($key, $articles, 10);
-        }
+        $articles = $this->articles->getVisibleWithPagination();
 
         return view('articles.index', compact('articles'));
     }
@@ -50,7 +49,7 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        $categories = $this->article->getAllCategories();
+        $categories = $this->categories->allPluck();
 
         return view('articles.create', compact('categories'));
     }
@@ -64,9 +63,9 @@ class ArticleController extends Controller
      */
     public function store(ArticleRequest $request)
     {
-        $this->article->create($request->all());
+        $this->articles->create($request->all());
 
-        Mail::to(\Auth::user()->email)->send(new ArticleCreateShipped((object) $request->all()));
+        Mail::to(\Auth::user()->email)->send(new ArticleCreate((object) $request->all()));
 
         return redirect()->route('admin.news');
     }
@@ -84,7 +83,7 @@ class ArticleController extends Controller
             return redirect()->back()->with('message', trans('catalog.blockedNews'));
         }
 
-        $comments = $this->article->getArticleComments($article->id);
+        $comments = $this->comments->getCommentsFromArticle($article->id);
 
         return view('articles.show', compact('article', 'comments'));
     }
@@ -111,7 +110,7 @@ class ArticleController extends Controller
      */
     public function update(ArticleRequest $request, $id)
     {
-        $this->article->update($id, $request->all());
+        $this->articles->update($id, $request->all());
 
         return redirect()->route('articles.index');
     }
@@ -125,7 +124,7 @@ class ArticleController extends Controller
      */
     public function destroy($id)
     {
-        $this->article->delete($id);
+        $this->articles->delete($id);
 
         return redirect()->back();
     }

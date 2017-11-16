@@ -17,8 +17,8 @@ class EventServiceProvider extends ServiceProvider
             'App\Listeners\EventListener',
         ],
         \SocialiteProviders\Manager\SocialiteWasCalled::class => [
-            \SocialiteProviders\VKontakte\VKontakteExtendSocialite::class,
-            \SocialiteProviders\Google\GoogleExtendSocialite::class,
+            'SocialiteProviders\VKontakte\VKontakteExtendSocialite@handle',
+            'SocialiteProviders\Google\GoogleExtendSocialite@handle',
         ],
     ];
 
