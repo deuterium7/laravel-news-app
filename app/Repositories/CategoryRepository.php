@@ -2,9 +2,8 @@
 
 namespace App\Repositories;
 
-use App\Models\Article;
 use App\Models\Category;
-use App\Repositories\Contracts\CategoryInterface;
+use App\Contracts\CategoryInterface;
 
 class CategoryRepository extends EloquentRepository implements CategoryInterface
 {
@@ -19,28 +18,22 @@ class CategoryRepository extends EloquentRepository implements CategoryInterface
     }
 
     /**
-     * Получить все отсортированным по дате создания.
+     * Получить все отсортированные категории.
      *
      * @return mixed
      */
-    public function getAll()
+    public function all()
     {
         return $this->model->orderBy('id', 'desc')->get();
     }
 
     /**
-     * Получить все новости из категорий.
+     * Получить все категории вида <значение-ключ>.
      *
-     * @param $id
-     *
-     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     * @return \Illuminate\Support\Collection
      */
-    public function getAllArticlesFromCategory($id)
+    public function allPluck()
     {
-        return Article::with('category')
-            ->where('visibility', true)
-            ->where('category_id', $id)
-            ->orderBy('updated_at', 'desc')
-            ->paginate(10);
+        return $this->model->all()->pluck('name', 'id');
     }
 }

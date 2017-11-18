@@ -3,9 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Article;
-use App\Models\Category;
-use App\Models\Comment;
-use App\Repositories\Contracts\ArticleInterface;
+use App\Contracts\ArticleInterface;
 
 class ArticleRepository extends EloquentRepository implements ArticleInterface
 {
@@ -20,38 +18,29 @@ class ArticleRepository extends EloquentRepository implements ArticleInterface
     }
 
     /**
-     * Получить все видимые записи из новостей с пагинацией.
+     * Получить видимые новости с пагинацией.
      *
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public function getAllVisibleWithPagination()
+    public function getVisibleWithPagination()
     {
         return $this->model->where('visibility', true)
             ->orderBy('updated_at', 'desc')
-            ->paginate(10);
+            ->paginate(5);
     }
 
     /**
-     * Получить все категории.
-     *
-     * @return \Illuminate\Support\Collection
-     */
-    public function getAllCategories()
-    {
-        return Category::all()->pluck('name', 'id');
-    }
-
-    /**
-     * Получить все комментарии новости.
+     * Получить все новости из категории.
      *
      * @param $id
      *
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public function getArticleComments($id)
+    public function getArticlesFromCategory($id)
     {
-        return Comment::with('user')
-            ->where('article_id', $id)
+        return $this->model->with('category')
+            ->where('visibility', true)
+            ->where('category_id', $id)
             ->orderBy('updated_at', 'desc')
             ->paginate(5);
     }
@@ -63,9 +52,9 @@ class ArticleRepository extends EloquentRepository implements ArticleInterface
      *
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public function getAllWithCategoryKeywordsAndPaginate($keywords)
+    public function getWithCategoryKeywordsAndPagination($keywords)
     {
-        return Article::with('category')
+        return $this->model->with('category')
             ->where('title', 'LIKE', '%'.$keywords.'%')
             ->orderBy('updated_at', 'desc')
             ->paginate(10);

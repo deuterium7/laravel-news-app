@@ -18,8 +18,7 @@ class CreateArticlesTable extends Migration
             $table->integer('category_id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->string('title', 255)->unique();
-            $table->string('image', 255)
-                ->default('http://www.veho.ru/img/photo_not_found.gif');
+            $table->string('image', 255);
             $table->text('body');
             $table->boolean('visibility')->default(true);
             $table->timestamps();

@@ -4,14 +4,13 @@ namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Carbon;
 
 class User extends Authenticatable
 {
     use Notifiable;
 
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'ban',
     ];
 
     protected $hidden = [
@@ -58,28 +57,5 @@ class User extends Authenticatable
     public function hasRole($check)
     {
         return in_array($check, array_pluck($this->roles->toArray(), 'slug'));
-    }
-
-    /**
-     * Создать пользователя через провайдер.
-     *
-     * @param $providerUser
-     *
-     * @return mixed
-     */
-    public static function createBySocialProvider($providerUser)
-    {
-        $user = self::create([
-            'email'    => $providerUser->getEmail(),
-            'name'     => $providerUser->getName(),
-            'password' => bcrypt('secret'.Carbon::now()),
-        ]);
-
-        RoleUser::create([
-            'user_id' => $user->id,
-            'role_id' => 1,
-        ]);
-
-        return $user;
     }
 }

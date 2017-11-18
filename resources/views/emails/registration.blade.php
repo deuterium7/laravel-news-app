@@ -4,7 +4,7 @@
 <div>
     <div style="width: 50%; padding: 40px 25%; text-align: justify;">
         <h3>{{ trans('catalog.yourContacts') }}:</h3>
-        <div>{{ trans('catalog.nameUser') }} - <strong>{{ $data->name }}</strong></div>
-        <div>{{ trans('catalog.createdAt') }} - <strong>{{ $data->created_at }}</strong></div>
+        <div>{{ trans('catalog.nameUser') }} - <strong>{{ $registration->name }}</strong></div>
+        <div>{{ trans('catalog.createdAt') }} - <strong>{{ $registration->created_at }}</strong></div>
     </div>
 </div>

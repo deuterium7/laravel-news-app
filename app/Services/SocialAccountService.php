@@ -2,8 +2,12 @@
 
 namespace App\Services;
 
+use App\Mail\Registration;
 use App\Models\User;
 use App\Models\UserSocialAccount;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class SocialAccountService
 {
@@ -13,9 +17,9 @@ class SocialAccountService
      * @param $providerObject
      * @param $providerName
      *
-     * @return mixed
+     * @return User
      */
-    public function createOrGetUser($providerObject, $providerName)
+    public function getUser($providerObject, $providerName)
     {
         $providerUser = $providerObject->user();
 
@@ -26,21 +30,46 @@ class SocialAccountService
         if ($account) {
             return $account->user;
         } else {
-            $account = new UserSocialAccount([
-                'provider_user_id' => $providerUser->getId(),
-                'provider'         => $providerName,
+            return $this->createUser($providerUser, $providerName);
+        }
+    }
+
+    /**
+     * Создать пользователя.
+     *
+     * @param $providerUser
+     * @param $providerName
+     *
+     * @return User $user
+     */
+    public function createUser($providerUser, $providerName)
+    {
+        $account = new UserSocialAccount([
+            'provider_user_id' => $providerUser->getId(),
+            'provider'         => $providerName,
+        ]);
+
+        $user = User::whereEmail($providerUser->getEmail())->first();
+
+        // Если пользователя не существует в таблице User, добавляем
+        if (!$user) {
+            $user = User::create([
+                'email'    => $providerUser->getEmail(),
+                'name'     => $providerUser->getName(),
+                'password' => bcrypt('secret'.Carbon::now()),
             ]);
 
-            $user = User::whereEmail($providerUser->getEmail())->first();
+            DB::table('role_user')->insert([
+                'user_id' => $user->id,
+                'role_id' => 1,
+            ]);
 
-            if (!$user) {
-                $user = User::createBySocialProvider($providerUser);
-            }
-
-            $account->user()->associate($user);
-            $account->save();
-
-            return $user;
+            Mail::to($user->email)->send(new Registration($user));
         }
+
+        $account->user()->associate($user);
+        $account->save();
+
+        return $user;
     }
 }

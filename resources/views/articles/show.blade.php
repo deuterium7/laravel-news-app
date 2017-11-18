@@ -51,11 +51,11 @@
                             [<a href="{{ route('users.show', ['user' => $comment->user_id]) }}" title="{{ $comment->user->name }}">
                                 {{ $comment->user->name }}
                             </a>]
-                            @if(Auth::user()->id === $comment->user_id)
+                            @can('edit', $comment)
                                 :<a href="{{ route('comments.edit', ['comment' => $comment->id]) }}" title="{{ trans('catalog.updateComment') }}">
                                     {{ trans('catalog.edit') }}
                                 </a>
-                            @endif
+                            @endcan
                         </h5>
                         <p class="body" style="text-align: justify">{{ $comment->body }}</p>
                         @if($comment->updated_at <= $comment->created_at)

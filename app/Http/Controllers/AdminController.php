@@ -2,37 +2,37 @@
 
 namespace App\Http\Controllers;
 
-use App\Repositories\Contracts\ArticleInterface;
-use App\Repositories\Contracts\CategoryInterface;
-use App\Repositories\Contracts\CommentInterface;
-use App\Repositories\Contracts\UserInterface;
+use App\Contracts\ArticleInterface;
+use App\Contracts\CategoryInterface;
+use App\Contracts\CommentInterface;
+use App\Contracts\UserInterface;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-    protected $article;
-    protected $category;
-    protected $user;
-    protected $comment;
+    protected $articles;
+    protected $categories;
+    protected $users;
+    protected $comments;
 
     /**
      * AdminController constructor.
      *
-     * @param ArticleInterface  $article
-     * @param CategoryInterface $category
-     * @param UserInterface     $user
-     * @param CommentInterface  $comment
+     * @param ArticleInterface  $articles
+     * @param CategoryInterface $categories
+     * @param UserInterface     $users
+     * @param CommentInterface  $comments
      */
     public function __construct(
-        ArticleInterface $article,
-        CategoryInterface $category,
-        UserInterface $user,
-        CommentInterface $comment
+        ArticleInterface $articles,
+        CategoryInterface $categories,
+        UserInterface $users,
+        CommentInterface $comments
     ) {
-        $this->article = $article;
-        $this->category = $category;
-        $this->user = $user;
-        $this->comment = $comment;
+        $this->articles = $articles;
+        $this->categories = $categories;
+        $this->users = $users;
+        $this->comments = $comments;
     }
 
     /**
@@ -44,7 +44,7 @@ class AdminController extends Controller
      */
     public function news(Request $request)
     {
-        $articles = $this->article->getAllWithCategoryKeywordsAndPaginate($request->keywords);
+        $articles = $this->articles->getWithCategoryKeywordsAndPagination($request->keywords);
 
         return view('admin.news', compact('articles'));
     }
@@ -56,7 +56,7 @@ class AdminController extends Controller
      */
     public function categories()
     {
-        $categories = $this->category->getAll();
+        $categories = $this->categories->all();
 
         return view('admin.categories', compact('categories'));
     }
@@ -70,7 +70,7 @@ class AdminController extends Controller
      */
     public function users(Request $request)
     {
-        $users = $this->user->getAllWithKeywordsAndPaginate($request->keywords);
+        $users = $this->users->getWithKeywordsAndPagination($request->keywords);
 
         return view('admin.users', compact('users'));
     }
@@ -84,7 +84,7 @@ class AdminController extends Controller
      */
     public function comments(Request $request)
     {
-        $comments = $this->comment->getAllWithKeywordsAndPaginate($request->keywords);
+        $comments = $this->comments->getWithKeywordsAndPagination($request->keywords);
 
         return view('admin.comments', compact('comments'));
     }

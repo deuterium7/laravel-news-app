@@ -1,7 +1,6 @@
 <?php
-
 return [
-    'enabled' => env('APP_DEBUG') === true,
+    'enabled' => env('APP_DEBUG') === false,
     'showBar' => env('APP_ENV') !== 'production',
     'route'   => [
         'prefix' => 'tracy',

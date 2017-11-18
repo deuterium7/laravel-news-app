@@ -2,18 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\Contracts\CommentInterface;
 use App\Http\Requests\UserStatusRequest;
 use App\Models\RoleUser;
 use App\Models\User;
-use App\Repositories\Contracts\UserInterface;
+use App\Contracts\UserInterface;
 
 class UserController extends Controller
 {
-    protected $user;
+    protected $users;
+    protected $comments;
 
-    public function __construct(UserInterface $user)
+    /**
+     * UserController constructor.
+     *
+     * @param UserInterface $users
+     * @param CommentInterface $comments
+     */
+    public function __construct(UserInterface $users, CommentInterface $comments)
     {
-        $this->user = $user;
+        $this->users = $users;
+        $this->comments = $comments;
     }
 
     /**
@@ -25,7 +34,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        $comments = $this->user->getLastCommentsFromUser($user->id);
+        $comments = $this->comments->getLastCommentsFromUser($user->id);
 
         return view('users.show', compact('user', 'comments'));
     }
@@ -52,7 +61,7 @@ class UserController extends Controller
      */
     public function update(UserStatusRequest $request, $id)
     {
-        $this->user->update($id, $request->all());
+        $this->users->update($id, $request->all());
 
         return redirect()->route('admin.users');
     }

@@ -7,20 +7,20 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class RegistrationShipped extends Mailable implements ShouldQueue
+class Registration extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
-    protected $data;
+    protected $registration;
 
     /**
-     * RegistrationShipped constructor.
+     * Registration constructor.
      *
-     * @param $data
+     * @param $registration
      */
-    public function __construct($data)
+    public function __construct($registration)
     {
-        $this->data = $data;
+        $this->registration = $registration;
     }
 
     /**
@@ -31,6 +31,6 @@ class RegistrationShipped extends Mailable implements ShouldQueue
     public function build()
     {
         return $this->view('emails.registration')
-            ->with('data', $this->data);
+            ->with('registration', $this->registration);
     }
 }
