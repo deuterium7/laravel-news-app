@@ -25,8 +25,8 @@ class UserControllerTest extends TestCase
             ->assertStatus(200);
 
         $request = [
-            'ban' => Carbon::now()->addHour(),
-            '_token' => csrf_token()
+            'ban'    => Carbon::now()->addHour(),
+            '_token' => csrf_token(),
         ];
 
         $user->update($request);
@@ -52,7 +52,7 @@ class UserControllerTest extends TestCase
         $request = [
             'user_id' => $user->id,
             'role_id' => 2,
-            '_token' => csrf_token()
+            '_token'  => csrf_token(),
         ];
 
         $this->post("users/$user->id", $request)

@@ -2,8 +2,8 @@
 
 namespace App\Repositories;
 
-use App\Models\Category;
 use App\Contracts\CategoryInterface;
+use App\Models\Category;
 
 class CategoryRepository extends EloquentRepository implements CategoryInterface
 {

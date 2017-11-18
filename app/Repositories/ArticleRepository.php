@@ -2,8 +2,8 @@
 
 namespace App\Repositories;
 
-use App\Models\Article;
 use App\Contracts\ArticleInterface;
+use App\Models\Article;
 
 class ArticleRepository extends EloquentRepository implements ArticleInterface
 {

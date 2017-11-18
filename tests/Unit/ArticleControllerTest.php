@@ -24,12 +24,12 @@ class ArticleControllerTest extends TestCase
             ->assertStatus(200);
 
         $request = [
-            'user_id' => $admin->id,
+            'user_id'     => $admin->id,
             'category_id' => $category->id,
-            'title' => 'Can create article title',
-            'image' => 'Can create article image',
-            'body' => 'Can create article body',
-            '_token' => csrf_token()
+            'title'       => 'Can create article title',
+            'image'       => 'Can create article image',
+            'body'        => 'Can create article body',
+            '_token'      => csrf_token(),
         ];
 
         $this->post('articles', $request)
@@ -50,10 +50,10 @@ class ArticleControllerTest extends TestCase
             ->assertStatus(200);
 
         $request = [
-            'title' => 'Can update article title',
-            'image' => 'Can update article image',
-            'body' => 'Can update article body',
-            '_token' => csrf_token()
+            'title'  => 'Can update article title',
+            'image'  => 'Can update article image',
+            'body'   => 'Can update article body',
+            '_token' => csrf_token(),
         ];
 
         $this->put("articles/$article->id", $request)

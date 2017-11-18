@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Contracts\ArticleInterface;
 use App\Contracts\CategoryInterface;
 use App\Contracts\CommentInterface;
 use App\Http\Requests\ArticleRequest;
 use App\Mail\ArticleCreate;
 use App\Models\Article;
-use App\Contracts\ArticleInterface;
 use Illuminate\Support\Facades\Mail;
 
 class ArticleController extends Controller
@@ -19,9 +19,9 @@ class ArticleController extends Controller
     /**
      * ArticleController constructor.
      *
-     * @param ArticleInterface $articles
+     * @param ArticleInterface  $articles
      * @param CategoryInterface $categories
-     * @param CommentInterface $comments
+     * @param CommentInterface  $comments
      */
     public function __construct(ArticleInterface $articles, CategoryInterface $categories, CommentInterface $comments)
     {

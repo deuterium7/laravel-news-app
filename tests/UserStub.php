@@ -26,7 +26,6 @@ trait UserStub
      * Дать пользователю соответствующие права.
      *
      * @param $id
-     *
      * @param string $role
      */
     public function setRights($id, string $role = 'user')
@@ -34,13 +33,13 @@ trait UserStub
         if ($role == 'admin') {
             RoleUser::create([
                 'user_id' => $id,
-                'role_id' => 2
+                'role_id' => 2,
             ]);
         }
 
         RoleUser::create([
             'user_id' => $id,
-            'role_id' => 1
+            'role_id' => 1,
         ]);
     }
 }

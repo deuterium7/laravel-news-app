@@ -2,8 +2,8 @@
 
 namespace App\Repositories;
 
-use App\Models\Comment;
 use App\Contracts\CommentInterface;
+use App\Models\Comment;
 
 class CommentRepository extends EloquentRepository implements CommentInterface
 {
