@@ -43,7 +43,7 @@
                         <td>{{ $user->created_at }}</td>
                         <td>
                             @if(!$user->hasRole('admin'))
-                                {!! Form::open(['method' => 'Put', 'route' => ['users.admin', $user->id]]) !!}
+                                {!! Form::open(['method' => 'Post', 'route' => ['users.admin', $user->id]]) !!}
                                     <input type="submit" class="btn btn-warning" value="@lang('catalog.admin')">
                                 {!! Form::close() !!}
                             @endif
