@@ -1,4 +1,5 @@
 <?php
+
 return [
     'enabled' => env('APP_DEBUG') === false,
     'showBar' => env('APP_ENV') !== 'production',

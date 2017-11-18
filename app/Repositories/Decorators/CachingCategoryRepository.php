@@ -45,7 +45,7 @@ class CachingCategoryRepository implements CategoryInterface
     /**
      * Обновить категорию.
      *
-     * @param int $id
+     * @param int   $id
      * @param array $attributes
      *
      * @return \App\Contracts\Model
