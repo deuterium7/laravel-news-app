@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Contracts\ArticleInterface;
+use App\Contracts\CategoryInterface;
 use App\Http\Requests\CategoryRequest;
 use App\Mail\CategoryCreate;
 use App\Models\Category;
-use App\Contracts\CategoryInterface;
 use Illuminate\Support\Facades\Mail;
 
 class CategoryController extends Controller
@@ -18,7 +18,7 @@ class CategoryController extends Controller
      * CategoryController constructor.
      *
      * @param CategoryInterface $categories
-     * @param ArticleInterface $articles
+     * @param ArticleInterface  $articles
      */
     public function __construct(CategoryInterface $categories, ArticleInterface $articles)
     {
@@ -94,7 +94,7 @@ class CategoryController extends Controller
      * Update the specified resource in storage.
      *
      * @param CategoryRequest $request
-     * @param int $id
+     * @param int             $id
      *
      * @return \Illuminate\Http\RedirectResponse
      */

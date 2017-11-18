@@ -14,7 +14,7 @@ class CachingArticleRepository implements ArticleInterface
      * CachingArticleRepository constructor.
      *
      * @param ArticleInterface $article
-     * @param Repository $cache
+     * @param Repository       $cache
      */
     public function __construct(ArticleInterface $article, Repository $cache)
     {
@@ -51,7 +51,7 @@ class CachingArticleRepository implements ArticleInterface
     /**
      * Обновить новость.
      *
-     * @param int $id
+     * @param int   $id
      * @param array $attributes
      *
      * @return Article

@@ -22,9 +22,9 @@ class CategoryControllerTest extends TestCase
             ->assertStatus(200);
 
         $request = [
-            'name' => 'Can create category name',
-            'image' => 'Can create category image',
-            '_token' => csrf_token()
+            'name'   => 'Can create category name',
+            'image'  => 'Can create category image',
+            '_token' => csrf_token(),
         ];
 
         $this->post('categories', $request)
@@ -45,9 +45,9 @@ class CategoryControllerTest extends TestCase
             ->assertStatus(200);
 
         $request = [
-            'name' => 'Can update category name',
-            'image' => 'Can update category image',
-            '_token' => csrf_token()
+            'name'   => 'Can update category name',
+            'image'  => 'Can update category image',
+            '_token' => csrf_token(),
         ];
 
         $this->put("categories/$category->id", $request)

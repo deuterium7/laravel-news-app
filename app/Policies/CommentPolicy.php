@@ -2,9 +2,9 @@
 
 namespace App\Policies;
 
-use Carbon\Carbon;
-use App\Models\User;
 use App\Models\Comment;
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class CommentPolicy

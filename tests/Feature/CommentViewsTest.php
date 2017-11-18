@@ -18,8 +18,8 @@ class CommentViewsTest extends TestCase
         $user = $this->createUserStub();
         $comment = Comment::create([
             'article_id' => $article->id,
-            'user_id' => $user->id,
-            'body' => 'edit view test'
+            'user_id'    => $user->id,
+            'body'       => 'edit view test',
         ]);
 
         $this->actingAs($user)

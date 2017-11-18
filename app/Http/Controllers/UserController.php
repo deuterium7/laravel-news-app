@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Contracts\CommentInterface;
+use App\Contracts\UserInterface;
 use App\Http\Requests\UserStatusRequest;
 use App\Models\RoleUser;
 use App\Models\User;
-use App\Contracts\UserInterface;
 
 class UserController extends Controller
 {
@@ -16,7 +16,7 @@ class UserController extends Controller
     /**
      * UserController constructor.
      *
-     * @param UserInterface $users
+     * @param UserInterface    $users
      * @param CommentInterface $comments
      */
     public function __construct(UserInterface $users, CommentInterface $comments)

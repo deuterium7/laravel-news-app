@@ -24,10 +24,10 @@ class CommentControllerTest extends TestCase
             ->assertStatus(200);
 
         $request = [
-            'user_id' => $user->id,
+            'user_id'    => $user->id,
             'article_id' => $article->id,
-            'body' => 'Can create comment',
-            '_token' => csrf_token()
+            'body'       => 'Can create comment',
+            '_token'     => csrf_token(),
         ];
 
         $this->post('comments', $request)
@@ -48,8 +48,8 @@ class CommentControllerTest extends TestCase
             ->assertStatus(200);
 
         $request = [
-            'body' => 'Can update comment',
-            '_token' => csrf_token()
+            'body'   => 'Can update comment',
+            '_token' => csrf_token(),
         ];
 
         $this->put("comments/$comment->id", $request)
