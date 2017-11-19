@@ -22,9 +22,7 @@ class CreateArticlesTable extends Migration
             $table->text('body');
             $table->boolean('visibility')->default(true);
             $table->timestamps();
-        });
 
-        Schema::table('articles', function (Blueprint $table) {
             $table->foreign('category_id')->references('id')->on('categories')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
