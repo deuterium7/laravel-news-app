@@ -27,11 +27,7 @@ class SocialAccountService
             ->whereProviderUserId($providerUser->getId())
             ->first();
 
-        if ($account) {
-            return $account->user;
-        } else {
-            return $this->createUser($providerUser, $providerName);
-        }
+        return $account ? $account->user : $this->createUser($providerUser, $providerName);
     }
 
     /**
@@ -57,11 +53,6 @@ class SocialAccountService
                 'email'    => $providerUser->getEmail(),
                 'name'     => $providerUser->getName(),
                 'password' => bcrypt('secret'.Carbon::now()),
-            ]);
-
-            DB::table('role_user')->insert([
-                'user_id' => $user->id,
-                'role_id' => 1,
             ]);
 
             Mail::to($user->email)->send(new Registration($user));

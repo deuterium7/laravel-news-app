@@ -13,7 +13,7 @@ class UsersTableSeeder extends Seeder
     {
         // администраторы загружают статьи
         $categoriesCount = \App\Models\Category::count();
-        factory(\App\Models\User::class, 10)->create()->each(function ($u) use ($categoriesCount) {
+        factory(\App\Models\User::class, 10)->create(['admin' => true])->each(function ($u) use ($categoriesCount) {
             $u->articles()
                 ->saveMany(factory(\App\Models\Article::class, 15)
                 ->create([

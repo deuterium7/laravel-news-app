@@ -11,13 +11,13 @@
 |
 */
 
-Route::middleware('role:admin')->group(function () {
+Route::middleware('admin', 'ban')->group(function () {
     Route::resource('articles', 'ArticleController');
     Route::resource('comments', 'CommentController');
     Route::resource('categories', 'CategoryController');
     Route::get('users/{user}/ban', 'UserController@ban')->name('users.ban');
-    Route::put('users/{user}', 'UserController@update')->name('users.update');
-    Route::post('users/{user}', 'UserController@admin')->name('users.admin');
+    Route::put('users/{user}/update', 'UserController@update')->name('users.update');
+    Route::put('users/{user}/admin', 'UserController@admin')->name('users.admin');
     Route::get('admin/news', 'AdminController@news')->name('admin.news');
     Route::get('admin/categories', 'AdminController@categories')->name('admin.categories');
     Route::get('admin/users', 'AdminController@users')->name('admin.users');
@@ -25,7 +25,7 @@ Route::middleware('role:admin')->group(function () {
     Route::get('admin/logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index')->name('admin.logs');
 });
 
-Route::middleware('role:user')->group(function () {
+Route::middleware('auth', 'ban')->group(function () {
     Route::post('contact/send', 'HomeController@send')->name('home.send');
     Route::get('users/{user}', 'UserController@show')->name('users.show');
     Route::get('articles/{article}', 'ArticleController@show')->name('articles.show');

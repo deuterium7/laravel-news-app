@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Contracts\CommentInterface;
 use App\Contracts\UserInterface;
 use App\Http\Requests\UserStatusRequest;
-use App\Models\RoleUser;
 use App\Models\User;
 
 class UserController extends Controller
@@ -75,10 +74,7 @@ class UserController extends Controller
      */
     public function admin($id)
     {
-        RoleUser::create([
-            'user_id' => $id,
-            'role_id' => 2,
-        ]);
+        $this->users->update($id, ['admin' => true]);
 
         return redirect()->back();
     }
