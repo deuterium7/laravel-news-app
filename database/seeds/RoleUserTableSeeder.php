@@ -11,9 +11,11 @@ class RoleUserTableSeeder extends Seeder
      */
     public function run()
     {
-        for ($i = 1; $i <= 300000; $i++) {
+        $users = \App\Models\User::get();
+
+        foreach ($users as $user) {
             DB::table('role_user')->insert([
-                'user_id' => $i,
+                'user_id' => $user->id,
                 'role_id' => 1,
             ]);
         }
