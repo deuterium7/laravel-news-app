@@ -3,11 +3,17 @@
 use Faker\Generator as Faker;
 
 $factory->define(\App\Models\Article::class, function (Faker $faker) {
+    static $image;
+
     return [
-        'category_id' => $faker->numberBetween(1, 10),
-        'user_id'     => 1, // this user is admin
+        'category_id' => function () {
+            return factory(\App\Models\Category::class)->create()->id;
+        },
+        'user_id'     => function () {
+            return factory(\App\Models\User::class)->create()->id;
+        },
         'title'       => $faker->sentence(),
-        'image'       => 'http://www.veho.ru/img/photo_not_found.gif',
+        'image'       => $image ?: 'http://www.veho.ru/img/photo_not_found.gif',
         'body'        => $faker->realText(2000),
     ];
 });
