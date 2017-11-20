@@ -14,7 +14,7 @@ class CategoryWasCreated extends Mailable implements ShouldQueue
     /**
      * Request from categories.create
      */
-    protected $category;
+    public $category;
 
     /**
      * CategoryWasCreated constructor.

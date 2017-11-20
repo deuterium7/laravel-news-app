@@ -17,7 +17,7 @@ class ContactFormWasSubmitted extends Mailable implements ShouldQueue
      *
      * @var ContactRequest
      */
-    protected $contact;
+    public $contact;
 
     /**
      * ContactFormWasSubmitted constructor.

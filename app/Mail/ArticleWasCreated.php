@@ -14,7 +14,7 @@ class ArticleWasCreated extends Mailable implements ShouldQueue
     /**
      * Request from articles.create
      */
-    protected $article;
+    public $article;
 
     /**
      * ArticleWasCreated constructor.

@@ -75,8 +75,6 @@ class ArticleController extends Controller
     {
         $this->articles->create($request->all());
 
-        \Mail::to(auth()->user()->email)->send(new ArticleWasCreated((object) $request->all()));
-
         return redirect()->route('admin.news');
     }
 

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Mail\UserRegistrationWasConfirmed;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -14,6 +15,13 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name', 'email', 'password', 'admin', 'ban',
+    ];
+
+    /**
+     * @var array
+     */
+    protected $dispatchesEvents = [
+        'created' => UserRegistrationWasConfirmed::class,
     ];
 
     /**

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Mail\CategoryWasCreated;
 use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
@@ -11,6 +12,13 @@ class Category extends Model
      */
     protected $fillable = [
         'name', 'image',
+    ];
+
+    /**
+     * @var array
+     */
+    protected $dispatchesEvents = [
+        'created' => CategoryWasCreated::class,
     ];
 
     /**

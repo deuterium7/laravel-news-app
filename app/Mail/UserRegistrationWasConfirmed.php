@@ -14,7 +14,7 @@ class UserRegistrationWasConfirmed extends Mailable implements ShouldQueue
     /**
      * Request from auth.register
      */
-    protected $user;
+    public $user;
 
     /**
      * UserRegistrationWasConfirmed constructor.

@@ -65,8 +65,6 @@ class CategoryController extends Controller
     {
         $this->categories->create($request->all());
 
-        \Mail::to(auth()->user()->email)->send(new CategoryWasCreated((object) $request->all()));
-
         return redirect()->route('admin.categories');
     }
 

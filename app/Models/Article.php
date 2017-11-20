@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Mail\ArticleWasCreated;
 use Illuminate\Database\Eloquent\Model;
 
 class Article extends Model
@@ -11,6 +12,13 @@ class Article extends Model
      */
     protected $fillable = [
         'category_id', 'user_id', 'title', 'image', 'body', 'visibility',
+    ];
+
+    /**
+     * @var array
+     */
+    protected $dispatchesEvents = [
+        'created' => ArticleWasCreated::class,
     ];
 
     /**
