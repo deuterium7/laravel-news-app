@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Mail\UserRegistrationWasConfirmed;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
@@ -72,7 +71,7 @@ class RegisterController extends Controller
             'password' => bcrypt($data['password']),
         ]);
 
-        Mail::to($data['email'])->send(new UserRegistrationWasConfirmed($user));
+        \Mail::to($data['email'])->send(new UserRegistrationWasConfirmed($user));
 
         return $user;
     }

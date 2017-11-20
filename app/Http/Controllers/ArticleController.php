@@ -8,7 +8,6 @@ use App\Contracts\Comment as CommentContract;
 use App\Http\Requests\ArticleRequest;
 use App\Mail\ArticleWasCreated;
 use App\Models\Article;
-use Illuminate\Support\Facades\Mail;
 
 class ArticleController extends Controller
 {
@@ -74,7 +73,7 @@ class ArticleController extends Controller
     {
         $this->articles->create($request->all());
 
-        Mail::to(\Auth::user()->email)->send(new ArticleWasCreated((object) $request->all()));
+        \Mail::to(auth()->user()->email)->send(new ArticleWasCreated((object) $request->all()));
 
         return redirect()->route('admin.news');
     }

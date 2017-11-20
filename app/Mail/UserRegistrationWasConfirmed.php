@@ -2,7 +2,6 @@
 
 namespace App\Mail;
 
-use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -22,7 +21,7 @@ class UserRegistrationWasConfirmed extends Mailable implements ShouldQueue
      *
      * @param $user
      */
-    public function __construct(User $user)
+    public function __construct($user)
     {
         $this->user = $user;
     }
@@ -35,6 +34,6 @@ class UserRegistrationWasConfirmed extends Mailable implements ShouldQueue
     public function build()
     {
         return $this->view('emails.registration')
-            ->with('registration', $this->user);
+            ->with('user', $this->user);
     }
 }

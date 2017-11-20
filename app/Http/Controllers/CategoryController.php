@@ -7,7 +7,6 @@ use App\Contracts\Category as CategoryContract;
 use App\Http\Requests\CategoryRequest;
 use App\Mail\CategoryWasCreated;
 use App\Models\Category;
-use Illuminate\Support\Facades\Mail;
 
 class CategoryController extends Controller
 {
@@ -65,7 +64,7 @@ class CategoryController extends Controller
     {
         $this->categories->create($request->all());
 
-        Mail::to(\Auth::user()->email)->send(new CategoryWasCreated((object) $request->all()));
+        \Mail::to(auth()->user()->email)->send(new CategoryWasCreated((object) $request->all()));
 
         return redirect()->route('admin.categories');
     }

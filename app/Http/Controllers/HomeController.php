@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ContactRequest;
 use App\Mail\ContactFormWasSubmitted;
-use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller
 {
@@ -45,7 +44,7 @@ class HomeController extends Controller
      */
     public function send(ContactRequest $request)
     {
-        Mail::to(env('MAIL_USERNAME'))->send(new ContactFormWasSubmitted((object) $request->all));
+        \Mail::to(env('MAIL_CONTACT'))->send(new ContactFormWasSubmitted((object) $request->all()));
 
         return redirect('/')->with('message', trans('catalog.thxForMessage'));
     }

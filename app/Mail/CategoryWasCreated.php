@@ -33,7 +33,7 @@ class CategoryWasCreated extends Mailable implements ShouldQueue
      */
     public function build()
     {
-        return $this->view('emails.category_create')
+        return $this->view('emails.category-create')
             ->with('category', $this->category);
     }
 }

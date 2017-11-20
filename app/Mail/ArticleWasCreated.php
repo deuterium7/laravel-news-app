@@ -33,7 +33,7 @@ class ArticleWasCreated extends Mailable implements ShouldQueue
      */
     public function build()
     {
-        return $this->view('emails.article_create')
+        return $this->view('emails.article-create')
             ->with('article', $this->article);
     }
 }
