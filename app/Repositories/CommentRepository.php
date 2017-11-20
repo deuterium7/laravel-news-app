@@ -2,10 +2,10 @@
 
 namespace App\Repositories;
 
-use App\Contracts\CommentInterface;
+use App\Contracts\Comment as CommentContract;
 use App\Models\Comment;
 
-class CommentRepository extends EloquentRepository implements CommentInterface
+class CommentRepository extends ModelRepository implements CommentContract
 {
     /**
      * CommentRepository constructor.
@@ -49,13 +49,13 @@ class CommentRepository extends EloquentRepository implements CommentInterface
     }
 
     /**
-     * Получить комментарии по ключевым словам с пагинацией.
+     * Получить комментарии по ключевым словам.
      *
      * @param string $keywords
      *
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public function getWithKeywordsAndPagination($keywords)
+    public function getCommentsWithKeywords($keywords)
     {
         return $this->model->where('body', 'LIKE', '%'.$keywords.'%')
             ->orderBy('updated_at', 'desc')

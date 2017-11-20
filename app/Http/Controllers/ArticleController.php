@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Contracts\ArticleInterface;
-use App\Contracts\CategoryInterface;
-use App\Contracts\CommentInterface;
+use App\Contracts\Article as ArticleContract;
+use App\Contracts\Category as CategoryContract;
+use App\Contracts\Comment as CommentContract;
 use App\Http\Requests\ArticleRequest;
 use App\Mail\ArticleCreate;
 use App\Models\Article;
@@ -12,18 +12,27 @@ use Illuminate\Support\Facades\Mail;
 
 class ArticleController extends Controller
 {
+    /**
+     * @var ArticleContract
+     */
     protected $articles;
+    /**
+     * @var CategoryContract
+     */
     protected $categories;
+    /**
+     * @var CommentContract
+     */
     protected $comments;
 
     /**
      * ArticleController constructor.
      *
-     * @param ArticleInterface  $articles
-     * @param CategoryInterface $categories
-     * @param CommentInterface  $comments
+     * @param ArticleContract $articles
+     * @param CategoryContract $categories
+     * @param CommentContract $comments
      */
-    public function __construct(ArticleInterface $articles, CategoryInterface $categories, CommentInterface $comments)
+    public function __construct(ArticleContract $articles, CategoryContract $categories, CommentContract $comments)
     {
         $this->articles = $articles;
         $this->categories = $categories;
@@ -37,7 +46,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = $this->articles->getVisibleWithPagination();
+        $articles = $this->articles->getVisibleArticles();
 
         return view('articles.index', compact('articles'));
     }
@@ -49,7 +58,7 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        $categories = $this->categories->allPluck();
+        $categories = $this->categories->allMap();
 
         return view('articles.create', compact('categories'));
     }

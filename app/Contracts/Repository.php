@@ -2,7 +2,7 @@
 
 namespace App\Contracts;
 
-interface RepositoryInterface
+interface Repository
 {
     /**
      * Получить все записи из репозитория.

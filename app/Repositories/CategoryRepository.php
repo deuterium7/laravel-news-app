@@ -2,10 +2,10 @@
 
 namespace App\Repositories;
 
-use App\Contracts\CategoryInterface;
+use App\Contracts\Category as CategoryContract;
 use App\Models\Category;
 
-class CategoryRepository extends EloquentRepository implements CategoryInterface
+class CategoryRepository extends ModelRepository implements CategoryContract
 {
     /**
      * CategoryRepository constructor.
@@ -28,11 +28,11 @@ class CategoryRepository extends EloquentRepository implements CategoryInterface
     }
 
     /**
-     * Получить все категории вида <значение-ключ>.
+     * Получить все категории вида <id-name>.
      *
      * @return \Illuminate\Support\Collection
      */
-    public function allPluck()
+    public function allMap()
     {
         return $this->model->all()->pluck('name', 'id');
     }

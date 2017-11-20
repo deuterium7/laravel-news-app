@@ -2,7 +2,7 @@
 
 namespace App\Contracts;
 
-interface CommentInterface extends RepositoryInterface
+interface Comment extends Repository
 {
     /**
      * Получить все комментарии новости.
@@ -23,11 +23,11 @@ interface CommentInterface extends RepositoryInterface
     public function getLastCommentsFromUser($id);
 
     /**
-     * Получить комментарии по ключевым словам с пагинацией.
+     * Получить комментарии по ключевым словам.
      *
      * @param string $keywords
      *
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public function getWithKeywordsAndPagination($keywords);
+    public function getCommentsWithKeywords($keywords);
 }

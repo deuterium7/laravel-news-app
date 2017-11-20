@@ -2,13 +2,11 @@
 
 namespace App\Repositories;
 
-use App\Contracts\UserInterface;
+use App\Contracts\User as UserContract;
 use App\Models\User;
 
-class UserRepository extends EloquentRepository implements UserInterface
+class UserRepository extends ModelRepository implements UserContract
 {
-    protected $user;
-
     /**
      * UserRepository constructor.
      *
@@ -20,15 +18,15 @@ class UserRepository extends EloquentRepository implements UserInterface
     }
 
     /**
-     * Получить пользователей по ключевым словам с пагинацией.
+     * Получить пользователей по ключевым словам.
      *
      * @param string $keywords
      *
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public function getWithKeywordsAndPagination($keywords)
+    public function getUsersWithKeywords($keywords)
     {
-        return $this->model->where('id', '<>', \Auth::user()->id)
+        return $this->model->where('id', '<>', auth()->user()->id)
             ->where('name', 'LIKE', '%'.$keywords.'%')
             ->orderBy('id', 'desc')
             ->paginate(10);

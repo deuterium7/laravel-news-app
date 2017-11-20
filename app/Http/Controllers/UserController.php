@@ -2,23 +2,29 @@
 
 namespace App\Http\Controllers;
 
-use App\Contracts\CommentInterface;
-use App\Contracts\UserInterface;
+use App\Contracts\Comment as CommentContract;
+use App\Contracts\User as UserContract;
 use App\Http\Requests\UserStatusRequest;
 use App\Models\User;
 
 class UserController extends Controller
 {
+    /**
+     * @var UserContract
+     */
     protected $users;
+    /**
+     * @var CommentContract
+     */
     protected $comments;
 
     /**
      * UserController constructor.
      *
-     * @param UserInterface    $users
-     * @param CommentInterface $comments
+     * @param UserContract $users
+     * @param CommentContract $comments
      */
-    public function __construct(UserInterface $users, CommentInterface $comments)
+    public function __construct(UserContract $users, CommentContract $comments)
     {
         $this->users = $users;
         $this->comments = $comments;

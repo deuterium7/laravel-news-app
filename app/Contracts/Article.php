@@ -2,14 +2,14 @@
 
 namespace App\Contracts;
 
-interface ArticleInterface extends RepositoryInterface
+interface Article extends Repository
 {
     /**
-     * Получить видимые новости с пагинацией.
+     * Получить видимые новости.
      *
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public function getVisibleWithPagination();
+    public function getVisibleArticles();
 
     /**
      * Получить все новости из категории.
@@ -27,5 +27,5 @@ interface ArticleInterface extends RepositoryInterface
      *
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public function getWithCategoryKeywordsAndPagination($keywords);
+    public function getArticlesWithKeywords($keywords);
 }

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Contracts\CommentInterface;
+use App\Contracts\Comment;
 use App\Http\Requests\CommentRequest;
 use App\Models\Comment;
 
@@ -13,9 +13,9 @@ class CommentController extends Controller
     /**
      * CommentController constructor.
      *
-     * @param CommentInterface $comments
+     * @param Comment $comments
      */
-    public function __construct(CommentInterface $comments)
+    public function __construct(Comment $comments)
     {
         $this->comments = $comments;
     }

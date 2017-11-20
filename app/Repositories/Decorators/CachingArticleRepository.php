@@ -2,21 +2,27 @@
 
 namespace App\Repositories\Decorators;
 
-use App\Contracts\ArticleInterface;
+use App\Contracts\Article as ArticleContract;
 use Illuminate\Cache\Repository;
 
-class CachingArticleRepository implements ArticleInterface
+class CachingArticleRepository implements ArticleContract
 {
+    /**
+     * @var ArticleContract
+     */
     protected $article;
+    /**
+     * @var Repository
+     */
     protected $cache;
 
     /**
      * CachingArticleRepository constructor.
      *
-     * @param ArticleInterface $article
-     * @param Repository       $cache
+     * @param ArticleContract $article
+     * @param Repository $cache
      */
-    public function __construct(ArticleInterface $article, Repository $cache)
+    public function __construct(ArticleContract $article, Repository $cache)
     {
         $this->article = $article;
         $this->cache = $cache;
@@ -82,17 +88,17 @@ class CachingArticleRepository implements ArticleInterface
      *
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public function getVisibleWithPagination()
+    public function getVisibleArticles()
     {
         $page = request('page', 1);
 
         if ($page == 1) {
             return $this->cache->remember('article.visible', 10, function () {
-                return $this->article->getVisibleWithPagination();
+                return $this->article->getVisibleArticles();
             });
         }
 
-        return $this->article->getVisibleWithPagination();
+        return $this->article->getVisibleArticles();
     }
 
     /**
@@ -108,14 +114,14 @@ class CachingArticleRepository implements ArticleInterface
     }
 
     /**
-     * Получить новости по ключевым словам с пагинацией.
+     * Получить новости по ключевым словам.
      *
      * @param string $keywords
      *
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public function getWithCategoryKeywordsAndPagination($keywords)
+    public function getArticlesWithKeywords($keywords)
     {
-        return $this->article->getWithCategoryKeywordsAndPagination($keywords);
+        return $this->article->getArticlesWithKeywords($keywords);
     }
 }

@@ -2,10 +2,10 @@
 
 namespace App\Repositories;
 
-use App\Contracts\ArticleInterface;
+use App\Contracts\Article as ArticleContract;
 use App\Models\Article;
 
-class ArticleRepository extends EloquentRepository implements ArticleInterface
+class ArticleRepository extends ModelRepository implements ArticleContract
 {
     /**
      * ArticleRepository constructor.
@@ -22,7 +22,7 @@ class ArticleRepository extends EloquentRepository implements ArticleInterface
      *
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public function getVisibleWithPagination()
+    public function getVisibleArticles()
     {
         return $this->model->where('visibility', true)
             ->orderBy('updated_at', 'desc')
@@ -52,7 +52,7 @@ class ArticleRepository extends EloquentRepository implements ArticleInterface
      *
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public function getWithCategoryKeywordsAndPagination($keywords)
+    public function getArticlesWithKeywords($keywords)
     {
         return $this->model->with('category')
             ->where('title', 'LIKE', '%'.$keywords.'%')
