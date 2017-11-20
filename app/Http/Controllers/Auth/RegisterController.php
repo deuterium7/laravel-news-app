@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Mail\Registration;
+use App\Mail\UserRegistrationWasConfirmed;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Mail;
@@ -72,7 +72,7 @@ class RegisterController extends Controller
             'password' => bcrypt($data['password']),
         ]);
 
-        Mail::to($data['email'])->send(new Registration($user));
+        Mail::to($data['email'])->send(new UserRegistrationWasConfirmed($user));
 
         return $user;
     }

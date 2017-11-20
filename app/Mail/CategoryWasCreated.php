@@ -7,14 +7,17 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class CategoryCreate extends Mailable implements ShouldQueue
+class CategoryWasCreated extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
+    /**
+     * Request from categories.create
+     */
     protected $category;
 
     /**
-     * CategoryCreate constructor.
+     * CategoryWasCreated constructor.
      *
      * @param $category
      */

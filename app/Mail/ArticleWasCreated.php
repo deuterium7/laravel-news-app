@@ -7,14 +7,17 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class ArticleCreate extends Mailable implements ShouldQueue
+class ArticleWasCreated extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
+    /**
+     * Request from articles.create
+     */
     protected $article;
 
     /**
-     * ArticleCreate constructor.
+     * ArticleWasCreated constructor.
      *
      * @param $article
      */
