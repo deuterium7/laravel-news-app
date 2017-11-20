@@ -24,7 +24,7 @@ class CommentRepository extends ModelRepository implements CommentContract
      *
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public function getCommentsFromArticle($id)
+    public function getArticleComments($id)
     {
         return $this->model->with('user')
             ->where('article_id', $id)
@@ -39,7 +39,7 @@ class CommentRepository extends ModelRepository implements CommentContract
      *
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
-    public function getLastCommentsFromUser($id)
+    public function getUserComments($id)
     {
         return $this->model->with('user')
             ->where('user_id', $id)

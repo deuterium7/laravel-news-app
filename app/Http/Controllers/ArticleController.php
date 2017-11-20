@@ -91,7 +91,7 @@ class ArticleController extends Controller
             return redirect()->back()->with('message', trans('catalog.blockedNews'));
         }
 
-        $comments = $this->comments->getCommentsFromArticle($article->id);
+        $comments = $this->comments->getArticleComments($article->id);
 
         return view('articles.show', compact('article', 'comments'));
     }

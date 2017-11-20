@@ -40,7 +40,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        $comments = $this->comments->getLastCommentsFromUser($user->id);
+        $comments = $this->comments->getUserComments($user->id);
 
         return view('users.show', compact('user', 'comments'));
     }

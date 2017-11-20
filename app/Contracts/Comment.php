@@ -11,7 +11,7 @@ interface Comment extends Repository
      *
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public function getCommentsFromArticle($id);
+    public function getArticleComments($id);
 
     /**
      * Получить последние комментарии пользователя.
@@ -20,7 +20,7 @@ interface Comment extends Repository
      *
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
-    public function getLastCommentsFromUser($id);
+    public function getUserComments($id);
 
     /**
      * Получить комментарии по ключевым словам.
