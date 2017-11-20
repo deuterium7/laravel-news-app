@@ -45,7 +45,7 @@
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
 
                                 @if ($errors->has('password_confirmation'))
-                                    @component('components.errors.password_confirmation')
+                                    @component('components.errors.password-confirmation')
                                     @endcomponent
                                 @endif
                             </div>

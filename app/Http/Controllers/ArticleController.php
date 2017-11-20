@@ -6,9 +6,8 @@ use App\Contracts\Article as ArticleContract;
 use App\Contracts\Category as CategoryContract;
 use App\Contracts\Comment as CommentContract;
 use App\Http\Requests\ArticleRequest;
-use App\Mail\ArticleCreate;
+use App\Mail\ArticleWasCreated;
 use App\Models\Article;
-use Illuminate\Support\Facades\Mail;
 
 class ArticleController extends Controller
 {
@@ -16,10 +15,12 @@ class ArticleController extends Controller
      * @var ArticleContract
      */
     protected $articles;
+
     /**
      * @var CategoryContract
      */
     protected $categories;
+
     /**
      * @var CommentContract
      */
@@ -73,8 +74,6 @@ class ArticleController extends Controller
     public function store(ArticleRequest $request)
     {
         $this->articles->create($request->all());
-
-        Mail::to(\Auth::user()->email)->send(new ArticleCreate((object) $request->all()));
 
         return redirect()->route('admin.news');
     }

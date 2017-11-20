@@ -2,19 +2,25 @@
 
 namespace App\Mail;
 
+use App\Http\Requests\ContactRequest;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class Contact extends Mailable implements ShouldQueue
+class ContactFormWasSubmitted extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
-    protected $contact;
+    /**
+     * Request from contact form.
+     *
+     * @var ContactRequest
+     */
+    public $contact;
 
     /**
-     * Contact constructor.
+     * ContactFormWasSubmitted constructor.
      *
      * @param $contact
      */

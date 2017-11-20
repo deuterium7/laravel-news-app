@@ -11,6 +11,7 @@ class CachingArticleRepository implements ArticleContract
      * @var ArticleContract
      */
     protected $article;
+
     /**
      * @var Repository
      */

@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class UserSocialAccount extends Model
 {
+    /**
+     * @var array
+     */
     protected $fillable = [
         'user_id', 'provider_user_id', 'provider',
     ];

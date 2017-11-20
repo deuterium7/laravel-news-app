@@ -13,6 +13,7 @@ class UserController extends Controller
      * @var UserContract
      */
     protected $users;
+
     /**
      * @var CommentContract
      */
