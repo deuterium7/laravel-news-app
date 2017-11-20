@@ -13,9 +13,9 @@ class UsersTableSeeder extends Seeder
     {
         // администраторы загружают статьи
         $categoriesCount = \App\Models\Category::count();
-        factory(\App\Models\User::class, 10)->create(['admin' => true])->each(function ($u) use ($categoriesCount) {
+        factory(\App\Models\User::class, 1)->create(['admin' => true])->each(function ($u) use ($categoriesCount) {
             $u->articles()
-                ->saveMany(factory(\App\Models\Article::class, 15)
+                ->saveMany(factory(\App\Models\Article::class, 100)
                 ->create([
                     'category_id' => rand(1, $categoriesCount),
                     'user_id' => $u->id
@@ -24,13 +24,15 @@ class UsersTableSeeder extends Seeder
 
         // пользователи комментируют статьи
         $articlesCount = \App\Models\Article::count();
-        factory(\App\Models\User::class, 100)->create()->each(function ($u) use ($articlesCount) {
-            $u->comments()
-                ->saveMany(factory(\App\Models\Comment::class, 20)
-                ->create([
-                    'article_id' => rand(1, $articlesCount),
-                    'user_id' => $u->id
-                ]));
+        factory(\App\Models\User::class, 200)->create()->each(function ($u) use ($articlesCount) {
+            for ($i = 0; $i < 10; $i++) {
+                $u->comments()
+                    ->save(factory(\App\Models\Comment::class)
+                    ->create([
+                        'article_id' => rand(1, $articlesCount),
+                        'user_id' => $u->id
+                    ]));
+            }
         });
     }
 }
