@@ -14,6 +14,7 @@ class CategoryController extends Controller
      * @var CategoryContract
      */
     protected $categories;
+
     /**
      * @var ArticleContract
      */

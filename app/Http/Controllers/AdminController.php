@@ -14,14 +14,17 @@ class AdminController extends Controller
      * @var ArticleContract
      */
     protected $articles;
+
     /**
      * @var CategoryContract
      */
     protected $categories;
+
     /**
      * @var UserContract
      */
     protected $users;
+
     /**
      * @var CommentContract
      */

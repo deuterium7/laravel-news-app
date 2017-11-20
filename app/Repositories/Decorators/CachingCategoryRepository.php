@@ -11,6 +11,7 @@ class CachingCategoryRepository implements CategoryContract
      * @var CategoryContract
      */
     protected $category;
+
     /**
      * @var Repository
      */
