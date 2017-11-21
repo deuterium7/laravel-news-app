@@ -12,7 +12,7 @@ class CategoryWasCreated extends Mailable implements ShouldQueue
     use Queueable, SerializesModels;
 
     /**
-     * Request from categories.create
+     * Request from categories.create.
      */
     public $category;
 

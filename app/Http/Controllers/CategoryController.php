@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Contracts\Article as ArticleContract;
 use App\Contracts\Category as CategoryContract;
 use App\Http\Requests\CategoryRequest;
-use App\Mail\CategoryWasCreated;
 use App\Models\Category;
 
 class CategoryController extends Controller
@@ -24,7 +23,7 @@ class CategoryController extends Controller
      * CategoryController constructor.
      *
      * @param CategoryContract $categories
-     * @param ArticleContract $articles
+     * @param ArticleContract  $articles
      */
     public function __construct(CategoryContract $categories, ArticleContract $articles)
     {

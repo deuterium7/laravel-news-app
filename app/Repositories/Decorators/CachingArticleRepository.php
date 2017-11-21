@@ -21,7 +21,7 @@ class CachingArticleRepository implements ArticleContract
      * CachingArticleRepository constructor.
      *
      * @param ArticleContract $article
-     * @param Repository $cache
+     * @param Repository      $cache
      */
     public function __construct(ArticleContract $article, Repository $cache)
     {
