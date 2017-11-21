@@ -3,65 +3,68 @@
 namespace Tests\Feature;
 
 use App\Models\Article;
+use App\Models\User;
 use Tests\TestCase;
-use Tests\UserStub;
 
 class ArticleViewsTest extends TestCase
 {
-    use UserStub;
+    /**
+     * @var User
+     */
+    protected $user;
+
+    /**
+     * @var User
+     */
+    protected $admin;
+
+    /**
+     * @var int
+     */
+    protected $articleId;
+
+    /**
+     * Базовые значения для теста.
+     */
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->user = factory(User::class)->make();
+        $this->admin = factory(User::class)->make(['admin' => true]);
+        $this->articleId = Article::first()->id;
+    }
 
     /** @test */
-    public function can_show_articles_view()
+    public function the_guest_can_see_list_of_articles()
     {
         $this->get('articles')
-            ->assertStatus(200)
-            ->assertViewIs('articles.index')
-            ->assertViewHas('articles');
+            ->assertStatus(200);
     }
 
     /** @test */
-    public function can_show_article_view()
+    public function the_user_can_see_article()
     {
-        $article = Article::first();
-        $user = $this->createUserStub();
-
-        $this->actingAs($user)
-            ->get("articles/$article->id")
-            ->assertStatus(200)
-            ->assertViewIs('articles.show')
-            ->assertViewHas('article')
-            ->assertViewHas('comments');
-
-        $user->delete();
+        $this->actingAs($this->user)
+            ->get("articles/$this->articleId")
+            ->assertStatus(200);
     }
 
     /** @test */
-    public function can_show_create_article_view()
+    public function the_admin_can_see_article_create_form()
     {
-        $admin = $this->createUserStub('admin');
-
-        $this->actingAs($admin)
+        $this->actingAs($this->admin)
             ->get('articles/create')
             ->assertStatus(200)
-            ->assertViewIs('articles.create')
             ->assertSee(trans('catalog.create'));
-
-        $admin->delete();
     }
 
     /** @test */
-    public function can_show_edit_article_view()
+    public function the_admin_can_see_article_update_form()
     {
-        $article = Article::first();
-        $admin = $this->createUserStub('admin');
-
-        $this->actingAs($admin)
-            ->get("articles/$article->id/edit")
+        $this->actingAs($this->admin)
+            ->get("articles/$this->articleId/edit")
             ->assertStatus(200)
-            ->assertViewIs('articles.edit')
-            ->assertViewHas('article')
             ->assertSee(trans('catalog.update'));
-
-        $admin->delete();
     }
 }

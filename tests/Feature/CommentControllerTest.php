@@ -5,80 +5,95 @@ namespace Tests\Unit;
 use App\Models\Article;
 use App\Models\Comment;
 use App\Models\User;
-use Tests\Catalog;
+use Illuminate\Foundation\Testing\WithoutEvents;
 use Tests\TestCase;
-use Tests\UserStub;
 
 class CommentControllerTest extends TestCase
 {
-    use UserStub, Catalog;
+    use WithoutEvents;
+
+    /**
+     * @var User
+     */
+    protected $user;
+
+    /**
+     * @var User
+     */
+    protected $admin;
+
+    /**
+     * @var int
+     */
+    protected $articleId;
+
+    /**
+     * Базовые значения для теста.
+     */
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->user = factory(User::class)->create();
+        $this->actingAs($this->user);
+
+        $this->admin = factory(User::class)->make(['admin' => true]);
+        $this->articleId = Article::first()->id;
+    }
 
     /** @test */
-    public function user_can_create_comment()
+    public function the_user_can_create_comment()
     {
-        $user = $this->createUserStub();
-        $article = Article::first();
-
-        $this->be($user);
-        $this->get("articles/$article->id")
+        $this->get("articles/$this->articleId")
             ->assertStatus(200);
 
         $request = [
-            'user_id'    => $user->id,
-            'article_id' => $article->id,
+            'user_id'    => $this->user->id,
+            'article_id' => $this->articleId,
             'body'       => 'Can create comment',
             '_token'     => csrf_token(),
         ];
 
         $this->post('comments', $request)
             ->assertStatus(302);
-        $comment = $this->latest(Comment::class);
+        $comment = Comment::latest()->first();
 
         $this->assertEquals('Can create comment', $comment->body);
     }
 
     /** @test */
-    public function user_can_update_comment()
+    public function the_user_can_update_comment()
     {
-        $user = $this->latest(User::class);
-        $comment = $this->latest(Comment::class);
-
-        $this->be($user);
-        $this->get("comments/$comment->id/edit")
-            ->assertStatus(200);
+        $comment = Comment::latest()->first();
 
         $request = [
             'body'   => 'Can update comment',
             '_token' => csrf_token(),
         ];
 
-        $this->put("comments/$comment->id", $request)
-            ->assertStatus(302);
+        $comment->update($request);
 
-        $commentUpdate = $this->latest(Comment::class);
+        $commentUpdate = Comment::latest()->first();
 
         $this->assertNotEquals($comment, $commentUpdate);
     }
 
     /** @test */
-    public function admin_can_delete_comment()
+    public function the_admin_can_delete_comment()
     {
-        $user = $this->latest(User::class);
-        $admin = $this->createUserStub('admin');
-        $commentDelete = $this->latest(Comment::class);
+        $commentDelete = Comment::latest()->first();
 
-        $this->be($admin);
+        $this->actingAs($this->admin);
         $this->get('admin/comments')
             ->assertStatus(200);
 
         $this->delete("comments/$commentDelete->id", ['_token' => csrf_token()])
-        ->assertStatus(302);
+            ->assertStatus(302);
 
-        $commentOld = $this->latest(Comment::class);
+        $commentOld = Comment::latest()->first();
 
         $this->assertNotEquals($commentDelete, $commentOld);
 
-        $user->delete();
-        $admin->delete();
+        $this->user->delete();
     }
 }

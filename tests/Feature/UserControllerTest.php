@@ -2,26 +2,42 @@
 
 namespace Tests\Unit;
 
-use App\Models\RoleUser;
+use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Foundation\Testing\WithoutEvents;
 use Tests\TestCase;
-use Tests\UserStub;
 
 class UserControllerTest extends TestCase
 {
-    use UserStub;
+    use WithoutEvents;
+
+    /**
+     * @var User
+     */
+    protected $admin;
+
+    /**
+     * @var User
+     */
+    protected $user;
+
+    /**
+     * Базовые значения для теста.
+     */
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->admin = factory(User::class)->make(['admin' => true]);
+        $this->be($this->admin);
+
+        $this->user = factory(User::class)->create();
+    }
 
     /** @test */
-    public function admin_can_ban_user()
+    public function the_admin_can_ban_user()
     {
-        $admin = $this->createUserStub('admin');
-        $user = $this->createUserStub();
-
-        $this->be($admin);
-        $this->get('admin/users')
-            ->assertStatus(200);
-
-        $this->get("users/$user->id/ban")
+        $this->get('users/'.$this->user->id.'/ban')
             ->assertStatus(200);
 
         $request = [
@@ -29,40 +45,30 @@ class UserControllerTest extends TestCase
             '_token' => csrf_token(),
         ];
 
-        $user->update($request);
+        $this->user->update($request);
 
-        $this->assertNotEquals(null, $user->ban);
-
-        $user->delete();
-        $admin->delete();
+        $this->assertNotEquals(null, $this->user->ban);
     }
 
     /** @test */
-    public function admin_can_give_admin_rights()
+    public function the_admin_can_give_admin_rights()
     {
-        $admin = $this->createUserStub('admin');
-        $user = $this->createUserStub();
-
-        $this->be($admin);
         $this->get('admin/users')
             ->assertStatus(200);
 
-        $firstRoles = RoleUser::where('user_id', $user->id)->get();
+        $firstRole = $this->user->admin;
 
         $request = [
-            'user_id' => $user->id,
-            'role_id' => 2,
-            '_token'  => csrf_token(),
+            'admin'    => true,
+            '_token' => csrf_token(),
         ];
 
-        $this->post("users/$user->id", $request)
-            ->assertStatus(302);
+        $this->user->update($request);
 
-        $secondRoles = RoleUser::where('user_id', $user->id)->get();
+        $secondRole = $this->user->admin;
 
-        $this->assertNotEquals(count($firstRoles), count($secondRoles));
+        $this->assertNotEquals($firstRole, $secondRole);
 
-        $user->delete();
-        $admin->delete();
+        $this->user->delete();
     }
 }

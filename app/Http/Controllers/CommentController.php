@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Contracts\Comment;
+use App\Contracts\Comment as CommentContract;
 use App\Http\Requests\CommentRequest;
-use App\Models\Comment as CommentContract;
+use App\Models\Comment;
 
 class CommentController extends Controller
 {

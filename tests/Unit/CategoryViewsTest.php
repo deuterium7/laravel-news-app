@@ -3,60 +3,61 @@
 namespace Tests\Feature;
 
 use App\Models\Category;
+use App\Models\User;
 use Tests\TestCase;
-use Tests\UserStub;
 
 class CategoryViewsTest extends TestCase
 {
-    use UserStub;
+    /**
+     * @var User
+     */
+    protected $admin;
+
+    /**
+     * @var int
+     */
+    protected $categoryId;
+
+    /**
+     * Базовые значения для теста.
+     */
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->admin = factory(User::class)->make(['admin' => true]);
+        $this->categoryId = Category::first()->id;
+    }
 
     /** @test */
-    public function can_show_categories_view()
+    public function the_guest_can_see_list_of_categories()
     {
         $this->get('categories')
-            ->assertStatus(200)
-            ->assertViewIs('categories.index')
-            ->assertViewHas('categories');
+            ->assertStatus(200);
     }
 
     /** @test */
-    public function can_show_category_view()
+    public function the_guest_can_see_articles_from_category()
     {
-        $category = Category::first();
-
-        $this->get("categories/$category->id")
-            ->assertStatus(200)
-            ->assertViewIs('categories.show')
-            ->assertViewHas('articles');
+        $this->get("categories/$this->categoryId")
+            ->assertStatus(200);
     }
 
     /** @test */
-    public function can_show_create_category_view()
+    public function the_admin_can_see_category_create_form()
     {
-        $admin = $this->createUserStub('admin');
-
-        $this->actingAs($admin)
+        $this->actingAs($this->admin)
             ->get('categories/create')
             ->assertStatus(200)
-            ->assertViewIs('categories.create')
             ->assertSee(trans('catalog.create'));
-
-        $admin->delete();
     }
 
     /** @test */
-    public function can_show_edit_category_view()
+    public function the_admin_can_see_category_update_form()
     {
-        $category = Category::first();
-        $admin = $this->createUserStub('admin');
-
-        $this->actingAs($admin)
-            ->get("categories/$category->id/edit")
+        $this->actingAs($this->admin)
+            ->get("categories/$this->categoryId/edit")
             ->assertStatus(200)
-            ->assertViewIs('categories.edit')
-            ->assertViewHas('category')
             ->assertSee(trans('catalog.update'));
-
-        $admin->delete();
     }
 }

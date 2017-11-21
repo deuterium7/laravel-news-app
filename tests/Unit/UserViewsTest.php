@@ -4,41 +4,47 @@ namespace Tests\Feature;
 
 use App\Models\User;
 use Tests\TestCase;
-use Tests\UserStub;
 
 class UserViewsTest extends TestCase
 {
-    use UserStub;
+    /**
+     * @var User
+     */
+    protected $user;
 
-    /** @test */
-    public function can_show_user_profile_view()
+    /**
+     * @var User
+     */
+    protected $admin;
+
+    /**
+     * @var int
+     */
+    protected $userId;
+
+    public function setUp()
     {
-        $profile = User::first();
-        $user = $this->createUserStub();
+        parent::setUp();
 
-        $this->actingAs($user)
-            ->get("users/$profile->id")
-            ->assertStatus(200)
-            ->assertViewIs('users.show')
-            ->assertViewHas('user')
-            ->assertViewHas('comments');
-
-        $user->delete();
+        $this->user = factory(User::class)->make();
+        $this->admin = factory(User::class)->make(['admin' => true]);
+        $this->userId = User::first()->id;
     }
 
     /** @test */
-    public function can_show_user_ban_view()
+    public function the_user_can_see_profile_page()
     {
-        $user = User::first();
-        $admin = $this->createUserStub('admin');
+        $this->actingAs($this->user)
+            ->get("users/$this->userId")
+            ->assertStatus(200);
+    }
 
-        $this->actingAs($admin)
-            ->get("users/$user->id/ban")
+    /** @test */
+    public function the_admin_can_see_user_ban_page()
+    {
+        $this->actingAs($this->admin)
+            ->get("users/$this->userId/ban")
             ->assertStatus(200)
-            ->assertViewIs('users.ban')
-            ->assertViewHas('user')
             ->assertSee(trans('catalog.ban'));
-
-        $admin->delete();
     }
 }

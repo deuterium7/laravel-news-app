@@ -2,89 +2,69 @@
 
 namespace Tests\Feature;
 
+use App\Models\User;
 use Tests\TestCase;
-use Tests\UserStub;
 
 class AdminViewsTest extends TestCase
 {
-    use UserStub;
+    /**
+     * @var User
+     */
+    protected $admin;
 
-    /** @test */
-    public function can_show_articles_view_panel()
+    /**
+     * Базовые значения для теста.
+     */
+    public function setUp()
     {
-        $admin = $this->createUserStub('admin');
+        parent::setUp();
 
-        $this->actingAs($admin)
-            ->get('admin/news')
-            ->assertStatus(200)
-            ->assertViewIs('admin.news')
-            ->assertViewHas('articles')
-            ->assertSee(trans('catalog.create'))
-            ->assertSee(trans('catalog.edit'))
-            ->assertSee(trans('catalog.destroy'));
-
-        $admin->delete();
+        $this->admin = factory(User::class)->make(['admin' => true]);
+        $this->actingAs($this->admin);
     }
 
     /** @test */
-    public function can_show_categories_view_panel()
+    public function the_admin_can_see_news_panel()
     {
-        $admin = $this->createUserStub('admin');
-
-        $this->actingAs($admin)
-            ->get('admin/categories')
+        $this->get('admin/news')
             ->assertStatus(200)
-            ->assertViewIs('admin.categories')
-            ->assertViewHas('categories')
             ->assertSee(trans('catalog.create'))
             ->assertSee(trans('catalog.edit'))
             ->assertSee(trans('catalog.destroy'));
-
-        $admin->delete();
     }
 
     /** @test */
-    public function can_show_users_view_panel()
+    public function the_admin_can_see_categories_panel()
     {
-        $admin = $this->createUserStub('admin');
-
-        $this->actingAs($admin)
-            ->get('admin/users')
+        $this->get('admin/categories')
             ->assertStatus(200)
-            ->assertViewIs('admin.users')
-            ->assertViewHas('users')
+            ->assertSee(trans('catalog.create'))
+            ->assertSee(trans('catalog.edit'))
+            ->assertSee(trans('catalog.destroy'));
+    }
+
+    /** @test */
+    public function the_admin_can_see_users_panel()
+    {
+        $this->get('admin/users')
+            ->assertStatus(200)
             ->assertSee(trans('catalog.admin'))
             ->assertSee(trans('catalog.ban'));
-
-        $admin->delete();
     }
 
     /** @test */
-    public function can_show_comments_view_panel()
+    public function the_admin_can_see_comments_panel()
     {
-        $admin = $this->createUserStub('admin');
-
-        $this->actingAs($admin)
-            ->get('admin/comments')
+        $this->get('admin/comments')
             ->assertStatus(200)
-            ->assertViewIs('admin.comments')
-            ->assertViewHas('comments')
             ->assertSee(trans('catalog.destroy'));
-
-        $admin->delete();
     }
 
     /** @test */
-    public function can_show_logs_view_panel()
+    public function the_admin_can_see_logs_panel()
     {
-        $admin = $this->createUserStub('admin');
-
-        $this->actingAs($admin)
-            ->get('admin/logs')
+        $this->get('admin/logs')
             ->assertStatus(200)
-            ->assertViewIs('laravel-log-viewer::log')
             ->assertSee(trans('catalog.home'));
-
-        $admin->delete();
     }
 }

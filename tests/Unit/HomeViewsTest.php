@@ -2,38 +2,40 @@
 
 namespace Tests\Feature;
 
+use App\Models\User;
 use Tests\TestCase;
-use Tests\UserStub;
 
 class HomeViewsTest extends TestCase
 {
-    use UserStub;
+    /**
+     * @var User
+     */
+    protected $user;
 
-    /** @test */
-    public function can_show_dashboard_view()
+    /**
+     * Базовые значения для теста.
+     */
+    public function setUp()
     {
-        $user = $this->createUserStub();
+        parent::setUp();
 
-        $this->actingAs($user)
-            ->get('home')
-            ->assertStatus(200)
-            ->assertViewIs('home')
-            ->assertSee(trans('catalog.dashboard'));
-
-        $user->delete();
+        $this->user = factory(User::class)->make();
+        $this->actingAs($this->user);
     }
 
     /** @test */
-    public function can_show_contact_view()
+    public function the_user_can_see_home_page()
     {
-        $user = $this->createUserStub();
-
-        $this->actingAs($user)
-            ->get('contact')
+        $this->get('home')
             ->assertStatus(200)
-            ->assertViewIs('contact')
-            ->assertSee(trans('catalog.contactUs'));
+            ->assertSee(trans('catalog.dashboard'));
+    }
 
-        $user->delete();
+    /** @test */
+    public function the_user_can_see_contact_form_page()
+    {
+        $this->get('contact')
+            ->assertStatus(200)
+            ->assertSee(trans('catalog.contactUs'));
     }
 }
