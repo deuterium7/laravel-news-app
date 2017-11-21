@@ -5,12 +5,13 @@ namespace Tests\Unit;
 use App\Models\Article;
 use App\Models\Comment;
 use App\Models\User;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithoutEvents;
 use Tests\TestCase;
 
 class CommentControllerTest extends TestCase
 {
-    use WithoutEvents;
+    use WithoutEvents, DatabaseTransactions;
 
     /**
      * @var User
@@ -93,7 +94,5 @@ class CommentControllerTest extends TestCase
         $commentOld = Comment::latest()->first();
 
         $this->assertNotEquals($commentDelete, $commentOld);
-
-        $this->user->delete();
     }
 }

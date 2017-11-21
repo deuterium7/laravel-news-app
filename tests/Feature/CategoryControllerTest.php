@@ -4,12 +4,13 @@ namespace Tests\Unit;
 
 use App\Models\Category;
 use App\Models\User;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithoutEvents;
 use Tests\TestCase;
 
 class CategoryControllerTest extends TestCase
 {
-    use WithoutEvents;
+    use WithoutEvents, DatabaseTransactions;
 
     /**
      * @var User

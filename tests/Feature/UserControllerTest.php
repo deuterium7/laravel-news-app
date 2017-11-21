@@ -4,12 +4,13 @@ namespace Tests\Unit;
 
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithoutEvents;
 use Tests\TestCase;
 
 class UserControllerTest extends TestCase
 {
-    use WithoutEvents;
+    use WithoutEvents, DatabaseTransactions;
 
     /**
      * @var User
@@ -68,7 +69,5 @@ class UserControllerTest extends TestCase
         $secondRole = $this->user->admin;
 
         $this->assertNotEquals($firstRole, $secondRole);
-
-        $this->user->delete();
     }
 }
