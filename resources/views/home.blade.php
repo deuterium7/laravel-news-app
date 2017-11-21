@@ -13,7 +13,7 @@
                         @endcomponent
                     @endif
 
-                        @lang('catalog.loggedIn')!
+                    @lang('catalog.loggedIn')!
                 </div>
             </div>
         </div>

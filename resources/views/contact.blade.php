@@ -10,7 +10,7 @@
                 @endcomponent
             @endif
             <div class="form-group">
-                {{ Form::hidden('user', \Auth::user()->name, ['class'=>'form-control']) }}
+                {{ Form::hidden('user', auth()->user()->name, ['class'=>'form-control']) }}
             </div>
             <div class="form-group">
                 <label for="title">@lang('catalog.title') *</label>
