@@ -2,12 +2,10 @@
 
 namespace App\Services;
 
-use App\Mail\Registration;
+use App\Mail\UserRegistrationWasConfirmed;
 use App\Models\User;
 use App\Models\UserSocialAccount;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Mail;
 
 class SocialAccountService
 {
@@ -27,11 +25,7 @@ class SocialAccountService
             ->whereProviderUserId($providerUser->getId())
             ->first();
 
-        if ($account) {
-            return $account->user;
-        } else {
-            return $this->createUser($providerUser, $providerName);
-        }
+        return $account ? $account->user : $this->createUser($providerUser, $providerName);
     }
 
     /**
@@ -59,12 +53,7 @@ class SocialAccountService
                 'password' => bcrypt('secret'.Carbon::now()),
             ]);
 
-            DB::table('role_user')->insert([
-                'user_id' => $user->id,
-                'role_id' => 1,
-            ]);
-
-            Mail::to($user->email)->send(new Registration($user));
+            \Mail::to($user->email)->send(new UserRegistrationWasConfirmed($user));
         }
 
         $account->user()->associate($user);

@@ -3,11 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Mail\Registration;
+use App\Mail\UserRegistrationWasConfirmed;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
@@ -72,13 +70,6 @@ class RegisterController extends Controller
             'email'    => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
-
-        DB::table('role_user')->insert([
-            'user_id' => $user->id,
-            'role_id' => 1,
-        ]);
-
-        Mail::to($data['email'])->send(new Registration($user));
 
         return $user;
     }

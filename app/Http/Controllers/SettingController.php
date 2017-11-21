@@ -2,9 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Session;
-
 class SettingController extends Controller
 {
     /**
@@ -16,8 +13,8 @@ class SettingController extends Controller
      */
     public function locale(string $locale)
     {
-        if (in_array($locale, Config::get('app.locales'))) {
-            Session::put('locale', $locale);
+        if (in_array($locale, config()->get('app.locales'))) {
+            session()->put('locale', $locale);
         }
 
         return redirect()->back();

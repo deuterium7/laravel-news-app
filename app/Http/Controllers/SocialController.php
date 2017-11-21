@@ -31,7 +31,7 @@ class SocialController extends Controller
     {
         $driver = Socialite::driver($provider);
         $user = $service->getUser($driver, $provider);
-        \Auth::login($user, true);
+        auth()->login($user, true);
 
         return redirect()->intended('/home');
     }

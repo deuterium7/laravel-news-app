@@ -66,10 +66,10 @@ return [
 
         /*
          |--------------------------------------------------------------------------
-         | Cache Repository
+         | Cache ModelRepository
          |--------------------------------------------------------------------------
          |
-         | Instance of Illuminate\Contracts\Cache\Repository
+         | Instance of Illuminate\Contracts\Cache\ModelRepository
          |
          */
         'repository' => 'cache',

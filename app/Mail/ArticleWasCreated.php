@@ -7,14 +7,17 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class ArticleCreate extends Mailable implements ShouldQueue
+class ArticleWasCreated extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
-    protected $article;
+    /**
+     * Request from articles.create
+     */
+    public $article;
 
     /**
-     * ArticleCreate constructor.
+     * ArticleWasCreated constructor.
      *
      * @param $article
      */
@@ -30,7 +33,7 @@ class ArticleCreate extends Mailable implements ShouldQueue
      */
     public function build()
     {
-        return $this->view('emails.article_create')
+        return $this->view('emails.article-create')
             ->with('article', $this->article);
     }
 }

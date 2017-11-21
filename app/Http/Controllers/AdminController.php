@@ -2,32 +2,47 @@
 
 namespace App\Http\Controllers;
 
-use App\Contracts\ArticleInterface;
-use App\Contracts\CategoryInterface;
-use App\Contracts\CommentInterface;
-use App\Contracts\UserInterface;
+use App\Contracts\Article as ArticleContract;
+use App\Contracts\Category as CategoryContract;
+use App\Contracts\Comment as CommentContract;
+use App\Contracts\User as UserContract;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
+    /**
+     * @var ArticleContract
+     */
     protected $articles;
+
+    /**
+     * @var CategoryContract
+     */
     protected $categories;
+
+    /**
+     * @var UserContract
+     */
     protected $users;
+
+    /**
+     * @var CommentContract
+     */
     protected $comments;
 
     /**
      * AdminController constructor.
      *
-     * @param ArticleInterface  $articles
-     * @param CategoryInterface $categories
-     * @param UserInterface     $users
-     * @param CommentInterface  $comments
+     * @param ArticleContract $articles
+     * @param CategoryContract $categories
+     * @param UserContract $users
+     * @param CommentContract $comments
      */
     public function __construct(
-        ArticleInterface $articles,
-        CategoryInterface $categories,
-        UserInterface $users,
-        CommentInterface $comments
+        ArticleContract $articles,
+        CategoryContract $categories,
+        UserContract $users,
+        CommentContract $comments
     ) {
         $this->articles = $articles;
         $this->categories = $categories;
@@ -44,7 +59,7 @@ class AdminController extends Controller
      */
     public function news(Request $request)
     {
-        $articles = $this->articles->getWithCategoryKeywordsAndPagination($request->keywords);
+        $articles = $this->articles->getArticlesWithKeywords($request->keywords);
 
         return view('admin.news', compact('articles'));
     }
@@ -70,7 +85,7 @@ class AdminController extends Controller
      */
     public function users(Request $request)
     {
-        $users = $this->users->getWithKeywordsAndPagination($request->keywords);
+        $users = $this->users->getUsersWithKeywords($request->keywords);
 
         return view('admin.users', compact('users'));
     }
@@ -84,7 +99,7 @@ class AdminController extends Controller
      */
     public function comments(Request $request)
     {
-        $comments = $this->comments->getWithKeywordsAndPagination($request->keywords);
+        $comments = $this->comments->getCommentsWithKeywords($request->keywords);
 
         return view('admin.comments', compact('comments'));
     }

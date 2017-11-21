@@ -27,7 +27,7 @@
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
                         <td>
-                            @if($user->hasRole('admin'))
+                            @if($user->admin)
                                 @lang('catalog.true')
                             @else
                                 @lang('catalog.false')
@@ -42,8 +42,8 @@
                         </td>
                         <td>{{ $user->created_at }}</td>
                         <td>
-                            @if(!$user->hasRole('admin'))
-                                {!! Form::open(['method' => 'Post', 'route' => ['users.admin', $user->id]]) !!}
+                            @if(!$user->admin)
+                                {!! Form::open(['method' => 'Put', 'route' => ['users.admin', $user->id]]) !!}
                                     <input type="submit" class="btn btn-warning" value="@lang('catalog.admin')">
                                 {!! Form::close() !!}
                             @endif

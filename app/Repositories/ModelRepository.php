@@ -2,15 +2,18 @@
 
 namespace App\Repositories;
 
-use App\Contracts\RepositoryInterface;
+use App\Contracts\Repository as RepositoryContract;
 use Illuminate\Database\Eloquent\Model;
 
-abstract class EloquentRepository implements RepositoryInterface
+abstract class ModelRepository implements RepositoryContract
 {
+    /**
+     * @var Model
+     */
     protected $model;
 
     /**
-     * EloquentRepository constructor.
+     * ModelRepository constructor.
      *
      * @param Model $model
      */

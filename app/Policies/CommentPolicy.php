@@ -11,6 +11,14 @@ class CommentPolicy
 {
     use HandlesAuthorization;
 
+    /**
+     * Пользователь может редактировать комментарий в течении 5мин после опубликования.
+     *
+     * @param User $user
+     * @param Comment $comment
+     *
+     * @return bool
+     */
     public function edit(User $user, Comment $comment)
     {
         return $user->id === $comment->user_id

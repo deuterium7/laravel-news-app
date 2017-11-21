@@ -4,32 +4,45 @@ namespace Tests\Unit;
 
 use App\Models\Category;
 use App\Models\User;
-use Tests\Catalog;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\WithoutEvents;
 use Tests\TestCase;
-use Tests\UserStub;
 
 class CategoryControllerTest extends TestCase
 {
-    use UserStub, Catalog;
+    use WithoutEvents, DatabaseTransactions;
+
+    /**
+     * @var User
+     */
+    protected $admin;
+
+    /**
+     * Базовые значения для теста.
+     */
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->admin = factory(User::class)->make(['admin' => true]);
+        $this->be($this->admin);
+    }
 
     /** @test */
     public function admin_can_create_category()
     {
-        $admin = $this->createUserStub('admin');
-        $this->be($admin);
-
         $this->get('categories/create')
             ->assertStatus(200);
 
         $request = [
-            'name'   => 'Can create category name',
-            'image'  => 'Can create category image',
-            '_token' => csrf_token(),
+            'name'       => 'Can create category name',
+            'image'       => 'Can create category image',
+            '_token'      => csrf_token(),
         ];
 
         $this->post('categories', $request)
             ->assertStatus(302);
-        $category = $this->latest(Category::class);
+        $category = Category::orderBy('id', 'desc')->first();
 
         $this->assertEquals('Can create category name', $category->name);
     }
@@ -37,10 +50,8 @@ class CategoryControllerTest extends TestCase
     /** @test */
     public function admin_can_update_category()
     {
-        $admin = $this->latest(User::class);
-        $category = $this->latest(Category::class);
+        $category = Category::orderBy('id', 'desc')->first();
 
-        $this->be($admin);
         $this->get("categories/$category->id/edit")
             ->assertStatus(200);
 
@@ -52,7 +63,7 @@ class CategoryControllerTest extends TestCase
 
         $this->put("categories/$category->id", $request)
             ->assertStatus(302);
-        $categoryUpdate = $this->latest(Category::class);
+        $categoryUpdate = Category::orderBy('id', 'desc')->first();
 
         $this->assertNotEquals($category, $categoryUpdate);
     }
@@ -60,19 +71,15 @@ class CategoryControllerTest extends TestCase
     /** @test */
     public function admin_can_delete_category()
     {
-        $admin = $this->latest(User::class);
-        $categoryDelete = $this->latest(Category::class);
+        $categoryDelete = Category::orderBy('id', 'desc')->first();
 
-        $this->be($admin);
         $this->get('admin/categories')
             ->assertStatus(200);
 
         $this->delete("categories/$categoryDelete->id", ['_token' => csrf_token()])
             ->assertStatus(302);
-        $categoryOld = $this->latest(Category::class);
+        $categoryOld = Category::orderBy('id', 'desc')->first();
 
         $this->assertNotEquals($categoryDelete, $categoryOld);
-
-        $admin->delete();
     }
 }

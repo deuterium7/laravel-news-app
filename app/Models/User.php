@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Mail\UserRegistrationWasConfirmed;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -9,23 +10,26 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    /**
+     * @var array
+     */
     protected $fillable = [
-        'name', 'email', 'password', 'ban',
-    ];
-
-    protected $hidden = [
-        'password', 'remember_token',
+        'name', 'email', 'password', 'admin', 'ban',
     ];
 
     /**
-     * Связываем с таблицей ролей.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @var array
      */
-    public function roles()
-    {
-        return $this->belongsToMany(Role::class);
-    }
+    protected $dispatchesEvents = [
+        'created' => UserRegistrationWasConfirmed::class,
+    ];
+
+    /**
+     * @var array
+     */
+    protected $hidden = [
+        'password', 'remember_token',
+    ];
 
     /**
      * Связываем с таблицей новостей.
@@ -45,17 +49,5 @@ class User extends Authenticatable
     public function comments()
     {
         return $this->hasMany(Comment::class);
-    }
-
-    /**
-     * Проверяем есть ли данная роль у пользователя.
-     *
-     * @param $check
-     *
-     * @return bool
-     */
-    public function hasRole($check)
-    {
-        return in_array($check, array_pluck($this->roles->toArray(), 'slug'));
     }
 }

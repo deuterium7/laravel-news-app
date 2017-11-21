@@ -2,15 +2,28 @@
 
 namespace App\Repositories\Decorators;
 
-use App\Contracts\CategoryInterface;
+use App\Contracts\Category as CategoryContract;
 use Illuminate\Cache\Repository;
 
-class CachingCategoryRepository implements CategoryInterface
+class CachingCategoryRepository implements CategoryContract
 {
+    /**
+     * @var CategoryContract
+     */
     protected $category;
+
+    /**
+     * @var Repository
+     */
     protected $cache;
 
-    public function __construct(CategoryInterface $category, Repository $cache)
+    /**
+     * CachingCategoryRepository constructor.
+     *
+     * @param CategoryContract $category
+     * @param Repository $cache
+     */
+    public function __construct(CategoryContract $category, Repository $cache)
     {
         $this->category = $category;
         $this->cache = $cache;
@@ -72,12 +85,12 @@ class CachingCategoryRepository implements CategoryInterface
     }
 
     /**
-     * Получить все категории вида <значение-ключ>.
+     * Получить все категории вида <id-name>.
      *
      * @return \Illuminate\Support\Collection
      */
-    public function allPluck()
+    public function allMap()
     {
-        return $this->category->allPluck();
+        return $this->category->allMap();
     }
 }

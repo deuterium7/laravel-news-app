@@ -2,24 +2,30 @@
 
 namespace App\Http\Controllers;
 
-use App\Contracts\CommentInterface;
-use App\Contracts\UserInterface;
+use App\Contracts\Comment as CommentContract;
+use App\Contracts\User as UserContract;
 use App\Http\Requests\UserStatusRequest;
-use App\Models\RoleUser;
 use App\Models\User;
 
 class UserController extends Controller
 {
+    /**
+     * @var UserContract
+     */
     protected $users;
+
+    /**
+     * @var CommentContract
+     */
     protected $comments;
 
     /**
      * UserController constructor.
      *
-     * @param UserInterface    $users
-     * @param CommentInterface $comments
+     * @param UserContract $users
+     * @param CommentContract $comments
      */
-    public function __construct(UserInterface $users, CommentInterface $comments)
+    public function __construct(UserContract $users, CommentContract $comments)
     {
         $this->users = $users;
         $this->comments = $comments;
@@ -34,7 +40,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        $comments = $this->comments->getLastCommentsFromUser($user->id);
+        $comments = $this->comments->getUserComments($user->id);
 
         return view('users.show', compact('user', 'comments'));
     }
@@ -75,10 +81,7 @@ class UserController extends Controller
      */
     public function admin($id)
     {
-        RoleUser::create([
-            'user_id' => $id,
-            'role_id' => 2,
-        ]);
+        $this->users->update($id, ['admin' => true]);
 
         return redirect()->back();
     }

@@ -70,7 +70,7 @@
                             </li>
                             <!-- Admins -->
                             <li class="dropdown">
-                                @if(Auth::user()->hasRole('admin'))
+                                @if(Auth::user()->admin)
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                         {{ trans('catalog.admin') }} <span class="caret"></span>
                                     </a>

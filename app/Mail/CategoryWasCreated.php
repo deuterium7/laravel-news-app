@@ -7,14 +7,17 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class CategoryCreate extends Mailable implements ShouldQueue
+class CategoryWasCreated extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
-    protected $category;
+    /**
+     * Request from categories.create
+     */
+    public $category;
 
     /**
-     * CategoryCreate constructor.
+     * CategoryWasCreated constructor.
      *
      * @param $category
      */
@@ -30,7 +33,7 @@ class CategoryCreate extends Mailable implements ShouldQueue
      */
     public function build()
     {
-        return $this->view('emails.category_create')
+        return $this->view('emails.category-create')
             ->with('category', $this->category);
     }
 }

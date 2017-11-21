@@ -2,25 +2,31 @@
 
 namespace App\Http\Controllers;
 
-use App\Contracts\ArticleInterface;
-use App\Contracts\CategoryInterface;
+use App\Contracts\Article as ArticleContract;
+use App\Contracts\Category as CategoryContract;
 use App\Http\Requests\CategoryRequest;
-use App\Mail\CategoryCreate;
+use App\Mail\CategoryWasCreated;
 use App\Models\Category;
-use Illuminate\Support\Facades\Mail;
 
 class CategoryController extends Controller
 {
+    /**
+     * @var CategoryContract
+     */
     protected $categories;
+
+    /**
+     * @var ArticleContract
+     */
     protected $articles;
 
     /**
      * CategoryController constructor.
      *
-     * @param CategoryInterface $categories
-     * @param ArticleInterface  $articles
+     * @param CategoryContract $categories
+     * @param ArticleContract $articles
      */
-    public function __construct(CategoryInterface $categories, ArticleInterface $articles)
+    public function __construct(CategoryContract $categories, ArticleContract $articles)
     {
         $this->categories = $categories;
         $this->articles = $articles;
@@ -58,8 +64,6 @@ class CategoryController extends Controller
     public function store(CategoryRequest $request)
     {
         $this->categories->create($request->all());
-
-        Mail::to(\Auth::user()->email)->send(new CategoryCreate((object) $request->all()));
 
         return redirect()->route('admin.categories');
     }
