@@ -11,6 +11,8 @@ class ArticleCreate
      */
     public function handle($event)
     {
-        \Mail::to(auth()->user()->email)->send(new ArticleWasCreated($event->article));
+        if (auth()->check()) {
+            \Mail::to(auth()->user()->email)->send(new ArticleWasCreated($event->article));
+        }
     }
 }

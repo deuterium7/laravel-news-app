@@ -14,12 +14,14 @@ class UsersTableSeeder extends Seeder
         // администраторы загружают статьи
         $categoriesCount = \App\Models\Category::count();
         factory(\App\Models\User::class, 1)->create(['admin' => true])->each(function ($u) use ($categoriesCount) {
-            $u->articles()
-                ->saveMany(factory(\App\Models\Article::class, 100)
-                ->create([
-                    'category_id' => rand(1, $categoriesCount),
-                    'user_id' => $u->id
-                ]));
+            for ($i = 0; $i < 100; $i++) {
+                $u->articles()
+                    ->save(factory(\App\Models\Article::class)
+                    ->create([
+                        'category_id' => rand(1, $categoriesCount),
+                        'user_id' => $u->id
+                    ]));
+            }
         });
 
         // пользователи комментируют статьи

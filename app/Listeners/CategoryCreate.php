@@ -14,6 +14,8 @@ class CategoryCreate
      */
     public function handle($event)
     {
-        \Mail::to(auth()->user()->email)->send(new CategoryWasCreated($event->category));
+        if (auth()->check()) {
+            \Mail::to(auth()->user()->email)->send(new CategoryWasCreated($event->category));
+        }
     }
 }
