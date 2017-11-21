@@ -35,7 +35,7 @@ class CategoryControllerTest extends TestCase
             ->assertStatus(200);
 
         $request = [
-            'name'       => 'Can create category name',
+            'name'        => 'Can create category name',
             'image'       => 'Can create category image',
             '_token'      => csrf_token(),
         ];

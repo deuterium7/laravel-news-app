@@ -20,7 +20,7 @@ class CommentViewsTest extends TestCase
         $user = factory(User::class)->create();
         $comment = factory(Comment::class)->create([
             'article_id' => $article->id,
-            'user_id' => $user->id
+            'user_id'    => $user->id,
         ]);
 
         $this->actingAs($user)

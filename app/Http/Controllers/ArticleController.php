@@ -6,7 +6,6 @@ use App\Contracts\Article as ArticleContract;
 use App\Contracts\Category as CategoryContract;
 use App\Contracts\Comment as CommentContract;
 use App\Http\Requests\ArticleRequest;
-use App\Mail\ArticleWasCreated;
 use App\Models\Article;
 
 class ArticleController extends Controller
@@ -29,9 +28,9 @@ class ArticleController extends Controller
     /**
      * ArticleController constructor.
      *
-     * @param ArticleContract $articles
+     * @param ArticleContract  $articles
      * @param CategoryContract $categories
-     * @param CommentContract $comments
+     * @param CommentContract  $comments
      */
     public function __construct(ArticleContract $articles, CategoryContract $categories, CommentContract $comments)
     {
