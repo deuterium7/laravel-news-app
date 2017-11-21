@@ -61,7 +61,7 @@ class UserControllerTest extends TestCase
 
         $request = [
             'admin'    => true,
-            '_token' => csrf_token(),
+            '_token'   => csrf_token(),
         ];
 
         $this->user->update($request);

@@ -12,7 +12,7 @@ class ArticleWasCreated extends Mailable implements ShouldQueue
     use Queueable, SerializesModels;
 
     /**
-     * Request from articles.create
+     * Request from articles.create.
      */
     public $article;
 

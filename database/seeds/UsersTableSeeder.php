@@ -19,7 +19,7 @@ class UsersTableSeeder extends Seeder
                     ->save(factory(\App\Models\Article::class)
                     ->create([
                         'category_id' => rand(1, $categoriesCount),
-                        'user_id' => $u->id
+                        'user_id'     => $u->id,
                     ]));
             }
         });
@@ -32,7 +32,7 @@ class UsersTableSeeder extends Seeder
                     ->save(factory(\App\Models\Comment::class)
                     ->create([
                         'article_id' => rand(1, $articlesCount),
-                        'user_id' => $u->id
+                        'user_id'    => $u->id,
                     ]));
             }
         });

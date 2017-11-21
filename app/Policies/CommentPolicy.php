@@ -14,7 +14,7 @@ class CommentPolicy
     /**
      * Пользователь может редактировать комментарий в течении 5мин после опубликования.
      *
-     * @param User $user
+     * @param User    $user
      * @param Comment $comment
      *
      * @return bool

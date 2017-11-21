@@ -21,7 +21,7 @@ class CachingCategoryRepository implements CategoryContract
      * CachingCategoryRepository constructor.
      *
      * @param CategoryContract $category
-     * @param Repository $cache
+     * @param Repository       $cache
      */
     public function __construct(CategoryContract $category, Repository $cache)
     {

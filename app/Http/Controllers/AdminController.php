@@ -33,10 +33,10 @@ class AdminController extends Controller
     /**
      * AdminController constructor.
      *
-     * @param ArticleContract $articles
+     * @param ArticleContract  $articles
      * @param CategoryContract $categories
-     * @param UserContract $users
-     * @param CommentContract $comments
+     * @param UserContract     $users
+     * @param CommentContract  $comments
      */
     public function __construct(
         ArticleContract $articles,

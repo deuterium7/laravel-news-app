@@ -22,7 +22,7 @@ class UserController extends Controller
     /**
      * UserController constructor.
      *
-     * @param UserContract $users
+     * @param UserContract    $users
      * @param CommentContract $comments
      */
     public function __construct(UserContract $users, CommentContract $comments)

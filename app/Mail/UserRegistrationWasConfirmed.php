@@ -12,7 +12,7 @@ class UserRegistrationWasConfirmed extends Mailable implements ShouldQueue
     use Queueable, SerializesModels;
 
     /**
-     * Request from auth.register
+     * Request from auth.register.
      */
     public $user;
 
