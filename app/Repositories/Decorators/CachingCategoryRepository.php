@@ -50,8 +50,6 @@ class CachingCategoryRepository implements CategoryContract
      */
     public function create(array $attributes)
     {
-        $this->cache->flush();
-
         return $this->category->create($attributes);
     }
 
@@ -65,8 +63,6 @@ class CachingCategoryRepository implements CategoryContract
      */
     public function update(int $id, array $attributes)
     {
-        $this->cache->flush();
-
         return $this->category->update($id, $attributes);
     }
 
@@ -79,8 +75,6 @@ class CachingCategoryRepository implements CategoryContract
      */
     public function delete(int $id)
     {
-        $this->cache->flush();
-
         return $this->category->delete($id);
     }
 
