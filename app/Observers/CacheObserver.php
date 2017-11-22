@@ -5,7 +5,7 @@ namespace App\Observers;
 class CacheObserver
 {
     /**
-     * Очистка кэша
+     * Очистка кэша.
      */
     public function clear()
     {
@@ -13,7 +13,7 @@ class CacheObserver
     }
 
     /**
-     * Очистить кэш после создания экземпляра модели
+     * Очистить кэш после создания экземпляра модели.
      */
     public function created()
     {
@@ -21,7 +21,7 @@ class CacheObserver
     }
 
     /**
-     * Очистить кэш после обновления экземпляра модели
+     * Очистить кэш после обновления экземпляра модели.
      */
     public function updated()
     {
@@ -29,7 +29,7 @@ class CacheObserver
     }
 
     /**
-     * Очистить кэш после удаления экземпляра модели
+     * Очистить кэш после удаления экземпляра модели.
      */
     public function deleted()
     {
