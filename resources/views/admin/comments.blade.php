@@ -26,7 +26,7 @@
                         <td>{{ $comment->article->title }}</td>
                         <td>{{ $comment->user->name }}</td>
                         <td>
-                            {!! Form::open(['method' => 'Delete', 'route' => ['comments.destroy', $comment->id]]) !!}
+                            {!! Form::open(['method' => 'Delete', 'route' => ['comments.destroy', $comment->id], 'onsubmit' => 'return confirm("Are you sure?")']) !!}
                                 <input type="submit" class="btn btn-danger" value="@lang('catalog.destroy')">
                             {!! Form::close() !!}
                         </td>

@@ -42,14 +42,14 @@
                         </td>
                         <td>{{ $user->created_at }}</td>
                         <td>
+                            {!! Form::open(['method' => 'Get', 'route' => ['users.ban', $user->id]]) !!}
+                                <input type="submit" class="btn btn-warning" value="@lang('catalog.ban')">
+                            {!! Form::close() !!}
                             @if(!$user->admin)
-                                {!! Form::open(['method' => 'Put', 'route' => ['users.admin', $user->id]]) !!}
-                                    <input type="submit" class="btn btn-warning" value="@lang('catalog.admin')">
+                                {!! Form::open(['method' => 'Put', 'route' => ['users.admin', $user->id], 'onsubmit' => 'return confirm("Are you sure?")']) !!}
+                                    <input type="submit" class="btn btn-danger" value="@lang('catalog.admin')">
                                 {!! Form::close() !!}
                             @endif
-                            {!! Form::open(['method' => 'Get', 'route' => ['users.ban', $user->id]]) !!}
-                                <input type="submit" class="btn btn-danger" value="@lang('catalog.ban')">
-                            {!! Form::close() !!}
                         </td>
                     </tr>
                 @endforeach
