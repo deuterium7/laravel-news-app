@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use App\Mail\UserRegistrationWasConfirmed;
 use App\Models\User;
 use App\Models\UserSocialAccount;
 use Illuminate\Support\Carbon;
