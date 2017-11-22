@@ -35,7 +35,7 @@
                 <h4 style="text-align: center">@lang('catalog.addComment')</h4>
                 {!! Form::open(['route' => 'comments.store']) !!}
                     {!! Form::hidden('article_id', $article->id) !!}
-                    {!! Form::hidden('user_id', Auth::user()->id) !!}
+                    {!! Form::hidden('user_id', auth()->user()->id) !!}
                     <div class="form-group">
                         {!! Form::textarea('body', null, ['class'=>'form-control']) !!}
                     </div>

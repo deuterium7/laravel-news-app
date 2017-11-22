@@ -20,7 +20,7 @@
                         @endforeach
                     </select>
                 </div>
-                {{ Form::hidden('user_id', Auth::user()->id) }}
+                {{ Form::hidden('user_id', auth()->user()->id) }}
                 <div class="form-group">
                     <label for="title">@lang('catalog.title') *</label>
                     {{ Form::text('title', null, ['class'=>'form-control']) }}

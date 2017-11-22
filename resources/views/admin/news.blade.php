@@ -35,7 +35,7 @@
                                 {!! Form::open(['method' => 'Get', 'route' => ['articles.edit', $article->id]]) !!}
                                     <input type="submit" class="btn btn-warning" value="@lang('catalog.edit')">
                                 {!! Form::close() !!}
-                                {!! Form::open(['method' => 'Delete', 'route' => ['articles.destroy', $article->id]]) !!}
+                                {!! Form::open(['method' => 'Delete', 'route' => ['articles.destroy', $article->id], 'onsubmit' => 'return confirm("Are you sure?")']) !!}
                                     <input type="submit" class="btn btn-danger" value="@lang('catalog.destroy')">
                                 {!! Form::close() !!}
                             </td>

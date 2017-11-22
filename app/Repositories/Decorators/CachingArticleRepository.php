@@ -50,8 +50,6 @@ class CachingArticleRepository implements ArticleContract
      */
     public function create(array $attributes)
     {
-        $this->cache->flush();
-
         return $this->article->create($attributes);
     }
 
@@ -65,8 +63,6 @@ class CachingArticleRepository implements ArticleContract
      */
     public function update(int $id, array $attributes)
     {
-        $this->cache->flush();
-
         return $this->article->update($id, $attributes);
     }
 
@@ -79,8 +75,6 @@ class CachingArticleRepository implements ArticleContract
      */
     public function delete(int $id)
     {
-        $this->cache->flush();
-
         return $this->article->delete($id);
     }
 

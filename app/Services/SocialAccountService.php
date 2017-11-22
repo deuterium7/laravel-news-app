@@ -52,8 +52,6 @@ class SocialAccountService
                 'name'     => $providerUser->getName(),
                 'password' => bcrypt('secret'.Carbon::now()),
             ]);
-
-            \Mail::to($user->email)->send(new UserRegistrationWasConfirmed($user));
         }
 
         $account->user()->associate($user);
