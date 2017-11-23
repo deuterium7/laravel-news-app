@@ -116,6 +116,16 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'name' => '<Name>',
+        'email' => '<E-Mail>',
+        'password' => '<Password>',
+        'title' => '<Title>',
+        'image' => '<Image>',
+        'body'  => '<Body>',
+        'message'  => '<Message>',
+        'g-recaptcha-response' => '<reCAPTCHA>',
+        'ban'  => '<Ban>',
+    ],
 
 ];

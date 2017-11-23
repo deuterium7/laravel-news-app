@@ -117,7 +117,15 @@ return [
     */
 
     'attributes' => [
-        //
+        'name' => '<Найменування>',
+        'email' => '<E-Mail>',
+        'password' => '<Пароль>',
+        'title' => '<Заголовок>',
+        'image' => '<Зображення>',
+        'body'  => '<Зміст>',
+        'message'  => '<Повідомлення>',
+        'g-recaptcha-response' => '<reCAPTCHA>',
+        'ban'  => '<Бан>',
     ],
 
 ];
