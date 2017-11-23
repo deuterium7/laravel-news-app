@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <h3 style="text-align: center;">@lang('catalog.news')</h3>
+            <h3 class="center">@lang('catalog.news')</h3>
             {!! Form::open(['method' => 'Get', 'route' => ['admin.news']]) !!}
                 <div class="form-group">
                     <label for="keywords">@lang('catalog.searchByTitle')</label>
@@ -46,7 +46,7 @@
             {!! Form::open(['method' => 'Get', 'route' => ['articles.create']]) !!}
                 <input type="submit" class="btn btn-success" value="@lang('catalog.create')">
             {!! Form::close() !!}
-            <div style="text-align: center">{{ $articles->links() }}</div>
+            <div class="links">{{ $articles->links() }}</div>
         </div>
     </div>
 @endsection

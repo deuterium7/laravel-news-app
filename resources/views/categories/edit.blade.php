@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="category-update">
-                <h3 style="text-align: center;">@lang('catalog.updateCategory')</h3>
+                <h3 class="center">@lang('catalog.updateCategory')</h3>
                 {!! Form::open(['route' => ['categories.update', $category], 'method' => 'PUT']) !!}
                 @if ($errors->any())
                     @component('components.alert')
@@ -19,7 +19,7 @@
                     {{ Form::text('image', $category->image, ['class'=>'form-control']) }}
                 </div>
                 <div class="form-group">
-                    <div style="text-align: center">
+                    <div class="links">
                         <input type="submit" value="{{ trans('catalog.update') }}" class="btn btn-primary">
                     </div>
                 </div>

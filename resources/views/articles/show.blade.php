@@ -7,7 +7,7 @@
                 <div class="clearfix">
                     <div class="col-md-4"><img src="{{ $article->image }}"></div>
                     <div class="col-md-8">
-                        <h2>{{ $article->title }}</h2>
+                        <h2 class="center">{{ $article->title }}</h2>
                         <h4>@lang('catalog.category'):
                             <a href="{{ route('categories.show', ['id' => $article->category_id]) }}" title="{{ $article->category->name }}">
                                 {{ $article->category->name }}
@@ -18,7 +18,7 @@
                                 {{ $article->user->name }}
                             </a>
                         </h4>
-                        <p style="text-align: justify">{{ $article->body }}</p>
+                        <p>{{ $article->body }}</p>
                         @if($article->updated_at <= $article->created_at)
                             <div>@lang('catalog.createdAt'): {{ $article->created_at->format('d.m.Y H:i:s') }}</div>
                         @else
@@ -32,7 +32,7 @@
                 @endcomponent
             @endif
             <div class="comment-add">
-                <h4 style="text-align: center">@lang('catalog.addComment')</h4>
+                <h4 class="center">@lang('catalog.addComment')</h4>
                 {!! Form::open(['route' => 'comments.store']) !!}
                     {!! Form::hidden('article_id', $article->id) !!}
                     {!! Form::hidden('user_id', auth()->user()->id) !!}
@@ -57,20 +57,20 @@
                                 </a>
                             @endcan
                         </h5>
-                        <p class="body" style="text-align: justify">{{ $comment->body }}</p>
+                        <p>{{ $comment->body }}</p>
                         @if($comment->updated_at <= $comment->created_at)
-                            <div class="date-create" style="text-align: right">
+                            <div class="date-create">
                                 @lang('catalog.createdAt'): {{ $comment->created_at->format('d.m.Y H:i:s') }}
                             </div>
                         @else
-                            <div class="date-update" style="text-align: right">
+                            <div class="date-update">
                                 @lang('catalog.updatedAt'): {{ $comment->updated_at->format('d.m.Y H:i:s') }}
                             </div>
                         @endif
                     </div>
                 @endforeach
             </div>
-            <div style="text-align: center">{{ $comments->links() }}</div>
+            <div class="links">{{ $comments->links() }}</div>
         </div>
     </div>
 @endsection

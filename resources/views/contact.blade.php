@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <h3 style="text-align: center;">@lang('catalog.contactUs')</h3>
+            <h3 class="center">@lang('catalog.contactUs')</h3>
             {!! Form::open(['route' => 'home.send']) !!}
             @if ($errors->any())
                 @component('components.alert')
@@ -24,7 +24,7 @@
                 {!! NoCaptcha::display() !!}
             </div>
             <div class="form-group">
-                <div style="text-align: center">
+                <div class="submit">
                     <input type="submit" value="{{ trans('catalog.send') }}" class="btn btn-primary">
                 </div>
             </div>

@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <h3 style="text-align: center;">@lang('catalog.categories')</h3>
+            <h3 class="center">@lang('catalog.categories')</h3>
             <table class="table table-condensed">
                 <thead>
                 <tr>

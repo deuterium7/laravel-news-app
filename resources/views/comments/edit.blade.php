@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="news-update">
-                <h3 style="text-align: center;">@lang('catalog.updateComment')</h3>
+                <h3 class="center">@lang('catalog.updateComment')</h3>
                 {!! Form::open(['route' => ['comments.update', $comment->id], 'method' => 'PUT']) !!}
                 @if ($errors->any())
                     @component('components.alert')
@@ -15,7 +15,7 @@
                     {{ Form::textarea('body', $comment->body, ['class'=>'form-control']) }}
                 </div>
                 <div class="form-group">
-                    <div style="text-align: center">
+                    <div class="submit">
                         <input type="submit" value="{{ trans('catalog.update') }}" class="btn btn-primary">
                     </div>
                 </div>

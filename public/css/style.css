@@ -1,0 +1,25 @@
+h2.center, h3.center, h4.center, .links, .submit, .role, .comment .col-md-6 {
+    text-align: center;
+}
+
+p {
+    text-align: justify;
+}
+
+.date-create, .date-update {
+    text-align: right;
+}
+
+.category {
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+.category-name {
+    display:block;
+    margin-top: 4px;
+}
+
+.comment {
+    margin-top: 10px;
+}

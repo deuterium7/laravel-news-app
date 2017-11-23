@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="news-update">
-                <h3 style="text-align: center;">@lang('catalog.updateNews')</h3>
+                <h3 class="center">@lang('catalog.updateNews')</h3>
                 {!! Form::open(['route' => ['articles.update', $article->id], 'method' => 'PUT']) !!}
                 @if ($errors->any())
                     @component('components.alert')
@@ -27,7 +27,7 @@
                     {{ Form::checkbox('visibility', 1, $article->visibility) }}
                 </div>
                 <div class="form-group">
-                    <div style="text-align: center">
+                    <div class="submit">
                         <input type="submit" value="{{ trans('catalog.update') }}" class="btn btn-primary">
                     </div>
                 </div>

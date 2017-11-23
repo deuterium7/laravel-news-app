@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="news-create">
-                <h3 style="text-align: center;">@lang('catalog.addCategory')</h3>
+                <h3 class="center">@lang('catalog.addCategory')</h3>
                 {!! Form::open(['route' => 'categories.store']) !!}
                 @if ($errors->any())
                     @component('components.alert')
@@ -19,7 +19,7 @@
                     {{ Form::text('image', 'http://img.image-storage.com/a1f3cecc7/DSCN1022d5d2ee6.JPG', ['class'=>'form-control']) }}
                 </div>
                 <div class="form-group">
-                    <div style="text-align: center">
+                    <div class="links">
                         <input type="submit" value="{{ trans('catalog.create') }}" class="btn btn-primary">
                     </div>
                 </div>

@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="news-create">
-                <h3 style="text-align: center;">@lang('catalog.addNews')</h3>
+                <h3 class="center">@lang('catalog.addNews')</h3>
                 {!! Form::open(['route' => 'articles.store']) !!}
                 @if ($errors->any())
                     @component('components.alert')
@@ -38,7 +38,7 @@
                     {{ Form::checkbox('visibility', 1, true) }}
                 </div>
                 <div class="form-group">
-                    <div style="text-align: center">
+                    <div class="submit">
                         <input type="submit" value="{{ trans('catalog.create') }}" class="btn btn-primary">
                     </div>
                 </div>

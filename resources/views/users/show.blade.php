@@ -9,9 +9,9 @@
 
                     <div class="panel-body">
                         @if($user->admin)
-                            <div class="role" style="text-align: center">@lang('catalog.admin')</div>
+                            <div class="role">@lang('catalog.admin')</div>
                         @else
-                            <div class="role" style="text-align: center">@lang('catalog.user')</div>
+                            <div class="role">@lang('catalog.user')</div>
                         @endif
                         @if($user->updated_at <= $user->created_at)
                             <div>@lang('catalog.createdAt'): {{ $user->created_at->format('d.m.Y H:i:s') }}</div>
@@ -23,18 +23,18 @@
                             <hr>
                             <div class="comments">@lang('catalog.lastComments')
                                 @foreach($comments as $comment)
-                                    <div class="comment" style="margin-top: 10px;">
-                                        <div class="col-md-6" style="text-align: center;">
+                                    <div class="comment">
+                                        <div class="col-md-6">
                                             @lang('catalog.in') <a href="{{ route('articles.show', ['article' => $comment->article_id]) }}" title="{{ $comment->article->title }}">@lang('catalog.theme')</a>
                                         </div>
-                                        <div class="col-md-6" style="text-align: center;">
+                                        <div class="col-md-6">
                                             @if($comment->updated_at <= $comment->created_at)
                                                 <div>@lang('catalog.createdAt'): {{ $comment->created_at->format('d.m.Y H:i:s') }}</div>
                                             @else
                                                 <div>@lang('catalog.updatedAt'): {{ $comment->updated_at->format('d.m.Y H:i:s') }}</div>
                                             @endif
                                         </div>
-                                        <div class="body" style="text-align: justify;">{{ $comment->body }}</div>
+                                        <div class="body">{{ $comment->body }}</div>
                                     </div>
                                 @endforeach
                             </div>
