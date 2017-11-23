@@ -40,7 +40,7 @@
                                 @lang('catalog.false')
                             @endif
                         </td>
-                        <td>{{ $user->created_at }}</td>
+                        <td>{{ $user->created_at->format('d.m.Y H:i:s') }}</td>
                         <td>
                             {!! Form::open(['method' => 'Get', 'route' => ['users.ban', $user->id]]) !!}
                                 <input type="submit" class="btn btn-warning" value="@lang('catalog.ban')">

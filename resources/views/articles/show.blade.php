@@ -20,9 +20,9 @@
                         </h4>
                         <p style="text-align: justify">{{ $article->body }}</p>
                         @if($article->updated_at <= $article->created_at)
-                            <div>@lang('catalog.createdAt'): {{ $article->created_at }}</div>
+                            <div>@lang('catalog.createdAt'): {{ $article->created_at->format('d.m.Y H:i:s') }}</div>
                         @else
-                            <div>@lang('catalog.updatedAt'): {{ $article->updated_at }}</div>
+                            <div>@lang('catalog.updatedAt'): {{ $article->updated_at->format('d.m.Y H:i:s') }}</div>
                         @endif
                     </div>
                 </div>
@@ -60,11 +60,11 @@
                         <p class="body" style="text-align: justify">{{ $comment->body }}</p>
                         @if($comment->updated_at <= $comment->created_at)
                             <div class="date-create" style="text-align: right">
-                                @lang('catalog.createdAt'): {{ $comment->created_at }}
+                                @lang('catalog.createdAt'): {{ $comment->created_at->format('d.m.Y H:i:s') }}
                             </div>
                         @else
                             <div class="date-update" style="text-align: right">
-                                @lang('catalog.updatedAt'): {{ $comment->updated_at }}
+                                @lang('catalog.updatedAt'): {{ $comment->updated_at->format('d.m.Y H:i:s') }}
                             </div>
                         @endif
                     </div>
