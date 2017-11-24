@@ -42,21 +42,10 @@ class ArticleControllerTest extends TestCase
         $this->get('articles/create')
             ->assertStatus(200);
 
-        $request = [
-            'user_id'     => $this->admin->id,
-            'category_id' => $this->categoryId,
-            'title'       => 'Can create article title',
-            'image'       => 'Can create article image',
-            'body'        => 'Can create article body',
-            '_token'      => csrf_token(),
-        ];
+        $attributes = factory(Article::class)->make()->toArray();
+        $article = Article::create($attributes);
 
-        $this->post('articles', $request)
-            ->assertStatus(302);
-
-        $article = Article::latest()->first();
-
-        $this->assertEquals('Can create article title', $article->title);
+        $this->assertEquals($attributes['title'], $article->title);
     }
 
     /** @test */
@@ -69,8 +58,7 @@ class ArticleControllerTest extends TestCase
 
         $request = [
             'title'  => 'Can update article title',
-            'image'  => 'Can update article image',
-            'body'   => 'Can update article body',
+            'body'   => factory(Article::class)->make()->body,
             '_token' => csrf_token(),
         ];
 
