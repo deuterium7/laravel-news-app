@@ -31,8 +31,8 @@ class CategoryRequest extends FormRequest
 
             case 'POST':
                 return [
-                    'name'  => 'required|alpha|max:255|unique:categories',
-                    'image'  => 'required|alpha_num|max:255',
+                    'name'  => 'required|max:255|unique:categories',
+                    'image'  => 'required|mimes:jpeg,png,jpg|dimensions:max_width=150,max_height=150',
                 ];
 
             case 'PUT':
@@ -40,8 +40,8 @@ class CategoryRequest extends FormRequest
                 $id = $this->route('category');
 
                 return [
-                    'name'  => 'required|alpha|max:255|' . Rule::unique('categories')->ignore($id),
-                    'image'  => 'required|alpha_num|max:255',
+                    'name'  => 'required|max:255|' . Rule::unique('categories')->ignore($id),
+                    'image'  => 'mimes:jpeg,png,jpg|dimensions:max_width=150,max_height=150',
                 ];
 
             default:

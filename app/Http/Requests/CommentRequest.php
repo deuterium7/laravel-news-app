@@ -24,7 +24,7 @@ class CommentRequest extends FormRequest
     public function rules()
     {
         return [
-            'body' => 'required|alpha_num|between:10,600',
+            'body' => 'required|between:10,600',
         ];
     }
 }

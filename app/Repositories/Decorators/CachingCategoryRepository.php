@@ -3,6 +3,7 @@
 namespace App\Repositories\Decorators;
 
 use App\Contracts\Category as CategoryContract;
+use App\Http\Requests\CategoryRequest;
 use Illuminate\Cache\Repository;
 
 class CachingCategoryRepository implements CategoryContract
@@ -86,5 +87,17 @@ class CachingCategoryRepository implements CategoryContract
     public function allMap()
     {
         return $this->category->allMap();
+    }
+
+    /**
+     * Загрузить изображение категории.
+     *
+     * @param CategoryRequest $request
+     *
+     * @return string
+     */
+    public function uploadImage(CategoryRequest $request)
+    {
+        return $this->category->uploadImage($request);
     }
 }

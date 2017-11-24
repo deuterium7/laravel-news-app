@@ -72,7 +72,12 @@ class ArticleController extends Controller
      */
     public function store(ArticleRequest $request)
     {
-        $this->articles->create($request->all());
+        $attributes = $request->all();
+
+        $image = $this->articles->uploadImage($request);
+        $attributes['image'] = $image;
+
+        $this->articles->create($attributes);
 
         return redirect()->route('admin.news');
     }
@@ -87,7 +92,7 @@ class ArticleController extends Controller
     public function show(Article $article)
     {
         if ($article->visibility == false) {
-            return redirect()->back()->with('message', trans('catalog.blockedNews'));
+            return back()->with('message', trans('catalog.blockedNews'));
         }
 
         $comments = $this->comments->getArticleComments($article->id);
@@ -117,7 +122,14 @@ class ArticleController extends Controller
      */
     public function update(ArticleRequest $request, $id)
     {
-        $this->articles->update($id, $request->all());
+        $attributes = $request->all();
+
+        if ($request->hasFile('image')) {
+            $image = $this->articles->uploadImage($request);
+            $attributes['image'] = $image;
+        }
+
+        $this->articles->update($id, $attributes);
 
         return redirect()->route('articles.index');
     }

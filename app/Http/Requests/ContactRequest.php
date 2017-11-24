@@ -24,8 +24,8 @@ class ContactRequest extends FormRequest
     public function rules()
     {
         return [
-            'title'                => 'required|alpha|max:255',
-            'message'              => 'required|alpha_num|between:10,1000',
+            'title'                => 'required|max:255',
+            'message'              => 'required|between:10,1000',
             'g-recaptcha-response' => 'required|captcha',
         ];
     }

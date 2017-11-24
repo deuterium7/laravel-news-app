@@ -62,7 +62,12 @@ class CategoryController extends Controller
      */
     public function store(CategoryRequest $request)
     {
-        $this->categories->create($request->all());
+        $attributes = $request->all();
+
+        $image = $this->categories->uploadImage($request);
+        $attributes['image'] = $image;
+
+        $this->categories->create($attributes);
 
         return redirect()->route('admin.categories');
     }
@@ -103,7 +108,14 @@ class CategoryController extends Controller
      */
     public function update(CategoryRequest $request, $id)
     {
-        $this->categories->update($id, $request->all());
+        $attributes = $request->all();
+
+        if ($request->hasFile('image')) {
+            $image = $this->categories->uploadImage($request);
+            $attributes['image'] = $image;
+        }
+
+        $this->categories->update($id, $attributes);
 
         return redirect()->route('admin.categories');
     }

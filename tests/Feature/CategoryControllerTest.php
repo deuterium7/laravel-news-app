@@ -29,26 +29,19 @@ class CategoryControllerTest extends TestCase
     }
 
     /** @test */
-    public function admin_can_create_category()
+    public function the_admin_can_create_category()
     {
         $this->get('categories/create')
             ->assertStatus(200);
 
-        $request = [
-            'name'        => 'Can create category name',
-            'image'       => 'Can create category image',
-            '_token'      => csrf_token(),
-        ];
+        $attributes = factory(Category::class)->make()->toArray();
+        $category = Category::create($attributes);
 
-        $this->post('categories', $request)
-            ->assertStatus(302);
-        $category = Category::orderBy('id', 'desc')->first();
-
-        $this->assertEquals('Can create category name', $category->name);
+        $this->assertEquals($attributes['name'], $category->name);
     }
 
     /** @test */
-    public function admin_can_update_category()
+    public function the_admin_can_update_category()
     {
         $category = Category::orderBy('id', 'desc')->first();
 
@@ -57,7 +50,6 @@ class CategoryControllerTest extends TestCase
 
         $request = [
             'name'   => 'Can update category name',
-            'image'  => 'Can update category image',
             '_token' => csrf_token(),
         ];
 
@@ -69,7 +61,7 @@ class CategoryControllerTest extends TestCase
     }
 
     /** @test */
-    public function admin_can_delete_category()
+    public function the_admin_can_delete_category()
     {
         $categoryDelete = Category::orderBy('id', 'desc')->first();
 

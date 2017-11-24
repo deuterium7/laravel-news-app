@@ -5,7 +5,7 @@
         <div class="row">
             <div class="news-update">
                 <h3 class="center">@lang('catalog.updateNews')</h3>
-                {!! Form::open(['route' => ['articles.update', $article->id], 'method' => 'PUT']) !!}
+                {!! Form::open(['route' => ['articles.update', $article->id], 'method' => 'PUT', 'enctype' => 'multipart/form-data']) !!}
                 @if ($errors->any())
                     @component('components.alert')
                     @endcomponent
@@ -16,7 +16,8 @@
                 </div>
                 <div class="form-group">
                     <label for="image">@lang('catalog.image')</label>
-                    {{ Form::text('image', $article->image, ['class'=>'form-control']) }}
+                    {{ Form::file('image', ['accept'=>'.jpeg, .png, .jpg']) }}
+                    <p class="help-block">@lang('catalog.articleFileHelp')</p>
                 </div>
                 <div class="form-group">
                     <label for="body">@lang('catalog.body')</label>

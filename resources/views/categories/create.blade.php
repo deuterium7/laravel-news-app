@@ -5,7 +5,7 @@
         <div class="row">
             <div class="news-create">
                 <h3 class="center">@lang('catalog.addCategory')</h3>
-                {!! Form::open(['route' => 'categories.store']) !!}
+                {!! Form::open(['route' => 'categories.store', 'enctype' => 'multipart/form-data']) !!}
                 @if ($errors->any())
                     @component('components.alert')
                     @endcomponent
@@ -16,7 +16,8 @@
                 </div>
                 <div class="form-group">
                     <label for="image">@lang('catalog.image') *</label>
-                    {{ Form::text('image', 'http://img.image-storage.com/a1f3cecc7/DSCN1022d5d2ee6.JPG', ['class'=>'form-control']) }}
+                    {{ Form::file('image', ['accept'=>'.jpeg, .png, .jpg']) }}
+                    <p class="help-block">@lang('catalog.categoryFileHelp')</p>
                 </div>
                 <div class="form-group">
                     <div class="links">

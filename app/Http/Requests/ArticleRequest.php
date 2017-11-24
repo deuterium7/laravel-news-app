@@ -31,9 +31,9 @@ class ArticleRequest extends FormRequest
 
             case 'POST':
                 return [
-                    'title'  => 'required|alpha|max:255|unique:articles',
-                    'image'  => 'required|alpha_num|max:255',
-                    'body'   => 'required|alpha_num|min:100',
+                    'title'  => 'required|max:255|unique:articles',
+                    'image'  => 'required|mimes:jpeg,png,jpg|dimensions:max_width=300,max_height=300',
+                    'body'   => 'required|min:100',
                 ];
 
             case 'PUT':
@@ -41,9 +41,9 @@ class ArticleRequest extends FormRequest
                 $id = $this->route('article');
 
                 return [
-                    'title'  => 'required|alpha|max:255|' . Rule::unique('articles')->ignore($id),
-                    'image'  => 'required|alpha_num|max:255',
-                    'body'   => 'required|alpha_num|min:100',
+                    'title'  => 'required|max:255|' . Rule::unique('articles')->ignore($id),
+                    'image'  => 'mimes:jpeg,png,jpg|dimensions:max_width=300,max_height=300',
+                    'body'   => 'required|min:100',
                 ];
 
             default:
