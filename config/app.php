@@ -168,7 +168,6 @@ return [
         /*
          * Package Service Providers...
          */
-        Recca0120\LaravelTracy\LaravelTracyServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         SocialiteProviders\Manager\ServiceProvider::class,
         Anhskohbo\NoCaptcha\NoCaptchaServiceProvider::class,
