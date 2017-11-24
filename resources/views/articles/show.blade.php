@@ -5,7 +5,7 @@
         <div class="row">
             <div class="article">
                 <div class="clearfix">
-                    <div class="col-md-4"><img src="{{ $article->image }}"></div>
+                    <div class="col-md-4"><img src="{{ asset($article->image) }}"></div>
                     <div class="col-md-8">
                         <h2 class="center">{{ $article->title }}</h2>
                         <h4>@lang('catalog.category'):

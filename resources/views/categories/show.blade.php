@@ -9,7 +9,7 @@
                         <div class="clearfix">
                             <div class="col-md-4">
                                 <a href="{{ route('articles.show', ['id' => $article->id]) }}" title="{{ $article->title }}">
-                                    <img src="{{ $article->image }}">
+                                    <img src="{{ asset($article->image) }}">
                                 </a>
                             </div>
                             <div class="col-md-8">
