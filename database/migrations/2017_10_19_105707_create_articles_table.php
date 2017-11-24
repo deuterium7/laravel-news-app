@@ -15,12 +15,12 @@ class CreateArticlesTable extends Migration
     {
         Schema::create('articles', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('category_id')->unsigned()->comment('Внешний ключ категорий');
-            $table->integer('user_id')->unsigned()->comment('Внешний ключ пользователей');
-            $table->string('title', 255)->unique()->comment('Заголовок новости');
-            $table->string('image', 255)->comment('Изображение новости');
-            $table->text('body')->comment('Содержание новости');
-            $table->boolean('visibility')->default(true)->comment('Новость видима?');
+            $table->integer('category_id')->unsigned();
+            $table->integer('user_id')->unsigned();
+            $table->string('title')->unique();
+            $table->string('image');
+            $table->text('body');
+            $table->boolean('visibility')->default(true);
             $table->timestamps();
 
             $table->foreign('category_id')->references('id')->on('categories')

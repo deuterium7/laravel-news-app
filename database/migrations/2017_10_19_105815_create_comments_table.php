@@ -15,9 +15,9 @@ class CreateCommentsTable extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('article_id')->unsigned()->comment('Внешний ключ новостей');
-            $table->integer('user_id')->unsigned()->comment('Внешний ключ пользователей');
-            $table->text('body')->comment('Содержание комментария');
+            $table->integer('article_id')->unsigned();
+            $table->integer('user_id')->unsigned();
+            $table->text('body');
             $table->timestamps();
 
             $table->foreign('article_id')->references('id')->on('articles')

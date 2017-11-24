@@ -15,9 +15,9 @@ class CreateUserSocialAccountsTable extends Migration
     {
         Schema::create('user_social_accounts', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->comment('Внешний ключ пользователей');
-            $table->string('provider_user_id')->comment('Внешний ключ провайдера');
-            $table->string('provider')->comment('Наименование провайдера');
+            $table->integer('user_id');
+            $table->string('provider_user_id');
+            $table->string('provider');
             $table->timestamps();
         });
     }
