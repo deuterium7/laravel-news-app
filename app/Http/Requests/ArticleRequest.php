@@ -41,7 +41,7 @@ class ArticleRequest extends FormRequest
                 $id = $this->route('article');
 
                 return [
-                    'title'  => 'required|max:255|' . Rule::unique('articles')->ignore($id),
+                    'title'  => 'required|max:255|'.Rule::unique('articles')->ignore($id),
                     'image'  => 'mimes:jpeg,png,jpg|dimensions:max_width=300,max_height=300',
                     'body'   => 'required|min:100',
                 ];

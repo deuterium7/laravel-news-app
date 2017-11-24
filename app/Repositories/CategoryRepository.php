@@ -51,9 +51,9 @@ class CategoryRepository extends ModelRepository implements CategoryContract
         $image = $request->file('image');
 
         $upload = public_path($put);
-        $filename = time() . '.' . $image->getClientOriginalExtension();
+        $filename = time().'.'.$image->getClientOriginalExtension();
         $image->move($upload, $filename);
 
-        return $put .'/'. $filename;
+        return $put.'/'.$filename;
     }
 }
