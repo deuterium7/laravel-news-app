@@ -19,8 +19,8 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->rememberToken();
-            $table->boolean('admin')->nullable();
-            $table->timestamp('ban')->nullable();
+            $table->boolean('admin')->nullable()->comment('Данный пользователь администратор?');
+            $table->timestamp('ban')->nullable()->comment('Данный пользователь имеет бан?');
             $table->timestamps();
         });
     }

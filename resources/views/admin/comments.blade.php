@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <h3 style="text-align: center;">@lang('catalog.comments')</h3>
+            <h3 class="center">@lang('catalog.comments')</h3>
             {!! Form::open(['method' => 'Get', 'route' => ['admin.comments']]) !!}
                 <div class="form-group">
                     <label for="keywords">@lang('catalog.searchByComment')</label>
@@ -34,7 +34,7 @@
                 @endforeach
                 </tbody>
             </table>
-            <div style="text-align: center">{{ $comments->links() }}</div>
+            <div class="links">{{ $comments->links() }}</div>
         </div>
     </div>
 @endsection

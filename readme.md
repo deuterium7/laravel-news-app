@@ -1,7 +1,6 @@
 <p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
 
 <p align="center">
-<a href="https://styleci.io/repos/107368111"><img src="https://styleci.io/repos/107368111/shield?branch=master" alt="StyleCI"></a>
 <a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
@@ -81,23 +80,24 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 ## Requirements
 
 ### require:
-* php: >=7.0.0
-* anhskohbo/no-captcha: ^3.0
-* caouecs/laravel-lang: ^3.0
-* fideloper/proxy: ~3.3
-* laravel/framework: 5.5.*
-* laravel/tinker: ~1.0
-* laravelcollective/html: ^5.5
-* predis/predis: ^1.1
-* rap2hpoutre/laravel-log-viewer: ^0.10.4
-* recca0120/laravel-tracy: ^1.8
-* socialiteproviders/google: ^3.0
-* socialiteproviders/vkontakte: ^3.0
+* php: >=7.0.0,
+* anhskohbo/no-captcha: ^3.0,
+* caouecs/laravel-lang": ^3.0,
+* fideloper/proxy: ~3.3,
+* laravel/framework: 5.5.*,
+* laravel/tinker: ~1.0,
+* laravelcollective/html: ^5.5,
+* league/fractal: ^0.17.0,
+* predis/predis: ^1.1,
+* rap2hpoutre/laravel-log-viewer: ^0.10.4,
+* socialiteproviders/google: ^3.0,
+* socialiteproviders/vkontakte": ^3.0
 
 ### require-dev:
-* filp/whoops: ~2.0
-* fzaninotto/faker: ~1.4
-* mockery/mockery: 0.9.*
+* barryvdh/laravel-debugbar: ^3.1,
+* filp/whoops": ~2.0,
+* fzaninotto/faker: ~1.4,
+* mockery/mockery: 0.9.*,
 * phpunit/phpunit: ~6.0
 
 ## Stages

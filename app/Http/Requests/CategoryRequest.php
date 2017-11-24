@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class CategoryRequest extends FormRequest
 {
@@ -23,9 +24,28 @@ class CategoryRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'name'  => 'required|max:255',
-            'image' => 'required|max:255',
-        ];
+        switch ($this->method()) {
+            case 'GET':
+            case 'DELETE':
+                return [];
+
+            case 'POST':
+                return [
+                    'name'  => 'required|max:255|unique:categories',
+                    'image'  => 'required|mimes:jpeg,png,jpg|dimensions:max_width=150,max_height=150',
+                ];
+
+            case 'PUT':
+            case 'PATCH':
+                $id = $this->route('category');
+
+                return [
+                    'name'  => 'required|max:255|' . Rule::unique('categories')->ignore($id),
+                    'image'  => 'mimes:jpeg,png,jpg|dimensions:max_width=150,max_height=150',
+                ];
+
+            default:
+                break;
+        }
     }
 }

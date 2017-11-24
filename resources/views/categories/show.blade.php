@@ -9,16 +9,16 @@
                         <div class="clearfix">
                             <div class="col-md-4">
                                 <a href="{{ route('articles.show', ['id' => $article->id]) }}" title="{{ $article->title }}">
-                                    <img src="{{ $article->image }}">
+                                    <img src="{{ asset($article->image) }}">
                                 </a>
                             </div>
                             <div class="col-md-8">
-                                <h3 style="text-align: center">
+                                <h3 class="center">
                                     <a href="{{ route('articles.show', ['id' => $article->id]) }}" title="{{ $article->title }}">
                                         {{ $article->title }}
                                     </a>
                                 </h3>
-                                <p style="text-align: justify">{{ mb_substr($article->body, 0, 300) . '...' }}</p>
+                                <p>{{ mb_substr($article->body, 0, 300) . '...' }}</p>
                                 <a href="{{ route('articles.show', ['id' => $article->id]) }}" title="{{ $article->title }}">
                                     @lang('catalog.read')
                                 </a>
@@ -29,6 +29,6 @@
                 @endforeach
             </div>
         </div>
-        <div style="text-align: center">{{ $articles->links() }}</div>
+        <div class="links">{{ $articles->links() }}</div>
     </div>
 @endsection

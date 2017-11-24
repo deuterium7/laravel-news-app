@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Contracts\Category as CategoryContract;
+use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
 
 class CategoryRepository extends ModelRepository implements CategoryContract
@@ -35,5 +36,24 @@ class CategoryRepository extends ModelRepository implements CategoryContract
     public function allMap()
     {
         return $this->model->all()->pluck('name', 'id');
+    }
+
+    /**
+     * Загрузить изображение категории.
+     *
+     * @param CategoryRequest $request
+     *
+     * @return string
+     */
+    public function uploadImage(CategoryRequest $request)
+    {
+        $put = 'images/categories';
+        $image = $request->file('image');
+
+        $upload = public_path($put);
+        $filename = time() . '.' . $image->getClientOriginalExtension();
+        $image->move($upload, $filename);
+
+        return $put .'/'. $filename;
     }
 }

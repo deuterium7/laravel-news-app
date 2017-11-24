@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <h3 style="text-align: center;">@lang('catalog.users')</h3>
+            <h3 class="center">@lang('catalog.users')</h3>
             {!! Form::open(['method' => 'Get', 'route' => ['admin.users']]) !!}
                 <div class="form-group">
                     <label for="keywords">@lang('catalog.searchByName')</label>
@@ -40,7 +40,7 @@
                                 @lang('catalog.false')
                             @endif
                         </td>
-                        <td>{{ $user->created_at }}</td>
+                        <td>{{ $user->created_at->format('d.m.Y H:i:s') }}</td>
                         <td>
                             {!! Form::open(['method' => 'Get', 'route' => ['users.ban', $user->id]]) !!}
                                 <input type="submit" class="btn btn-warning" value="@lang('catalog.ban')">
@@ -55,7 +55,7 @@
                 @endforeach
                 </tbody>
             </table>
-            <div style="text-align: center">{{ $users->links() }}</div>
+            <div class="links">{{ $users->links() }}</div>
         </div>
     </div>
 @endsection

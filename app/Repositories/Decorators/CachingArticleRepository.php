@@ -3,6 +3,7 @@
 namespace App\Repositories\Decorators;
 
 use App\Contracts\Article as ArticleContract;
+use App\Http\Requests\ArticleRequest;
 use Illuminate\Cache\Repository;
 
 class CachingArticleRepository implements ArticleContract
@@ -118,5 +119,17 @@ class CachingArticleRepository implements ArticleContract
     public function getArticlesWithKeywords($keywords)
     {
         return $this->article->getArticlesWithKeywords($keywords);
+    }
+
+    /**
+     * Загрузить изображение новости.
+     *
+     * @param ArticleRequest $request
+     *
+     * @return string
+     */
+    public function uploadImage(ArticleRequest $request)
+    {
+        return $this->article->uploadImage($request);
     }
 }

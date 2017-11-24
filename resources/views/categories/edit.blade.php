@@ -4,8 +4,8 @@
     <div class="container">
         <div class="row">
             <div class="category-update">
-                <h3 style="text-align: center;">@lang('catalog.updateCategory')</h3>
-                {!! Form::open(['route' => ['categories.update', $category], 'method' => 'PUT']) !!}
+                <h3 class="center">@lang('catalog.updateCategory')</h3>
+                {!! Form::open(['route' => ['categories.update', $category], 'method' => 'PUT', 'enctype' => 'multipart/form-data']) !!}
                 @if ($errors->any())
                     @component('components.alert')
                     @endcomponent
@@ -16,10 +16,11 @@
                 </div>
                 <div class="form-group">
                     <label for="image">@lang('catalog.image')</label>
-                    {{ Form::text('image', $category->image, ['class'=>'form-control']) }}
+                    {{ Form::file('image', ['accept'=>'.jpeg, .png, .jpg']) }}
+                    <p class="help-block">@lang('catalog.categoryFileHelp')</p>
                 </div>
                 <div class="form-group">
-                    <div style="text-align: center">
+                    <div class="links">
                         <input type="submit" value="{{ trans('catalog.update') }}" class="btn btn-primary">
                     </div>
                 </div>
