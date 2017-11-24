@@ -4,8 +4,8 @@
     <div class="container">
         <div class="row">
             <div class="news-create">
-                <h3 class="center">@lang('catalog.addNews')</h3>
-                {!! Form::open(['route' => 'articles.store']) !!}
+                <h3 style="text-align: center;">@lang('catalog.addNews')</h3>
+                {!! Form::open(['route' => 'articles.store', 'enctype' => 'multipart/form-data']) !!}
                 @if ($errors->any())
                     @component('components.alert')
                     @endcomponent
@@ -27,7 +27,7 @@
                 </div>
                 <div class="form-group">
                     <label for="image">@lang('catalog.image') *</label>
-                    {{ Form::text('image', 'http://www.veho.ru/img/photo_not_found.gif', ['class'=>'form-control']) }}
+                    {{ Form::file('image', ['accept'=>'.jpeg, .png, .jpg']) }}
                 </div>
                 <div class="form-group">
                     <label for="body">@lang('catalog.body') *</label>
@@ -38,7 +38,7 @@
                     {{ Form::checkbox('visibility', 1, true) }}
                 </div>
                 <div class="form-group">
-                    <div class="submit">
+                    <div style="text-align: center">
                         <input type="submit" value="{{ trans('catalog.create') }}" class="btn btn-primary">
                     </div>
                 </div>

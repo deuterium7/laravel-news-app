@@ -62,7 +62,19 @@ class CategoryController extends Controller
      */
     public function store(CategoryRequest $request)
     {
-        $this->categories->create($request->all());
+        $put = 'images/categories';
+        $image = $request->file('image');
+
+        $upload = public_path($put);
+        $filename = time() . '.' . $image->getClientOriginalExtension();
+        $image->move($upload, $filename);
+
+        $link = $put .'/'. $filename;
+
+        $this->categories->create([
+            'name' => $request->name,
+            'image' => $link,
+        ]);
 
         return redirect()->route('admin.categories');
     }
@@ -103,7 +115,23 @@ class CategoryController extends Controller
      */
     public function update(CategoryRequest $request, $id)
     {
-        $this->categories->update($id, $request->all());
+        if ($request->hasFile('image')) {
+            $put = 'images/categories';
+            $image = $request->file('image');
+
+            $upload = public_path($put);
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+            $image->move($upload, $filename);
+
+            $link = $put .'/'. $filename;
+
+            $this->categories->update($id, [
+                'name' => $request->name,
+                'image' => $link,
+            ]);
+        } else {
+            $this->categories->update($id, $request->all());
+        }
 
         return redirect()->route('admin.categories');
     }

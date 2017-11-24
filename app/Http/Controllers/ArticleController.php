@@ -72,7 +72,17 @@ class ArticleController extends Controller
      */
     public function store(ArticleRequest $request)
     {
-        $this->articles->create($request->all());
+        $put = 'images/articles';
+        $image = $request->file('image');
+
+        $upload = public_path($put);
+        $filename = time() . '.' . $image->getClientOriginalExtension();
+        $image->move($upload, $filename);
+
+        $link = $put .'/'. $filename;
+
+        $id = $this->articles->create($request->all())->id;
+        $this->articles->update($id, ['image' => $link]);
 
         return redirect()->route('admin.news');
     }
@@ -87,7 +97,7 @@ class ArticleController extends Controller
     public function show(Article $article)
     {
         if ($article->visibility == false) {
-            return redirect()->back()->with('message', trans('catalog.blockedNews'));
+            return back()->with('message', trans('catalog.blockedNews'));
         }
 
         $comments = $this->comments->getArticleComments($article->id);
@@ -117,7 +127,25 @@ class ArticleController extends Controller
      */
     public function update(ArticleRequest $request, $id)
     {
-        $this->articles->update($id, $request->all());
+        if ($request->hasFile('image')) {
+            $put = 'images/articles';
+            $image = $request->file('image');
+
+            $upload = public_path($put);
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+            $image->move($upload, $filename);
+
+            $link = $put .'/'. $filename;
+
+            $this->categories->update($id, [
+                'title' => $request->title,
+                'image' => $link,
+                'body' => $request->body,
+                'visibility' => $request->visibility
+            ]);
+        } else {
+            $this->articles->update($id, $request->all());
+        }
 
         return redirect()->route('articles.index');
     }
