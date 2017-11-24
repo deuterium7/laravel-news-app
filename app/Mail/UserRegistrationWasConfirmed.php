@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -12,16 +13,16 @@ class UserRegistrationWasConfirmed extends Mailable implements ShouldQueue
     use Queueable, SerializesModels;
 
     /**
-     * Request from auth.register.
+     * @param User $user
      */
     public $user;
 
     /**
      * UserRegistrationWasConfirmed constructor.
      *
-     * @param $user
+     * @param User $user
      */
-    public function __construct($user)
+    public function __construct(User $user)
     {
         $this->user = $user;
     }

@@ -17,13 +17,13 @@ class EventServiceProvider extends ServiceProvider
             'SocialiteProviders\Google\GoogleExtendSocialite@handle',
         ],
         'App\Mail\ArticleWasCreated' => [
-            'App\Listeners\ArticleCreate',
+            'App\Listeners\NotifyUserAnArticle',
         ],
         'App\Mail\CategoryWasCreated' => [
-            'App\Listeners\CategoryCreate',
+            'App\Listeners\NotifyUserACategory',
         ],
         'App\Mail\UserRegistrationWasConfirmed' => [
-            'App\Listeners\UserRegistration',
+            'App\Listeners\NotifyUserAnRegistration',
         ],
     ];
 

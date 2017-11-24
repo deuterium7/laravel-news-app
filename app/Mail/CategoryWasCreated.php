@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\Category;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -12,16 +13,16 @@ class CategoryWasCreated extends Mailable implements ShouldQueue
     use Queueable, SerializesModels;
 
     /**
-     * Request from categories.create.
+     * @param Category $category
      */
     public $category;
 
     /**
      * CategoryWasCreated constructor.
      *
-     * @param $category
+     * @param Category $category
      */
-    public function __construct($category)
+    public function __construct(Category $category)
     {
         $this->category = $category;
     }

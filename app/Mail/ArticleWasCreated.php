@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\Article;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -12,16 +13,16 @@ class ArticleWasCreated extends Mailable implements ShouldQueue
     use Queueable, SerializesModels;
 
     /**
-     * Request from articles.create.
+     * @param Article $article
      */
     public $article;
 
     /**
      * ArticleWasCreated constructor.
      *
-     * @param $article
+     * @param Article $article
      */
-    public function __construct($article)
+    public function __construct(Article $article)
     {
         $this->article = $article;
     }
