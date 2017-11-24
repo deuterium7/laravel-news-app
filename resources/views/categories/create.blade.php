@@ -17,6 +17,7 @@
                 <div class="form-group">
                     <label for="image">@lang('catalog.image') *</label>
                     {{ Form::file('image', ['accept'=>'.jpeg, .png, .jpg']) }}
+                    <p class="help-block">@lang('catalog.categoryFileHelp')</p>
                 </div>
                 <div class="form-group">
                     <div class="links">

@@ -94,4 +94,6 @@ return [
     'downloadFile'          => 'Скачать файл',
     'deleteFile'            => 'Удалить файл',
     'deleteAllFiles'        => 'Удалить все файлы',
+    'categoryFileHelp'      => 'Размеры изображения не должны превышать 150x150',
+    'articleFileHelp'       => 'Размеры изображения не должны превышать 300x300',
 ];
