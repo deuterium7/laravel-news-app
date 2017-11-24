@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Contracts\Article as ArticleContract;
+use App\Http\Requests\ArticleRequest;
 use App\Models\Article;
 
 class ArticleRepository extends ModelRepository implements ArticleContract
@@ -58,5 +59,24 @@ class ArticleRepository extends ModelRepository implements ArticleContract
             ->where('title', 'LIKE', '%'.$keywords.'%')
             ->orderBy('updated_at', 'desc')
             ->paginate(10);
+    }
+
+    /**
+     * Загрузить изображение новости.
+     *
+     * @param ArticleRequest $request
+     *
+     * @return string
+     */
+    public function uploadImage(ArticleRequest $request)
+    {
+        $put = 'images/articles';
+        $image = $request->file('image');
+
+        $upload = public_path($put);
+        $filename = time() . '.' . $image->getClientOriginalExtension();
+        $image->move($upload, $filename);
+
+        return $put .'/'. $filename;
     }
 }

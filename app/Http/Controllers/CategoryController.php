@@ -62,19 +62,12 @@ class CategoryController extends Controller
      */
     public function store(CategoryRequest $request)
     {
-        $put = 'images/categories';
-        $image = $request->file('image');
+        $attributes = $request->all();
 
-        $upload = public_path($put);
-        $filename = time() . '.' . $image->getClientOriginalExtension();
-        $image->move($upload, $filename);
+        $image = $this->categories->uploadImage($request);
+        $attributes['image'] = $image;
 
-        $link = $put .'/'. $filename;
-
-        $this->categories->create([
-            'name' => $request->name,
-            'image' => $link,
-        ]);
+        $this->categories->create($attributes);
 
         return redirect()->route('admin.categories');
     }
@@ -115,23 +108,14 @@ class CategoryController extends Controller
      */
     public function update(CategoryRequest $request, $id)
     {
+        $attributes = $request->all();
+
         if ($request->hasFile('image')) {
-            $put = 'images/categories';
-            $image = $request->file('image');
-
-            $upload = public_path($put);
-            $filename = time() . '.' . $image->getClientOriginalExtension();
-            $image->move($upload, $filename);
-
-            $link = $put .'/'. $filename;
-
-            $this->categories->update($id, [
-                'name' => $request->name,
-                'image' => $link,
-            ]);
-        } else {
-            $this->categories->update($id, $request->all());
+            $image = $this->categories->uploadImage($request);
+            $attributes['image'] = $image;
         }
+
+        $this->categories->update($id, $attributes);
 
         return redirect()->route('admin.categories');
     }

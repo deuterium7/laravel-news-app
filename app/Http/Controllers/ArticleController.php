@@ -72,17 +72,12 @@ class ArticleController extends Controller
      */
     public function store(ArticleRequest $request)
     {
-        $put = 'images/articles';
-        $image = $request->file('image');
+        $attributes = $request->all();
 
-        $upload = public_path($put);
-        $filename = time() . '.' . $image->getClientOriginalExtension();
-        $image->move($upload, $filename);
+        $image = $this->articles->uploadImage($request);
+        $attributes['image'] = $image;
 
-        $link = $put .'/'. $filename;
-
-        $id = $this->articles->create($request->all())->id;
-        $this->articles->update($id, ['image' => $link]);
+        $this->articles->create($attributes);
 
         return redirect()->route('admin.news');
     }
@@ -127,25 +122,14 @@ class ArticleController extends Controller
      */
     public function update(ArticleRequest $request, $id)
     {
+        $attributes = $request->all();
+
         if ($request->hasFile('image')) {
-            $put = 'images/articles';
-            $image = $request->file('image');
-
-            $upload = public_path($put);
-            $filename = time() . '.' . $image->getClientOriginalExtension();
-            $image->move($upload, $filename);
-
-            $link = $put .'/'. $filename;
-
-            $this->categories->update($id, [
-                'title' => $request->title,
-                'image' => $link,
-                'body' => $request->body,
-                'visibility' => $request->visibility
-            ]);
-        } else {
-            $this->articles->update($id, $request->all());
+            $image = $this->articles->uploadImage($request);
+            $attributes['image'] = $image;
         }
+
+        $this->articles->update($id, $attributes);
 
         return redirect()->route('articles.index');
     }
