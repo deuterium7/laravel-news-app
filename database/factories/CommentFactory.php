@@ -1,14 +1,17 @@
 <?php
 
 use Faker\Generator as Faker;
+use App\Models\Comment;
+use App\Models\Article;
+use App\Models\User;
 
-$factory->define(\App\Models\Comment::class, function (Faker $faker) {
+$factory->define(Comment::class, function (Faker $faker) {
     return [
         'article_id' => function () {
-            return factory(\App\Models\Article::class)->create()->id;
+            return factory(Article::class)->create()->id;
         },
         'user_id'    => function () {
-            return factory(\App\Models\User::class)->create()->id;
+            return factory(User::class)->create()->id;
         },
         'body'       => $faker->paragraph,
     ];

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ContactRequest;
 use App\Mail\ContactFormWasSubmitted;
+use App\ValueObjects\Contact;
 
 class HomeController extends Controller
 {
@@ -44,7 +45,7 @@ class HomeController extends Controller
      */
     public function send(ContactRequest $request)
     {
-        \Mail::to(env('MAIL_CONTACT'))->send(new ContactFormWasSubmitted((object) $request->all()));
+        $this->dispatch(new ContactFormWasSubmitted($request->all()));
 
         return redirect('/')->with('message', trans('catalog.thxForMessage'));
     }

@@ -4,16 +4,16 @@ namespace App\Listeners;
 
 use App\Mail\UserRegistrationWasConfirmed;
 
-class UserRegistration
+class NotifyUserAnRegistration
 {
     /**
      * Handle the event.
      *
-     * @param object $event
+     * @param UserRegistrationWasConfirmed $event
      *
      * @return void
      */
-    public function handle($event)
+    public function handle(UserRegistrationWasConfirmed $event)
     {
         \Mail::to($event->user->email)->send(new UserRegistrationWasConfirmed($event->user));
     }

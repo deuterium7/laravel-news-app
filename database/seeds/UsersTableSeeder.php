@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Models\Category;
+use App\Models\User;
+use App\Models\Article;
+use App\Models\Comment;
 
 class UsersTableSeeder extends Seeder
 {
@@ -12,11 +16,13 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         // администраторы загружают статьи
-        $categoriesCount = \App\Models\Category::count();
-        factory(\App\Models\User::class, 1)->create(['admin' => true])->each(function ($u) use ($categoriesCount) {
+        $categoriesCount = Category::count();
+        factory(User::class, 1)->create(['admin' => true])->each(function ($u) use ($categoriesCount) {
+            auth()->setUser($u);
+
             for ($i = 0; $i < 100; $i++) {
                 $u->articles()
-                    ->save(factory(\App\Models\Article::class)
+                    ->save(factory(Article::class)
                     ->create([
                         'category_id' => rand(1, $categoriesCount),
                         'user_id'     => $u->id,
@@ -25,11 +31,11 @@ class UsersTableSeeder extends Seeder
         });
 
         // пользователи комментируют статьи
-        $articlesCount = \App\Models\Article::count();
-        factory(\App\Models\User::class, 200)->create()->each(function ($u) use ($articlesCount) {
+        $articlesCount = Article::count();
+        factory(User::class, 200)->create()->each(function ($u) use ($articlesCount) {
             for ($i = 0; $i < 10; $i++) {
                 $u->comments()
-                    ->save(factory(\App\Models\Comment::class)
+                    ->save(factory(Comment::class)
                     ->create([
                         'article_id' => rand(1, $articlesCount),
                         'user_id'    => $u->id,

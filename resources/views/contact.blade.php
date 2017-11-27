@@ -13,6 +13,9 @@
                 {{ Form::hidden('user', auth()->user()->name, ['class'=>'form-control']) }}
             </div>
             <div class="form-group">
+                {{ Form::hidden('email', auth()->user()->email, ['class'=>'form-control']) }}
+            </div>
+            <div class="form-group">
                 <label for="title">@lang('catalog.title') *</label>
                 {{ Form::text('title', null, ['class'=>'form-control']) }}
             </div>
