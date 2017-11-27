@@ -4,39 +4,44 @@ namespace App\Mail;
 
 use App\Http\Requests\ContactRequest;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailer;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Foundation\Bus\Dispatchable;
 
-class ContactFormWasSubmitted extends Mailable implements ShouldQueue
+class ContactFormWasSubmitted implements ShouldQueue
 {
-    use Queueable, SerializesModels;
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     /**
-     * Request from contact form.
-     *
-     * @var ContactRequest
+     * @var array
      */
-    public $contact;
+    protected $contact;
 
     /**
      * ContactFormWasSubmitted constructor.
      *
-     * @param $contact
+     * @param array $contact
      */
-    public function __construct($contact)
+    public function __construct(array $contact)
     {
         $this->contact = $contact;
     }
 
     /**
-     * Build the message.
+     * Handle the job.
      *
-     * @return $this
+     * @param Mailer $mailer
+     *
+     * @return void
      */
-    public function build()
+    public function handle(Mailer $mailer)
     {
-        return $this->view('emails.contact')
-            ->with('contact', $this->contact);
+        $mailer->send('emails.contact', ['contact' => $this->contact], function ($message) {
+            $message->from($this->contact['email'], $this->contact['user']);
+            $message->to(env('MAIL_CONTACT'));
+            $message->subject('Contact Form Was Submitted');
+        });
     }
 }
