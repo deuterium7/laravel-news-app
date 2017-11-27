@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Database\Seeder;
-use App\Models\Category;
-use App\Models\User;
 use App\Models\Article;
+use App\Models\Category;
 use App\Models\Comment;
+use App\Models\User;
+use Illuminate\Database\Seeder;
 
 class UsersTableSeeder extends Seeder
 {

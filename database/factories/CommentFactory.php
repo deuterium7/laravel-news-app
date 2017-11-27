@@ -1,9 +1,9 @@
 <?php
 
-use Faker\Generator as Faker;
-use App\Models\Comment;
 use App\Models\Article;
+use App\Models\Comment;
 use App\Models\User;
+use Faker\Generator as Faker;
 
 $factory->define(Comment::class, function (Faker $faker) {
     return [
