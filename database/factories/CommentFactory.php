@@ -13,6 +13,6 @@ $factory->define(Comment::class, function (Faker $faker) {
         'user_id'    => function () {
             return factory(User::class)->create()->id;
         },
-        'body'       => $faker->paragraph,
+        'body' => $faker->paragraph,
     ];
 });
