@@ -14,8 +14,8 @@ $factory->define(Article::class, function (Faker $faker) {
         'user_id'     => function () {
             return factory(User::class)->create()->id;
         },
-        'title'       => $faker->sentence(),
-        'image'       => 'http://www.veho.ru/img/photo_not_found.gif',
-        'body'        => $faker->realText(2000),
+        'title' => $faker->sentence(),
+        'image' => 'http://www.veho.ru/img/photo_not_found.gif',
+        'body'  => $faker->realText(2000),
     ];
 });
