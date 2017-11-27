@@ -2,13 +2,12 @@
 
 namespace App\Mail;
 
-use App\Http\Requests\ContactRequest;
 use Illuminate\Bus\Queueable;
-use Illuminate\Mail\Mailer;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Mail\Mailer;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
 
 class ContactFormWasSubmitted implements ShouldQueue
 {
