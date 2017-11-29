@@ -15,7 +15,11 @@
                 <tbody>
                 @foreach($categories as $category)
                     <tr>
-                        <td>{{ $category->name }}</td>
+                        <td>
+                            <a href="{{ route('categories.show', ['categories' => $category->id]) }}" title="{{ $category->name }}">
+                                {{ $category->name }}
+                            </a>
+                        </td>
                         <td>{{ $category->image }}</td>
                         <td>
                             {!! Form::open(['method' => 'Get', 'route' => ['categories.edit', $category->id]]) !!}

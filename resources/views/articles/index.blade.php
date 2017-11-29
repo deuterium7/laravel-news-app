@@ -19,9 +19,18 @@
                                     </a>
                                 </h3>
                                 <p>{{ mb_substr($article->body, 0, 300) . '...' }}</p>
-                                <a href="{{ route('articles.show', ['article' => $article->id]) }}" title="{{ $article->title }}">
-                                    @lang('catalog.read')
-                                </a>
+                                <div style="float:left;">
+                                    <a href="{{ route('articles.show', ['article' => $article->id]) }}" title="{{ $article->title }}">
+                                        @lang('catalog.read')
+                                    </a>
+                                </div>
+                                <div style="float:right;">
+                                    @if($article->updated_at <= $article->created_at)
+                                        <span>@lang('catalog.createdAt'): {{ $article->created_at->diffForHumans() }}</span>
+                                    @else
+                                        <span>@lang('catalog.updatedAt'): {{ $article->updated_at->diffForHumans() }}</span>
+                                    @endif
+                                </div>
                             </div>
                         </div>
                         <hr>
