@@ -14,9 +14,9 @@
                             <div class="role">@lang('catalog.user')</div>
                         @endif
                         @if($user->updated_at <= $user->created_at)
-                            <div>@lang('catalog.createdAt'): {{ $user->created_at->format('d.m.Y H:i:s') }}</div>
+                            <div>@lang('catalog.registeredAt'): {{ $user->created_at->diffForHumans() }}</div>
                         @else
-                            <div>@lang('catalog.updatedAt'): {{ $user->updated_at->format('d.m.Y H:i:s') }}</div>
+                            <div>@lang('catalog.updatedAt'): {{ $user->updated_at->diffForHumans() }}</div>
                         @endif
                         <div>@lang('catalog.emailAddress'): {{ $user->email }}</div>
                         @if(count($comments) > 0)

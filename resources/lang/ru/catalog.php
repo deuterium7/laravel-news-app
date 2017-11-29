@@ -33,7 +33,7 @@ return [
     'create'                => 'Создать',
     'updateNews'            => 'Обновить Новость',
     'update'                => 'Обновить',
-    'createdAt'             => 'Создано',
+    'createdAt'             => 'Опубликовано',
     'updatedAt'             => 'Обновлено',
     'author'                => 'Автор',
     'addComment'            => 'Добавить Комментарий',
@@ -96,4 +96,5 @@ return [
     'deleteAllFiles'        => 'Удалить все файлы',
     'categoryFileHelp'      => 'Размеры изображения не должны превышать 150x150',
     'articleFileHelp'       => 'Размеры изображения не должны превышать 300x300',
+    'registeredAt'          => 'Регистрация',
 ];

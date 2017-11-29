@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Carbon;
 
 class Locale
 {
@@ -25,6 +26,7 @@ class Locale
         }
 
         app()->setLocale($locale);
+        Carbon::setLocale($locale);
 
         return $next($request);
     }
