@@ -22,8 +22,16 @@
                 <tbody>
                     @foreach($articles as $article)
                         <tr>
-                            <td>{{ $article->title }}</td>
-                            <td>{{ $article->category->name }}</td>
+                            <td>
+                                <a href="{{ route('articles.show', ['article' => $article->id]) }}" title="{{ $article->title }}">
+                                    {{ $article->title }}
+                                </a>
+                            </td>
+                            <td>
+                                <a href="{{ route('categories.show', ['category' => $article->category_id]) }}" title="{{ $article->category->name }}">
+                                    {{ $article->category->name }}
+                                </a>
+                            </td>
                             <td>
                                 @if($article->visibility)
                                     @lang('catalog.true')

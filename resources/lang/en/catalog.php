@@ -97,4 +97,5 @@ return [
     'deleteAllFiles'        => 'Delete All Files',
     'categoryFileHelp'      => 'Image dimensions must not exceed 150x150',
     'articleFileHelp'       => 'Image dimensions must not exceed 300x300',
+    'registeredAt'          => 'Registered At',
 ];

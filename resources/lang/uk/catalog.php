@@ -33,7 +33,7 @@ return [
     'create'                => 'Створити',
     'updateNews'            => 'Оновити Новину',
     'update'                => 'Оновити',
-    'createdAt'             => 'Створено',
+    'createdAt'             => 'Опубліковано',
     'updatedAt'             => 'Оновлено',
     'author'                => 'Автор',
     'addComment'            => 'Додати Коментар',
@@ -96,4 +96,5 @@ return [
     'deleteAllFiles'        => 'Видалити всі файли',
     'categoryFileHelp'      => 'Розміри зображення не повинні перевищувати 150x150',
     'articleFileHelp'       => 'Розміри зображення не повинні перевищувати 300x300',
+    'registeredAt'          => 'Реєстрація',
 ];

@@ -23,8 +23,16 @@
                 @foreach($comments as $comment)
                     <tr>
                         <td>{{ $comment->body }}</td>
-                        <td>{{ $comment->article->title }}</td>
-                        <td>{{ $comment->user->name }}</td>
+                        <td>
+                            <a href="{{ route('articles.show', ['articles' => $comment->article_id]) }}" title="{{ $comment->article->title }}">
+                                {{ $comment->article->title }}
+                            </a>
+                        </td>
+                        <td>
+                            <a href="{{ route('users.show', ['user' => $comment->user_id]) }}" title="{{ $comment->user->name }}">
+                                {{ $comment->user->name }}
+                            </a>
+                        </td>
                         <td>
                             {!! Form::open(['method' => 'Delete', 'route' => ['comments.destroy', $comment->id], 'onsubmit' => 'return confirm("Are you sure?")']) !!}
                                 <input type="submit" class="btn btn-danger" value="@lang('catalog.destroy')">
