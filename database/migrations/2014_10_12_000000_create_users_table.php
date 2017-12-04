@@ -17,12 +17,20 @@ class CreateUsersTable extends Migration
             $table->increments('id');
 
             $table->string('name');
-            $table->string('email')->unique();
-            $table->string('password');
+            $table->string('email')->nullable();
             $table->rememberToken();
+
+            // social
+            $table->string('provider');
+            $table->string('provider_id');
+            $table->text('avatar');
+
+            // user is admin
             $table->boolean('admin')->nullable();
 
+            // user haven't ban
             $table->timestamp('ban')->nullable();
+
             $table->timestamps();
         });
     }

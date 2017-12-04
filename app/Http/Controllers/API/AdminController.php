@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
 use App\Contracts\Article as ArticleContract;
 use App\Contracts\Category as CategoryContract;

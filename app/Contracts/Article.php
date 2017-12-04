@@ -14,6 +14,15 @@ interface Article extends Repository
     public function getVisibleArticles();
 
     /**
+     * Получить новость с комментариями.
+     *
+     * @param $id
+     *
+     * @return Model
+     */
+    public function getArticle($id);
+
+    /**
      * Получить все новости из категории.
      *
      * @param $id

@@ -15,6 +15,8 @@ class NotifyUserAnRegistration
      */
     public function handle(UserRegistrationWasConfirmed $event)
     {
-        \Mail::to($event->user->email)->send(new UserRegistrationWasConfirmed($event->user));
+        if ($event->user->email) {
+            \Mail::to($event->user->email)->send(new UserRegistrationWasConfirmed($event->user));
+        }
     }
 }

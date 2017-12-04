@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
+use App\Http\Controllers\Controller;
 use App\Contracts\Article as ArticleContract;
 use App\Contracts\Category as CategoryContract;
 use App\Contracts\Comment as CommentContract;
 use App\Http\Requests\ArticleRequest;
-use App\Models\Article;
 
 class ArticleController extends Controller
 {
@@ -46,21 +46,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = $this->articles->getVisibleArticles();
-
-        return view('articles.index', compact('articles'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        $categories = $this->categories->allMap();
-
-        return view('articles.create', compact('categories'));
+        return $this->articles->getVisibleArticles();
     }
 
     /**
@@ -77,39 +63,19 @@ class ArticleController extends Controller
         $image = $this->articles->uploadImage($request);
         $attributes['image'] = $image;
 
-        $this->articles->create($attributes);
-
-        return redirect()->route('admin.news');
+        return $this->articles->create($attributes);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param Article $article
+     * @param $id
      *
      * @return \Illuminate\Http\Response
      */
-    public function show(Article $article)
+    public function show($id)
     {
-        if ($article->visibility == false) {
-            return back()->with('message', trans('catalog.blockedNews'));
-        }
-
-        $comments = $this->comments->getArticleComments($article->id);
-
-        return view('articles.show', compact('article', 'comments'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param Article $article
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Article $article)
-    {
-        return view('articles.edit', compact('article'));
+        return $this->articles->getArticle($id);
     }
 
     /**
@@ -129,9 +95,7 @@ class ArticleController extends Controller
             $attributes['image'] = $image;
         }
 
-        $this->articles->update($id, $attributes);
-
-        return redirect()->route('articles.index');
+        return $this->articles->update($id, $attributes);
     }
 
     /**
@@ -143,8 +107,6 @@ class ArticleController extends Controller
      */
     public function destroy($id)
     {
-        $this->articles->delete($id);
-
-        return redirect()->back();
+        return $this->articles->delete($id);
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
 use App\Contracts\Comment as CommentContract;
 use App\Contracts\User as UserContract;

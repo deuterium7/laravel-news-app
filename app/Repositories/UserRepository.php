@@ -18,6 +18,21 @@ class UserRepository extends ModelRepository implements UserContract
     }
 
     /**
+     * Получить пользователя по провайдеру.
+     *
+     * @param $id
+     * @param string $provider
+     *
+     * @return User
+     */
+    public function getUserProvider($id, $provider)
+    {
+        return $this->model->where('provider_id', $id)
+            ->where('provider', $provider)
+            ->first();
+    }
+
+    /**
      * Получить пользователей по ключевым словам.
      *
      * @param string $keywords

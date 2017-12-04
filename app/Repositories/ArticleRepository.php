@@ -25,9 +25,27 @@ class ArticleRepository extends ModelRepository implements ArticleContract
      */
     public function getVisibleArticles()
     {
-        return $this->model->where('visibility', true)
-            ->orderBy('updated_at', 'desc')
-            ->paginate(5);
+        $articles = $this->model->where('visibility', true)
+            ->orderBy('updated_at', 'desc')->get();
+
+        foreach ($articles as $article) {
+            $article->body = str_limit($article->body, 300);
+        }
+
+        return $articles;
+    }
+
+    /**
+     * Получить новость с комментариями.
+     *
+     * @param $id
+     *
+     * @return Model
+     */
+    public function getArticle($id)
+    {
+        return $this->model->with('comments')
+            ->findOrFail($id);
     }
 
     /**
