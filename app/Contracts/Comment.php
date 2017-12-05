@@ -5,22 +5,14 @@ namespace App\Contracts;
 interface Comment extends Repository
 {
     /**
-     * Получить все комментарии новости.
+     * Получить все комментарии по связанной таблице.
      *
      * @param $id
-     *
-     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
-     */
-    public function getArticleComments($id);
-
-    /**
-     * Получить последние комментарии пользователя.
-     *
-     * @param $id
+     * @param string $from === 'article'|'user'
      *
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
-    public function getUserComments($id);
+    public function getComments($id, $from);
 
     /**
      * Получить комментарии по ключевым словам.

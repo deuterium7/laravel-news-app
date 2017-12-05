@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Http\Controllers\Controller;
 use App\Contracts\Article as ArticleContract;
 use App\Contracts\Category as CategoryContract;
 use App\Contracts\Comment as CommentContract;

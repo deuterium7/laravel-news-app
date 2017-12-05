@@ -29,7 +29,7 @@ interface Article extends Repository
      *
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public function getArticlesFromCategory($id);
+    public function getArticlesCategory($id);
 
     /**
      * Получить новости по ключевым словам с пагинацией.

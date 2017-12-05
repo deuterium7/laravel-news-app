@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Http\Controllers\Controller;
 use App\Contracts\Comment as CommentContract;
 use App\Http\Requests\CommentRequest;
 use App\Models\Comment;
@@ -21,6 +22,19 @@ class CommentController extends Controller
     public function __construct(CommentContract $comments)
     {
         $this->comments = $comments;
+    }
+
+    /**
+     * Получить все комментарии новости.
+     *
+     * @param $id
+     * @param string $model === 'article'|'user'
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
+    public function comments($id, $model)
+    {
+        return $this->comments->getComments($id, $model);
     }
 
     /**

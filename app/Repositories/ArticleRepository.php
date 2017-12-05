@@ -19,15 +19,14 @@ class ArticleRepository extends ModelRepository implements ArticleContract
     }
 
     /**
-     * Получить видимые новости с пагинацией.
+     * Обрезать содержание новости.
      *
-     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     * @param $articles
+     *
+     * @return Article
      */
-    public function getVisibleArticles()
+    public function cutBody($articles)
     {
-        $articles = $this->model->where('visibility', true)
-            ->orderBy('updated_at', 'desc')->get();
-
         foreach ($articles as $article) {
             $article->body = str_limit($article->body, 300);
         }
@@ -36,16 +35,30 @@ class ArticleRepository extends ModelRepository implements ArticleContract
     }
 
     /**
-     * Получить новость с комментариями.
+     * Получить видимые новости с пагинацией.
+     *
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
+    public function getVisibleArticles()
+    {
+        $articles = $this->model->where('visibility', true)
+            ->orderBy('updated_at', 'desc')
+            ->get();
+
+        return $this->cutBody($articles);
+    }
+
+    /**
+     * Получить новость.
      *
      * @param $id
      *
-     * @return Model
+     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|null|static|static[]
      */
     public function getArticle($id)
     {
-        return $this->model->with('comments')
-            ->findOrFail($id);
+        return $this->model->with(['category', 'user'])
+            ->find($id);
     }
 
     /**
@@ -55,13 +68,14 @@ class ArticleRepository extends ModelRepository implements ArticleContract
      *
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public function getArticlesFromCategory($id)
+    public function getArticlesCategory($id)
     {
-        return $this->model->with('category')
+        $articles = $this->model->where('category_id', $id)
             ->where('visibility', true)
-            ->where('category_id', $id)
             ->orderBy('updated_at', 'desc')
-            ->paginate(5);
+            ->get();
+
+        return $this->cutBody($articles);
     }
 
     /**

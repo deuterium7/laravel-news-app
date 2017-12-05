@@ -5,6 +5,15 @@ namespace App\Contracts;
 interface User extends Repository
 {
     /**
+     * Получить профиль пользователя с комментариями.
+     *
+     * @param $id
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|null|static|static[]
+     */
+    public function getUser($id);
+
+    /**
      * Получить пользователя по провайдеру.
      *
      * @param $id

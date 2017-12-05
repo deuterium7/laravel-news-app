@@ -1,8 +1,8 @@
 <template>
-    <div id="articles" v-if="articlesLoadStatus === 2">
+    <div id="category" v-if="categoryLoadStatus === 2">
         <div class="container">
             <div class="row">
-                <div v-for="article in articles">
+                <div v-for="article in category">
                     <div class="clearfix">
                         <div class="col-md-4">
                             <router-link :to="{ name: 'article', params: { id: article.id } }">
@@ -34,16 +34,18 @@
 <script>
     export default {
         created() {
-            this.$store.dispatch('loadArticles');
+            this.$store.dispatch('loadCategory', {
+                id: this.$route.params.id
+            });
         },
 
         computed: {
-            articlesLoadStatus() {
-                return this.$store.getters.getArticlesLoadStatus;
+            categoryLoadStatus() {
+                return this.$store.getters.getCategoryLoadStatus;
             },
 
-            articles() {
-                return this.$store.getters.getArticles;
+            category() {
+                return this.$store.getters.getCategory;
             }
         }
     }

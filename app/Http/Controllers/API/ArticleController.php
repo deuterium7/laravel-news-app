@@ -4,8 +4,6 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Contracts\Article as ArticleContract;
-use App\Contracts\Category as CategoryContract;
-use App\Contracts\Comment as CommentContract;
 use App\Http\Requests\ArticleRequest;
 
 class ArticleController extends Controller
@@ -16,27 +14,13 @@ class ArticleController extends Controller
     protected $articles;
 
     /**
-     * @var CategoryContract
-     */
-    protected $categories;
-
-    /**
-     * @var CommentContract
-     */
-    protected $comments;
-
-    /**
      * ArticleController constructor.
      *
      * @param ArticleContract  $articles
-     * @param CategoryContract $categories
-     * @param CommentContract  $comments
      */
-    public function __construct(ArticleContract $articles, CategoryContract $categories, CommentContract $comments)
+    public function __construct(ArticleContract $articles)
     {
         $this->articles = $articles;
-        $this->categories = $categories;
-        $this->comments = $comments;
     }
 
     /**

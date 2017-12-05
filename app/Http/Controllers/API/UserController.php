@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Contracts\Comment as CommentContract;
 use App\Contracts\User as UserContract;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\UserStatusRequest;
 use App\Models\User;
 
@@ -32,17 +33,25 @@ class UserController extends Controller
     }
 
     /**
-     * Показать профиль Пользователя.
+     * Авторизованный пользователь.
      *
-     * @param User $user
-     *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return \Illuminate\Contracts\Auth\Authenticatable|null
      */
-    public function show(User $user)
+    public function auth()
     {
-        $comments = $this->comments->getUserComments($user->id);
+        return auth()->user();
+    }
 
-        return view('users.show', compact('user', 'comments'));
+    /**
+     * Профиль Пользователя.
+     *
+     * @param $id
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|null|static|static[]
+     */
+    public function show($id)
+    {
+        return $this->users->getUser($id);
     }
 
     /**

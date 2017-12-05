@@ -32,6 +32,26 @@ export default new VueRouter({
                     name: 'articles',
                     component: Vue.component('Articles', require('./pages/Articles.vue'))
                 },
+                {
+                    path: 'articles/:id',
+                    name: 'article',
+                    component: Vue.component('Article', require('./pages/Article.vue'))
+                },
+                {
+                    path: 'categories',
+                    name: 'categories',
+                    component: Vue.component('Categories', require('./pages/Categories.vue'))
+                },
+                {
+                    path: 'categories/:id',
+                    name: 'category',
+                    component: Vue.component('Category', require('./pages/Category.vue'))
+                },
+                {
+                    path: 'users/:id',
+                    name: 'user',
+                    component: Vue.component('User', require('./pages/User.vue'))
+                },
             ]
         },
     ]

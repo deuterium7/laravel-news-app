@@ -18,6 +18,18 @@ class UserRepository extends ModelRepository implements UserContract
     }
 
     /**
+     * Получить профиль пользователя с комментариями.
+     *
+     * @param $id
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|null|static|static[]
+     */
+    public function getUser($id)
+    {
+        return $this->model->find($id);
+    }
+
+    /**
      * Получить пользователя по провайдеру.
      *
      * @param $id
