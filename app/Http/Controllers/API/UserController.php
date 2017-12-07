@@ -43,6 +43,16 @@ class UserController extends Controller
     }
 
     /**
+     * Получить всех пользователей для админа.
+     *
+     * @return mixed
+     */
+    public function usersAdmin()
+    {
+        return $this->users->getUsers();
+    }
+
+    /**
      * Профиль Пользователя.
      *
      * @param $id

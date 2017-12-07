@@ -52,6 +52,16 @@ export default new VueRouter({
                     name: 'user',
                     component: Vue.component('User', require('./pages/User.vue'))
                 },
+                {
+                    path: 'contact',
+                    name: 'contact',
+                    component: Vue.component('Contact', require('./pages/Contact.vue'))
+                },
+                {
+                    path: 'admin',
+                    name: 'admin',
+                    component: Vue.component('Admin', require('./pages/Admin.vue'))
+                }
             ]
         },
     ]

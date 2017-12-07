@@ -5,7 +5,14 @@ namespace App\Contracts;
 interface User extends Repository
 {
     /**
-     * Получить профиль пользователя с комментариями.
+     * Получить всех пользователей.
+     *
+     * @return mixed
+     */
+    public function getUsers();
+
+    /**
+     * Получить профиль пользователя.
      *
      * @param $id
      *

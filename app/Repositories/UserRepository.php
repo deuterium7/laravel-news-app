@@ -18,7 +18,17 @@ class UserRepository extends ModelRepository implements UserContract
     }
 
     /**
-     * Получить профиль пользователя с комментариями.
+     * Получить всех пользователей.
+     *
+     * @return mixed
+     */
+    public function getUsers()
+    {
+        return $this->model->latest()->get();
+    }
+
+    /**
+     * Получить профиль пользователя.
      *
      * @param $id
      *

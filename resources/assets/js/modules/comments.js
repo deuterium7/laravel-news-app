@@ -9,43 +9,76 @@ import commentAPI from '../api/comment.js';
 
 export const comments = {
     state: {
-        comments: {},
-        commentsLoadStatus: 0
+        commentsClient: {},
+        commentsClientLoadStatus: 0,
+
+        commentsAdmin: {},
+        commentsAdminLoadStatus: 0
     },
 
     actions: {
-        loadComments({ commit }, data) {
-            commit('setCommentsLoadStatus', 1);
+        loadCommentsClient({ commit }, data) {
+            commit('setCommentsClientLoadStatus', 1);
 
-            commentAPI.comments(data.id, data.from)
+            commentAPI.commentsClient(data.id, data.from)
                 .then(function(response) {
-                    commit('setComments', response.data);
-                    commit('setCommentsLoadStatus', 2);
+                    commit('setCommentsClient', response.data);
+                    commit('setCommentsClientLoadStatus', 2);
                 })
                 .catch(function() {
-                    commit('setComments', []);
-                    commit('setCommentsLoadStatus', 3);
+                    commit('setCommentsClient', []);
+                    commit('setCommentsClientLoadStatus', 3);
+                });
+        },
+
+        loadCommentsAdmin({ commit }) {
+            commit('setCommentsAdminLoadStatus', 1);
+
+            commentAPI.commentsAdmin()
+                .then(function(response) {
+                    commit('setCommentsAdmin', response.data);
+                    commit('setCommentsAdminLoadStatus', 2);
+                })
+                .catch(function() {
+                    commit('setCommentsAdmin', []);
+                    commit('setCommentsAdminLoadStatus', 3);
                 });
         }
     },
 
     mutations: {
-        setCommentsLoadStatus(state, status) {
-            state.commentsLoadStatus = status;
+        setCommentsClientLoadStatus(state, status) {
+            state.commentsClientLoadStatus = status;
         },
 
-        setComments(state, comments) {
-            state.comments = comments;
+        setCommentsClient(state, comments) {
+            state.commentsClient = comments;
+        },
+
+        setCommentsAdminLoadStatus(state, status) {
+            state.commentsAdminLoadStatus = status;
+        },
+
+        setCommentsAdmin(state, comments) {
+            state.commentsAdmin = comments;
         }
     },
 
     getters: {
-        getCommentsLoadStatus(state) {
-            return state.commentsLoadStatus;
+        getCommentsClientLoadStatus(state) {
+            return state.commentsClientLoadStatus;
         },
 
-        getComments(state) {
-            return state.comments;
+        getCommentsClient(state) {
+            return state.commentsClient;
+        },
+
+        getCommentsAdminLoadStatus(state) {
+            return state.commentsAdminLoadStatus;
+        },
+
+        getCommentsAdmin(state) {
+            return state.commentsAdmin;
         }
     }
 }

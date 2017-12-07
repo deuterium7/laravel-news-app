@@ -18,6 +18,18 @@ class CommentRepository extends ModelRepository implements CommentContract
     }
 
     /**
+     * Получить все комметарии администратора.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
+    public function getCommentsAdmin()
+    {
+        return $this->model->with(['article', 'user'])
+            ->orderBy('id', 'desc')
+            ->get();
+    }
+
+    /**
      * Получить все комментарии по связанной таблице.
      *
      * @param $id
@@ -25,7 +37,7 @@ class CommentRepository extends ModelRepository implements CommentContract
      *
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
-    public function getComments($id, $from)
+    public function getCommentsClient($id, $from)
     {
         $toggle = $from === 'article' ? 'user' : 'article';
 

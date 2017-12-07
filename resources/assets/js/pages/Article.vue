@@ -2,23 +2,26 @@
     <div id="article" v-if="articleLoadStatus === 2">
         <div class="container">
             <div class="row">
-                <div class="col-md-4"><img :src="article.image"></div>
-                <div class="col-md-8">
-                    <h3 class="article-title">{{ article.title }}</h3>
-                    <h4>Category:
-                        <router-link :to="{ name: 'category', params: { id: article.category_id } }">
-                            {{ article.category.name }}
-                        </router-link>
-                    </h4>
-                    <h4>Author:
-                        <router-link :to="{ name: 'user', params: { id: article.user_id } }">
-                            {{ article.user.name }}
-                        </router-link>
-                    </h4>
-                    <p>{{ article.body }}</p>
-                    <div class="article-date">{{ article.updated_at }}</div>
+                <div class="clearfix">
+                    <div class="col-md-4"><img :src="article.image"></div>
+                    <div class="col-md-8">
+                        <div class="article-date">{{ article.updated_at }}</div>
+                        <h3 class="article-title">{{ article.title }}</h3>
+                        <h4>Category:
+                            <router-link :to="{ name: 'category', params: { id: article.category_id } }">
+                                {{ article.category.name }}
+                            </router-link>
+                        </h4>
+                        <h4>Author:
+                            <router-link :to="{ name: 'user', params: { id: article.user_id } }">
+                                {{ article.user.name }}
+                            </router-link>
+                        </h4>
+                        <p>{{ article.body }}</p>
+                    </div>
                 </div>
 
+                <comment-create></comment-create>
                 <comments :from="'article'"></comments>
             </div>
         </div>
@@ -26,10 +29,12 @@
 </template>
 
 <script>
+    import CommentCreate from '../components/CommentCreate';
     import Comments from '../components/Comments';
 
     export default {
         components: {
+            CommentCreate,
             Comments
         },
 

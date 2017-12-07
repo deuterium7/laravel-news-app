@@ -6,5 +6,5 @@ export default {
 
     show: function (id) {
         return axios.get('api/categories/' + id);
-    },
+    }
 }
