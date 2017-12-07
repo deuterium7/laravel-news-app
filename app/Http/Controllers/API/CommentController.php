@@ -25,16 +25,26 @@ class CommentController extends Controller
     }
 
     /**
-     * Получить все комментарии новости.
+     * Получить все комментарии администратора.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
+    public function commentsAdmin()
+    {
+        return $this->comments->getCommentsAdmin();
+    }
+
+    /**
+     * Получить все комментарии клиента.
      *
      * @param $id
      * @param string $model === 'article'|'user'
      *
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
-    public function comments($id, $model)
+    public function commentsClient($id, $model)
     {
-        return $this->comments->getComments($id, $model);
+        return $this->comments->getCommentsClient($id, $model);
     }
 
     /**
@@ -42,42 +52,28 @@ class CommentController extends Controller
      *
      * @param CommentRequest $request
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \App\Contracts\Model
      */
     public function store(CommentRequest $request)
     {
-        $this->comments->create($request->all());
-
-        return redirect()->back();
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param Comment $comment
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Comment $comment)
-    {
-        $this->authorize('edit', $comment);
-
-        return view('comments.edit', compact('comment'));
+        return $this->comments->create($request->all());
     }
 
     /**
      * Update the specified resource in storage.
      *
+     * @param $id
      * @param CommentRequest $request
-     * @param Comment        $comment
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \App\Contracts\Model
      */
-    public function update(CommentRequest $request, Comment $comment)
+    public function update($id, CommentRequest $request)
     {
-        $this->comments->update($comment->id, $request->all());
+        $this->comments->update($id, $request->all());
 
-        return redirect()->route('articles.show', ['article' => $comment->article->id]);
+        return response()->json([
+            'message' => 'Comment updated successfully!'
+        ], 200);
     }
 
     /**

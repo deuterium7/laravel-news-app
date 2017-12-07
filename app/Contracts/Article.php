@@ -14,6 +14,13 @@ interface Article extends Repository
     public function getVisibleArticles();
 
     /**
+     * Получить все новости для администратора.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
+    public function getArticlesAdmin();
+
+    /**
      * Получить новость с комментариями.
      *
      * @param $id

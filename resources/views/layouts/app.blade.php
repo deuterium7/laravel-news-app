@@ -21,7 +21,7 @@
         @component('layouts.header')
         @endcomponent
 
-        @if ( session()->has('message') )
+        @if (session()->has('message'))
             <div class="alert alert-info">{{ session()->get('message') }}</div>
         @endif
 

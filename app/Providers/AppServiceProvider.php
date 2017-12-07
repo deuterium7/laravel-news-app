@@ -16,8 +16,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Article::observe(CacheObserver::class);
-        Category::observe(CacheObserver::class);
+        //
     }
 
     /**

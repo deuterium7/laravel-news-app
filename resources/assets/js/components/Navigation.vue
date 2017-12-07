@@ -12,9 +12,9 @@
                 </button>
 
                 <!-- Branding Image -->
-                <a class="navbar-brand" href="/#/articles">
+                <router-link class="navbar-brand" :to="{ name: 'articles' }">
                     News
-                </a>
+                </router-link>
             </div>
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
@@ -25,7 +25,11 @@
                             Categories
                         </router-link>
                     </li>
-                    <li><a href="#">Contact</a></li>
+                    <li>
+                        <router-link :to="{ name: 'contact' }">
+                            Contact
+                        </router-link>
+                    </li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
@@ -38,13 +42,13 @@
 
                         <ul class="dropdown-menu" role="menu">
                             <li>
-                                <a href="#">Russian</a>
+                                <a href="/locale/ru">Russian</a>
                             </li>
                             <li>
-                                <a href="#">Ukraine</a>
+                                <a href="/locale/uk">Ukraine</a>
                             </li>
                             <li>
-                                <a href="#">English</a>
+                                <a href="/locale/en">English</a>
                             </li>
                         </ul>
                     </li>
@@ -54,8 +58,15 @@
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
+                            <li v-if="auth.admin">
+                                <router-link :to="{ name: 'admin' }">
+                                    Admin
+                                </router-link>
+                            </li>
                             <li>
-                                <a href="#">Profile</a>
+                                <router-link :to="{ name: 'user', params: { id: auth.id } }">
+                                    My Profile
+                                </router-link>
                             </li>
                             <li>
                                 <a href="/logout">Logout</a>

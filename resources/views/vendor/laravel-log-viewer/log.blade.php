@@ -50,7 +50,7 @@
 <body>
   <div class="container-fluid">
     <div class="row">
-      <h4 style="text-align: center;"><a href="{{ url('/') }}" title="@lang('catalog.home')">@lang('catalog.home')</a></h4>
+      <h4 style="text-align: center;"><a href="{{ url('/#/admin') }}" title="@lang('catalog.back')">@lang('catalog.back')</a></h4>
       <div class="table-container">
         @if ($logs === null)
           <div>@lang('catalog.outOfTheMemory')</div>

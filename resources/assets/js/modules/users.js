@@ -9,14 +9,31 @@ import userAPI from '../api/user.js';
 
 export const users = {
     state: {
+        usersAdmin: [],
+        usersAdminLoadStatus: 0,
+
         auth: {},
         authLoadStatus: 0,
 
         user: {},
-        userLoadStatus: 0,
+        userLoadStatus: 0
     },
 
     actions: {
+        loadUsersAdmin({ commit }) {
+            commit('setUsersAdminLoadStatus', 1);
+
+            userAPI.usersAdmin()
+                .then(function(response) {
+                    commit('setUsersAdmin', response.data);
+                    commit('setUsersAdminLoadStatus', 2);
+                })
+                .catch(function() {
+                    commit('setUsersAdmin', {});
+                    commit('setUsersAdminLoadStatus', 3);
+                });
+        },
+
         loadAuth({ commit }) {
             commit('setAuthLoadStatus', 1);
 
@@ -47,6 +64,14 @@ export const users = {
     },
 
     mutations: {
+        setUsersAdminLoadStatus(state, status) {
+            state.usersAdminLoadStatus = status;
+        },
+
+        setUsersAdmin(state, usersAdmin) {
+            state.usersAdmin = usersAdmin;
+        },
+
         setAuthLoadStatus(state, status) {
             state.authLoadStatus = status;
         },
@@ -65,6 +90,14 @@ export const users = {
     },
 
     getters: {
+        getUsersAdminLoadStatus(state) {
+            return state.usersAdminLoadStatus;
+        },
+
+        getUsersAdmin(state) {
+            return state.usersAdmin;
+        },
+
         getAuthLoadStatus(state) {
             return state.authLoadStatus;
         },

@@ -1,8 +1,8 @@
 <template>
-    <div id="articles" v-if="articlesLoadStatus === 2">
+    <div id="articles" v-if="articlesClientLoadStatus === 2">
         <div class="container">
             <div class="row">
-                <div v-for="article in articles">
+                <div v-for="article in articlesClient">
                     <div class="clearfix">
                         <div class="col-md-4">
                             <router-link :to="{ name: 'article', params: { id: article.id } }">
@@ -34,16 +34,16 @@
 <script>
     export default {
         created() {
-            this.$store.dispatch('loadArticles');
+            this.$store.dispatch('loadArticlesClient');
         },
 
         computed: {
-            articlesLoadStatus() {
-                return this.$store.getters.getArticlesLoadStatus;
+            articlesClientLoadStatus() {
+                return this.$store.getters.getArticlesClientLoadStatus;
             },
 
-            articles() {
-                return this.$store.getters.getArticles;
+            articlesClient() {
+                return this.$store.getters.getArticlesClient;
             }
         }
     }

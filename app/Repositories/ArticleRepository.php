@@ -35,9 +35,9 @@ class ArticleRepository extends ModelRepository implements ArticleContract
     }
 
     /**
-     * Получить видимые новости с пагинацией.
+     * Получить видимые новости.
      *
-     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     * @return Article
      */
     public function getVisibleArticles()
     {
@@ -46,6 +46,18 @@ class ArticleRepository extends ModelRepository implements ArticleContract
             ->get();
 
         return $this->cutBody($articles);
+    }
+
+    /**
+     * Получить все новости для администратора.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
+    public function getArticlesAdmin()
+    {
+        return $this->model->with('category')
+            ->orderBy('updated_at', 'desc')
+            ->get();
     }
 
     /**

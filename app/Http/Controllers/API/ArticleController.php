@@ -34,6 +34,16 @@ class ArticleController extends Controller
     }
 
     /**
+     * Получить все новости для администратора.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
+    public function articlesAdmin()
+    {
+        return $this->articles->getArticlesAdmin();
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param ArticleRequest $request

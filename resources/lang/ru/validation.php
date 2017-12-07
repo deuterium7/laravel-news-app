@@ -132,15 +132,15 @@ return [
     */
 
     'attributes' => [
-        'name'                 => '<Наименование>',
-        'email'                => '<E-Mail>',
-        'password'             => '<Пароль>',
-        'title'                => '<Заголовок>',
-        'image'                => '<Изображение>',
-        'body'                 => '<Содержание>',
-        'message'              => '<Сообщение>',
-        'g-recaptcha-response' => '<reCAPTCHA>',
-        'ban'                  => '<Бан>',
+        'name'      => '<Наименование>',
+        'email'     => '<E-Mail>',
+        'password'  => '<Пароль>',
+        'title'     => '<Заголовок>',
+        'image'     => '<Изображение>',
+        'body'      => '<Содержание>',
+        'message'   => '<Сообщение>',
+        'recaptcha' => '<reCAPTCHA>',
+        'ban'       => '<Бан>',
     ],
 
 ];

@@ -9,25 +9,42 @@ import ArticleAPI from '../api/article.js';
 
 export const articles = {
     state: {
-        articles: [],
-        articlesLoadStatus: 0,
+        articlesAdmin: [],
+        articlesAdminLoadStatus: 0,
+
+        articlesClient: [],
+        articlesClientLoadStatus: 0,
 
         article: {},
         articleLoadStatus: 0
     },
 
     actions: {
-        loadArticles({ commit }) {
-            commit('setArticlesLoadStatus', 1);
+        loadArticlesClient({ commit }) {
+            commit('setArticlesClientLoadStatus', 1);
 
             ArticleAPI.index()
                 .then(function(response) {
-                    commit('setArticles', response.data);
-                    commit('setArticlesLoadStatus', 2);
+                    commit('setArticlesClient', response.data);
+                    commit('setArticlesClientLoadStatus', 2);
                 })
                 .catch(function() {
-                    commit('setArticles', []);
-                    commit('setArticlesLoadStatus', 3);
+                    commit('setArticlesClient', []);
+                    commit('setArticlesClientLoadStatus', 3);
+                });
+        },
+
+        loadArticlesAdmin({ commit }) {
+            commit('setArticlesAdminLoadStatus', 1);
+
+            ArticleAPI.articlesAdmin()
+                .then(function(response) {
+                    commit('setArticlesAdmin', response.data);
+                    commit('setArticlesAdminLoadStatus', 2);
+                })
+                .catch(function() {
+                    commit('setArticlesAdmin', []);
+                    commit('setArticlesAdminLoadStatus', 3);
                 });
         },
 
@@ -47,12 +64,20 @@ export const articles = {
     },
 
     mutations: {
-        setArticlesLoadStatus(state, status) {
-            state.articlesLoadStatus = status;
+        setArticlesClientLoadStatus(state, status) {
+            state.articlesClientLoadStatus = status;
         },
 
-        setArticles(state, articles) {
-            state.articles = articles;
+        setArticlesClient(state, articlesClient) {
+            state.articlesClient = articlesClient;
+        },
+
+        setArticlesAdminLoadStatus(state, status) {
+            state.articlesAdminLoadStatus = status;
+        },
+
+        setArticlesAdmin(state, articlesAdmin) {
+            state.articlesAdmin = articlesAdmin;
         },
 
         setArticleLoadStatus(state, status) {
@@ -65,12 +90,20 @@ export const articles = {
     },
 
     getters: {
-        getArticlesLoadStatus(state) {
-            return state.articlesLoadStatus;
+        getArticlesClientLoadStatus(state) {
+            return state.articlesClientLoadStatus;
         },
 
-        getArticles(state) {
-            return state.articles;
+        getArticlesClient(state) {
+            return state.articlesClient;
+        },
+
+        getArticlesAdminLoadStatus(state) {
+            return state.articlesAdminLoadStatus;
+        },
+
+        getArticlesAdmin(state) {
+            return state.articlesAdmin;
         },
 
         getArticleLoadStatus(state) {
