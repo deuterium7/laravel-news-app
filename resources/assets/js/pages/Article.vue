@@ -33,25 +33,31 @@
     import Comments from '../components/Comments';
 
     export default {
-        components: {
-            CommentCreate,
-            Comments
+        data() {
+            return {
+                article: {},
+                articleLoadStatus: 0
+            }
         },
 
         created() {
-            this.$store.dispatch('loadArticle', {
-                id: this.$route.params.id
-            });
+            this.getArticle();
         },
 
-        computed: {
-            articleLoadStatus() {
-                return this.$store.getters.getArticleLoadStatus;
-            },
-
-            article() {
-                return this.$store.getters.getArticle;
+        methods: {
+            getArticle() {
+                this.articleLoadStatus = 1;
+                axios.get('api/articles/' + this.$route.params.id)
+                    .then((response) => {
+                        this.article = response.data;
+                        this.articleLoadStatus = 2;
+                    });
             }
+        },
+
+        components: {
+            CommentCreate,
+            Comments
         }
     }
 </script>

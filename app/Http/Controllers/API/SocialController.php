@@ -16,7 +16,11 @@ class SocialController extends Controller
      */
     public function login($provider)
     {
-        return Socialite::with($provider)->redirect();
+        try {
+            return Socialite::with($provider)->redirect();
+        } catch (\InvalidArgumentException $e){
+            return redirect('/login');
+        }
     }
 
     /**
@@ -33,6 +37,6 @@ class SocialController extends Controller
         $user = $service->getUser($driver, $provider);
         auth()->login($user, true);
 
-        return redirect()->intended('/home');
+        return redirect('/');
     }
 }

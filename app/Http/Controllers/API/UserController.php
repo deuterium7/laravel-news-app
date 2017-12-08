@@ -45,7 +45,7 @@ class UserController extends Controller
     /**
      * Получить всех пользователей для админа.
      *
-     * @return mixed
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
     public function usersAdmin()
     {
@@ -88,7 +88,9 @@ class UserController extends Controller
     {
         $this->users->update($id, $request->all());
 
-        return redirect()->route('admin.users');
+        return response()->json([
+            'message' => 'User updated successfully!'
+        ], 200);
     }
 
     /**
@@ -102,6 +104,8 @@ class UserController extends Controller
     {
         $this->users->update($id, ['admin' => true]);
 
-        return redirect()->back();
+        return response()->json([
+            'message' => 'User updated successfully!'
+        ], 200);
     }
 }

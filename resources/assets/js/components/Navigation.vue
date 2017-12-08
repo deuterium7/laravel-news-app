@@ -1,5 +1,5 @@
 <template>
-    <nav class="navbar navbar-default navbar-static-top">
+    <nav id="navigation" class="navbar navbar-default navbar-static-top">
         <div class="container">
             <div class="navbar-header">
 
@@ -54,17 +54,17 @@
                     </li>
                     <li class="dropdown" v-if="authLoadStatus === 2">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            {{ auth.name }} <span class="caret"></span>
+                            {{ this.$root.auth.name }} <span class="caret"></span>
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
-                            <li v-if="auth.admin">
+                            <li v-if="this.$root.auth.admin">
                                 <router-link :to="{ name: 'admin' }">
                                     Admin
                                 </router-link>
                             </li>
                             <li>
-                                <router-link :to="{ name: 'user', params: { id: auth.id } }">
+                                <router-link :to="{ name: 'user', params: { id: this.$root.auth.id } }">
                                     My Profile
                                 </router-link>
                             </li>
@@ -81,13 +81,24 @@
 
 <script>
     export default {
-        computed: {
-            authLoadStatus() {
-                return this.$store.getters.getAuthLoadStatus;
-            },
+        data() {
+            return {
+                authLoadStatus: 0
+            }
+        },
 
-            auth() {
-                return this.$store.getters.getAuth;
+        created() {
+            this.getAuth();
+        },
+
+        methods: {
+            getAuth() {
+                this.authLoadStatus = 1;
+                axios.get('api/auth')
+                    .then((response) => {
+                        this.$root.auth = response.data;
+                        this.authLoadStatus = 2;
+                    });
             }
         }
     }

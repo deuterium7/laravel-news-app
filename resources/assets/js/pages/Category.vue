@@ -2,7 +2,7 @@
     <div id="category" v-if="categoryLoadStatus === 2">
         <div class="container">
             <div class="row">
-                <div v-for="article in category">
+                <div v-for="article in category.data">
                     <div class="clearfix">
                         <div class="col-md-4">
                             <router-link :to="{ name: 'article', params: { id: article.id } }">
@@ -26,6 +26,9 @@
                     </div>
                     <hr>
                 </div>
+                <div class="paginator">
+                    <pagination :data="category" :limit="5" v-on:pagination-change-page="getCategory"></pagination>
+                </div>
             </div>
         </div>
     </div>
@@ -33,25 +36,35 @@
 
 <script>
     export default {
-        created() {
-            this.$store.dispatch('loadCategory', {
-                id: this.$route.params.id
-            });
+        data() {
+            return {
+                category: {},
+                categoryLoadStatus: 0
+            }
         },
 
-        computed: {
-            categoryLoadStatus() {
-                return this.$store.getters.getCategoryLoadStatus;
-            },
+        created() {
+            this.getCategory();
+        },
 
-            category() {
-                return this.$store.getters.getCategory;
+        methods: {
+            getCategory(page) {
+                if (typeof page === 'undefined') {
+                    page = 1;
+                }
+
+                this.categoryLoadStatus = 1;
+                axios.get('api/categories/' + this.$route.params.id + '/?page=' + page)
+                    .then((response) => {
+                        this.category = response.data;
+                        this.categoryLoadStatus = 2;
+                    });
             }
-        }
+        },
     }
 </script>
 
 <style>
-    .article-title { text-align: center; }
+    .article-title, div.paginator { text-align: center; }
     .article-date { text-align: right; }
 </style>

@@ -7,7 +7,7 @@ interface Comment extends Repository
     /**
      * Получить все комметарии администратора.
      *
-     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
     public function getCommentsAdmin();
 
@@ -17,7 +17,7 @@ interface Comment extends Repository
      * @param $id
      * @param string $from === 'article'|'user'
      *
-     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
     public function getCommentsClient($id, $from);
 

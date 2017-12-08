@@ -14,7 +14,7 @@ $factory->define(Article::class, function (Faker $faker) {
             return factory(User::class)->create()->id;
         },
         'title' => $faker->sentence(),
-        'image' => 'http://www.veho.ru/img/photo_not_found.gif',
+        'image' => 'http://b-smart.co.th/wp-content/uploads/2014/07/not-found-300x300.png',
         'body'  => $faker->realText(2000),
     ];
 });

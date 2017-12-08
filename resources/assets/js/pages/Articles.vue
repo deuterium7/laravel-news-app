@@ -1,8 +1,8 @@
 <template>
-    <div id="articles" v-if="articlesClientLoadStatus === 2">
+    <div id="articles" v-if="articlesLoadStatus === 2">
         <div class="container">
             <div class="row">
-                <div v-for="article in articlesClient">
+                <div v-for="article in articles.data">
                     <div class="clearfix">
                         <div class="col-md-4">
                             <router-link :to="{ name: 'article', params: { id: article.id } }">
@@ -26,6 +26,9 @@
                     </div>
                     <hr>
                 </div>
+                <div class="paginator">
+                    <pagination :data="articles" :limit="5" v-on:pagination-change-page="getArticles"></pagination>
+                </div>
             </div>
         </div>
     </div>
@@ -33,17 +36,29 @@
 
 <script>
     export default {
-        created() {
-            this.$store.dispatch('loadArticlesClient');
+        data() {
+            return {
+                articles: {},
+                articlesLoadStatus: 0
+            }
         },
 
-        computed: {
-            articlesClientLoadStatus() {
-                return this.$store.getters.getArticlesClientLoadStatus;
-            },
+        created() {
+            this.getArticles();
+        },
 
-            articlesClient() {
-                return this.$store.getters.getArticlesClient;
+        methods: {
+            getArticles(page) {
+                if (typeof page === 'undefined') {
+                    page = 1;
+                }
+
+                this.articlesLoadStatus = 1;
+                axios.get('api/articles/?page=' + page)
+                    .then((response) => {
+                        this.articles = response.data;
+                        this.articlesLoadStatus = 2;
+                    });
             }
         }
     }
@@ -52,4 +67,5 @@
 <style>
     .article-title { text-align: center; }
     .article-date { text-align: right; }
+    div.paginator { text-align: center; }
 </style>
