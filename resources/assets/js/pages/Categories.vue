@@ -21,17 +21,25 @@
 
 <script>
     export default {
-        created() {
-            this.$store.dispatch('loadCategories');
+        data() {
+            return {
+                categories: {},
+                categoriesLoadStatus: 0
+            }
         },
 
-        computed: {
-            categoriesLoadStatus() {
-                return this.$store.getters.getCategoriesLoadStatus;
-            },
+        created() {
+            this.getCategories();
+        },
 
-            categories() {
-                return this.$store.getters.getCategories;
+        methods: {
+            getCategories() {
+                this.categoriesLoadStatus = 1;
+                axios.get('api/categories')
+                    .then((response) => {
+                        this.categories = response.data;
+                        this.categoriesLoadStatus = 2;
+                    });
             }
         }
     }

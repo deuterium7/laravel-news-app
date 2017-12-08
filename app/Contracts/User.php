@@ -7,7 +7,7 @@ interface User extends Repository
     /**
      * Получить всех пользователей.
      *
-     * @return mixed
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
     public function getUsers();
 

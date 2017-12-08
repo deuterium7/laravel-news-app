@@ -18,15 +18,15 @@ class CommentRepository extends ModelRepository implements CommentContract
     }
 
     /**
-     * Получить все комметарии администратора.
+     * Получить все коментарии для администратора.
      *
-     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
     public function getCommentsAdmin()
     {
         return $this->model->with(['article', 'user'])
-            ->orderBy('id', 'desc')
-            ->get();
+            ->latest()
+            ->paginate(10);
     }
 
     /**
@@ -35,7 +35,7 @@ class CommentRepository extends ModelRepository implements CommentContract
      * @param $id
      * @param string $from === 'article'|'user'
      *
-     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
     public function getCommentsClient($id, $from)
     {
@@ -43,8 +43,8 @@ class CommentRepository extends ModelRepository implements CommentContract
 
         return $this->model->with($toggle)
             ->where($from.'_id', $id)
-            ->orderBy('updated_at', 'desc')
-            ->get();
+            ->latest()
+            ->paginate(5);
     }
 
     /**

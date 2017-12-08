@@ -33,10 +33,6 @@
     import Errors from '../components/Errors';
 
     export default {
-        components: {
-            Errors
-        },
-
         data() {
             return {
                 comment: {
@@ -51,10 +47,11 @@
                 this.errors = [];
                 $('#add_comment_modal').modal('show');
             },
+
             createComment() {
                 axios.post('api/comments', {
                     article_id: this.$route.params.id,
-                    user_id: this.$store.getters.getAuth.id,
+                    user_id: this.$root.auth.id,
                     body: this.comment.body,
                 })
                     .then(() => {
@@ -71,6 +68,10 @@
                         }
                     });
             }
+        },
+
+        components: {
+            Errors
         }
     }
 </script>

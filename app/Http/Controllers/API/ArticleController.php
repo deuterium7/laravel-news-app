@@ -26,7 +26,7 @@ class ArticleController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
     public function index()
     {
@@ -36,7 +36,7 @@ class ArticleController extends Controller
     /**
      * Получить все новости для администратора.
      *
-     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
     public function articlesAdmin()
     {
@@ -48,7 +48,7 @@ class ArticleController extends Controller
      *
      * @param ArticleRequest $request
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \App\Contracts\Model
      */
     public function store(ArticleRequest $request)
     {
@@ -65,7 +65,7 @@ class ArticleController extends Controller
      *
      * @param $id
      *
-     * @return \Illuminate\Http\Response
+     * @return \App\Contracts\Model
      */
     public function show($id)
     {
@@ -76,9 +76,9 @@ class ArticleController extends Controller
      * Update the specified resource in storage.
      *
      * @param ArticleRequest $request
-     * @param int            $id
+     * @param $id
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \App\Contracts\Model
      */
     public function update(ArticleRequest $request, $id)
     {
@@ -89,18 +89,26 @@ class ArticleController extends Controller
             $attributes['image'] = $image;
         }
 
-        return $this->articles->update($id, $attributes);
+        $this->articles->update($id, $attributes);
+
+        return response()->json([
+            'message' => 'Article updated successfully!'
+        ], 200);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
+     * @param $id
      *
-     * @return \Illuminate\Http\Response
+     * @return bool
      */
     public function destroy($id)
     {
-        return $this->articles->delete($id);
+        $this->articles->delete($id);
+
+        return response()->json([
+            'message' => 'Article destroy successfully!'
+        ], 200);
     }
 }

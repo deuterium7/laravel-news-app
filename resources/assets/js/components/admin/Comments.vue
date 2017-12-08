@@ -1,5 +1,5 @@
 <template>
-    <div id="comments" v-if="commentsAdminLoadStatus === 2">
+    <div id="comments" v-if="commentsLoadStatus === 2">
         <div class="panel panel-default">
             <div class="panel-heading">
                 Comments
@@ -15,7 +15,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="comment in commentsAdmin">
+                    <tr v-for="comment in comments.data">
                         <td>{{ comment.body }}</td>
                         <td>
                             <router-link :to="{ name: 'article', params: { id: comment.article_id } }">
@@ -35,6 +35,9 @@
                     </tr>
                     </tbody>
                 </table>
+                <div class="paginator">
+                    <pagination :data="comments" :limit="5" v-on:pagination-change-page="getComments"></pagination>
+                </div>
             </div>
         </div>
     </div>
@@ -42,17 +45,29 @@
 
 <script>
     export default {
-        created() {
-            this.$store.dispatch('loadCommentsAdmin');
+        data() {
+            return {
+                comments: {},
+                commentsLoadStatus: 0
+            }
         },
 
-        computed: {
-            commentsAdminLoadStatus() {
-                return this.$store.getters.getCommentsAdminLoadStatus;
-            },
+        created() {
+            this.getComments();
+        },
 
-            commentsAdmin() {
-                return this.$store.getters.getCommentsAdmin;
+        methods: {
+            getComments(page) {
+                if (typeof page === 'undefined') {
+                    page = 1;
+                }
+
+                this.commentsLoadStatus = 1;
+                axios.get('api/admin/comments/?page=' + page)
+                    .then((response) => {
+                        this.comments = response.data;
+                        this.commentsLoadStatus = 2;
+                    });
             }
         }
     }

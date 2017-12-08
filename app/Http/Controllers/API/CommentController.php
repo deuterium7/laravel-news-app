@@ -87,6 +87,8 @@ class CommentController extends Controller
     {
         $this->comments->delete($id);
 
-        return redirect()->back();
+        return response()->json([
+            'message' => 'Comment destroy successfully!'
+        ], 200);
     }
 }

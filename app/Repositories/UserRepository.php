@@ -24,7 +24,8 @@ class UserRepository extends ModelRepository implements UserContract
      */
     public function getUsers()
     {
-        return $this->model->latest()->get();
+        return $this->model->latest()
+            ->paginate(10);
     }
 
     /**

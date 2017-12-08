@@ -16,7 +16,7 @@ interface Article extends Repository
     /**
      * Получить все новости для администратора.
      *
-     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
     public function getArticlesAdmin();
 

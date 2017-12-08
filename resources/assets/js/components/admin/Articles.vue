@@ -1,5 +1,5 @@
 <template>
-    <div id="articles" v-if="articlesAdminLoadStatus === 2">
+    <div id="articles" v-if="articlesLoadStatus === 2">
         <div class="panel panel-default">
             <div class="panel-heading">
                 Articles
@@ -15,7 +15,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="article in articlesAdmin">
+                    <tr v-for="article in articles.data">
                         <td>
                             <router-link :to="{ name: 'article', params: { id: article.id } }">
                                 {{ article.title }}
@@ -27,8 +27,8 @@
                             </router-link>
                         </td>
 
-                        <td v-if="article.visibility">True</td>
-                        <td v-else>False</td>
+                        <td v-if="article.visibility">Yes</td>
+                        <td v-else>No</td>
 
                         <td>
                             <form>
@@ -42,6 +42,9 @@
                 <form>
                     <input type="submit" class="btn btn-success" value="Create">
                 </form>
+                <div class="paginator">
+                    <pagination :data="articles" :limit="5" v-on:pagination-change-page="getArticles"></pagination>
+                </div>
             </div>
         </div>
     </div>
@@ -49,18 +52,34 @@
 
 <script>
     export default {
-        created() {
-            this.$store.dispatch('loadArticlesAdmin');
+        data() {
+            return {
+                articles: {},
+                articlesLoadStatus: 0
+            }
         },
 
-        computed: {
-            articlesAdminLoadStatus() {
-                return this.$store.getters.getArticlesAdminLoadStatus;
-            },
+        created() {
+            this.getArticles();
+        },
 
-            articlesAdmin() {
-                return this.$store.getters.getArticlesAdmin;
+        methods: {
+            getArticles(page) {
+                if (typeof page === 'undefined') {
+                    page = 1;
+                }
+
+                this.articlesLoadStatus = 1;
+                axios.get('api/admin/articles/?page=' + page)
+                    .then((response) => {
+                        this.articles = response.data;
+                        this.articlesLoadStatus = 2;
+                    });
             }
         }
     }
 </script>
+
+<style>
+    div.paginator { text-align: center; }
+</style>

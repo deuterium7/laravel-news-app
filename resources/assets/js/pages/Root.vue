@@ -11,10 +11,6 @@
     export default {
         components: {
             Navigation
-        },
-
-        created() {
-            this.$store.dispatch('loadAuth');
         }
     }
 </script>

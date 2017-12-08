@@ -1,5 +1,5 @@
 <template>
-    <div id="articles" v-if="usersAdminLoadStatus === 2">
+    <div id="articles" v-if="usersLoadStatus === 2">
         <div class="panel panel-default">
             <div class="panel-heading">
                 Users
@@ -17,7 +17,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="user in usersAdmin">
+                    <tr v-for="user in users.data" v-if="user.id !== $root.auth.id">
                         <td>
                             <router-link :to="{ name: 'user', params: { id: user.id } }">
                                 {{ user.name }}
@@ -25,11 +25,11 @@
                         </td>
                         <td>{{ user.email}}</td>
 
-                        <td v-if="user.admin">True</td>
-                        <td v-else>False</td>
+                        <td v-if="user.admin">Yes</td>
+                        <td v-else>No</td>
 
-                        <td v-if="user.ban">True</td>
-                        <td v-else>False</td>
+                        <td v-if="user.ban">Yes</td>
+                        <td v-else>No</td>
 
                         <td>{{ user.created_at }}</td>
                         <td>
@@ -41,6 +41,9 @@
                     </tr>
                     </tbody>
                 </table>
+                <div class="paginator">
+                    <pagination :data="users" :limit="5" v-on:pagination-change-page="getUsers"></pagination>
+                </div>
             </div>
         </div>
     </div>
@@ -48,17 +51,29 @@
 
 <script>
     export default {
-        created() {
-            this.$store.dispatch('loadUsersAdmin');
+        data() {
+            return {
+                users: {},
+                usersLoadStatus: 0
+            }
         },
 
-        computed: {
-            usersAdminLoadStatus() {
-                return this.$store.getters.getUsersAdminLoadStatus;
-            },
+        created() {
+            this.getUsers();
+        },
 
-            usersAdmin() {
-                return this.$store.getters.getUsersAdmin;
+        methods: {
+            getUsers(page) {
+                if (typeof page === 'undefined') {
+                    page = 1;
+                }
+
+                this.usersLoadStatus = 1;
+                axios.get('api/admin/users/?page=' + page)
+                    .then((response) => {
+                        this.users = response.data;
+                        this.usersLoadStatus = 2;
+                    });
             }
         }
     }

@@ -27,19 +27,18 @@
     import Users from '../components/admin/Users';
 
     export default {
+        data() {
+            return {
+                toggle: 'articles'
+            }
+        },
+
         components: {
             Articles,
             Categories,
             Comments,
             Users
-        },
-
-        data() {
-            return {
-                toggle: 'articles',
-                isActive: false
-            }
-        },
+        }
     }
 </script>
 

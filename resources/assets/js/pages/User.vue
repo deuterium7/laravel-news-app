@@ -17,7 +17,7 @@
                                     <div class="right">{{ user.updated_at }}</div>
                                     <div v-if="user.admin">Role: admin</div>
                                     <div v-else>Role: user</div>
-                                    <div>Email: {{ user.email }}</div>
+                                    <div v-if="user.email">Email: {{ user.email }}</div>
                                 </div>
                             </div>
 
@@ -34,24 +34,30 @@
     import Comments from '../components/Comments';
 
     export default {
-        components: {
-            Comments
+        data() {
+            return {
+                user: {},
+                userLoadStatus: 0
+            }
         },
 
         created() {
-            this.$store.dispatch('loadUser', {
-                id: this.$route.params.id
-            });
+            this.getUser();
         },
 
-        computed: {
-            userLoadStatus() {
-                return this.$store.getters.getUserLoadStatus;
-            },
-
-            user() {
-                return this.$store.getters.getUser;
+        methods: {
+            getUser() {
+                this.userLoadStatus = 1;
+                axios.get('api/users/' + this.$route.params.id)
+                    .then((response) => {
+                        this.user = response.data;
+                        this.userLoadStatus = 2;
+                    });
             }
+        },
+
+        components: {
+            Comments
         }
     }
 </script>
@@ -61,5 +67,4 @@
     .description { height: 120px; }
     .center { text-align: center; }
     img.avatar { border-radius: 50%; }
-    .comment-title {}
 </style>

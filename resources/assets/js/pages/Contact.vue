@@ -29,10 +29,6 @@
     import Errors from '../components/Errors';
 
     export default {
-        components: {
-            Errors,
-        },
-
         data() {
             return {
                 contact: {
@@ -60,8 +56,6 @@
                     .catch((error) => {
                         this.errors = [];
 
-                        console.log(error.response.data.errors);
-
                         if (error.response.data.errors.title) {
                             Array.prototype.push.apply(this.errors, error.response.data.errors.title);
                         }
@@ -75,6 +69,10 @@
                         }
                     });
             }
+        },
+
+        components: {
+            Errors,
         }
     }
 </script>

@@ -3,9 +3,9 @@ require('./bootstrap');
 
 import Vue from 'vue';
 import router from './routes.js'
-import store from './store.js'
+
+Vue.component('pagination', require('laravel-vue-pagination'));
 
 new Vue({
-    router,
-    store
+    router
 }).$mount('#app');

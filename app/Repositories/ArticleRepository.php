@@ -42,8 +42,8 @@ class ArticleRepository extends ModelRepository implements ArticleContract
     public function getVisibleArticles()
     {
         $articles = $this->model->where('visibility', true)
-            ->orderBy('updated_at', 'desc')
-            ->get();
+            ->latest()
+            ->paginate(5);
 
         return $this->cutBody($articles);
     }
@@ -51,13 +51,13 @@ class ArticleRepository extends ModelRepository implements ArticleContract
     /**
      * Получить все новости для администратора.
      *
-     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
     public function getArticlesAdmin()
     {
         return $this->model->with('category')
-            ->orderBy('updated_at', 'desc')
-            ->get();
+            ->latest()
+            ->paginate(10);
     }
 
     /**
@@ -84,8 +84,8 @@ class ArticleRepository extends ModelRepository implements ArticleContract
     {
         $articles = $this->model->where('category_id', $id)
             ->where('visibility', true)
-            ->orderBy('updated_at', 'desc')
-            ->get();
+            ->latest()
+            ->paginate(5);
 
         return $this->cutBody($articles);
     }

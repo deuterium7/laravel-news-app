@@ -35,7 +35,7 @@ class CategoryController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
     public function index()
     {
@@ -47,7 +47,7 @@ class CategoryController extends Controller
      *
      * @param CategoryRequest $request
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \App\Contracts\Model
      */
     public function store(CategoryRequest $request)
     {
@@ -56,9 +56,7 @@ class CategoryController extends Controller
         $image = $this->categories->uploadImage($request);
         $attributes['image'] = $image;
 
-        $this->categories->create($attributes);
-
-        return redirect()->route('admin.categories');
+        return $this->categories->create($attributes);
     }
 
     /**
@@ -92,7 +90,9 @@ class CategoryController extends Controller
 
         $this->categories->update($id, $attributes);
 
-        return redirect()->route('admin.categories');
+        return response()->json([
+            'message' => 'Category updated successfully!'
+        ], 200);
     }
 
     /**
@@ -106,6 +106,8 @@ class CategoryController extends Controller
     {
         $this->categories->delete($id);
 
-        return redirect()->back();
+        return response()->json([
+            'message' => 'Category destroy successfully!'
+        ], 200);
     }
 }
