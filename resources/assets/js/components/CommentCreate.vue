@@ -36,6 +36,8 @@
         data() {
             return {
                 comment: {
+                    article_id: this.$route.params.id,
+                    user_id: this.$root.auth.id,
                     body: ''
                 },
                 errors: []
@@ -49,16 +51,12 @@
             },
 
             createComment() {
-                axios.post('api/comments', {
-                    article_id: this.$route.params.id,
-                    user_id: this.$root.auth.id,
-                    body: this.comment.body,
-                })
+                axios.post('api/comments', this.comment)
                     .then(() => {
                         this.comment.body = '';
                         $('#add_comment_modal').modal('hide');
 
-                        location.reload(); // DELETE THIS
+                        location.reload();
                     })
                     .catch((error) => {
                         this.errors = [];

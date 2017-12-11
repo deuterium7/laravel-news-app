@@ -68,4 +68,25 @@ abstract class ModelRepository implements RepositoryContract
     {
         return $this->model->find($id)->delete();
     }
+
+    /**
+     * Загрузить изображение.
+     *
+     * @param $image
+     *
+     * @return string
+     */
+    public function uploadImage($image)
+    {
+        $exploded = explode(',', $image);
+        $decoded = base64_decode($exploded[1]);
+
+        $extension = str_contains($exploded[0], 'jpeg') ? 'jpg' : 'png';
+        $filename = str_random(). '.' .$extension;
+        $upload = public_path() . '/' . $filename;
+
+        file_put_contents($upload, $decoded);
+
+        return $filename;
+    }
 }

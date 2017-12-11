@@ -46,18 +46,4 @@ class CommentRepository extends ModelRepository implements CommentContract
             ->latest()
             ->paginate(5);
     }
-
-    /**
-     * Получить комментарии по ключевым словам.
-     *
-     * @param string $keywords
-     *
-     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
-     */
-    public function getCommentsWithKeywords($keywords)
-    {
-        return $this->model->where('body', 'LIKE', '%'.$keywords.'%')
-            ->orderBy('updated_at', 'desc')
-            ->paginate(10);
-    }
 }

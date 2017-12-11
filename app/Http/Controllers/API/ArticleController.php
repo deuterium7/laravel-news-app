@@ -54,7 +54,7 @@ class ArticleController extends Controller
     {
         $attributes = $request->all();
 
-        $image = $this->articles->uploadImage($request);
+        $image = $this->articles->uploadImage($request->image);
         $attributes['image'] = $image;
 
         return $this->articles->create($attributes);
@@ -83,9 +83,10 @@ class ArticleController extends Controller
     public function update(ArticleRequest $request, $id)
     {
         $attributes = $request->all();
+        $upload = $request->imageNew;
 
-        if ($request->hasFile('image')) {
-            $image = $this->articles->uploadImage($request);
+        if ($upload) {
+            $image = $this->articles->uploadImage($upload);
             $attributes['image'] = $image;
         }
 

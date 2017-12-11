@@ -20,7 +20,7 @@
             <p>{{ comment.body }}</p>
             <div class="comment-date">{{ comment.updated_at }}</div>
 
-            <div v-if="from === 'article'" class="modal fade" tabindex="-1" role="dialog" id="update_comment_model">
+            <div v-if="from === 'article'" class="modal fade" tabindex="-1" role="dialog" id="update_comment_modal">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -83,16 +83,14 @@
 
             initUpdate(index) {
                 this.errors = [];
-                $('#update_comment_model').modal('show');
+                $('#update_comment_modal').modal('show');
                 this.update_comment = this.comments.data[index];
             },
 
             updateComment() {
-                axios.put('api/comments/' + this.update_comment.id, {
-                    body: this.update_comment.body
-                })
+                axios.put('api/comments/' + this.update_comment.id, this.update_comment)
                     .then(() => {
-                        $('#update_comment_model').modal('hide');
+                        $('#update_comment_modal').modal('hide');
                     })
                     .catch((error) => {
                         this.errors = [];

@@ -21,7 +21,7 @@ class Ban
             auth()->user()->ban !== null
             && now() < new Carbon(auth()->user()->ban)
         ) {
-            return redirect()->route('home.contact')->with('message', trans('catalog.uHaveBan'));
+            return redirect()->route('/#/contact')->with('message', trans('catalog.uHaveBan'));
         }
 
         return $next($request);

@@ -2,8 +2,6 @@
 
 namespace App\Contracts;
 
-use App\Http\Requests\ArticleRequest;
-
 interface Article extends Repository
 {
     /**
@@ -37,22 +35,4 @@ interface Article extends Repository
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
     public function getArticlesCategory($id);
-
-    /**
-     * Получить новости по ключевым словам с пагинацией.
-     *
-     * @param string $keywords
-     *
-     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
-     */
-    public function getArticlesWithKeywords($keywords);
-
-    /**
-     * Загрузить изображение новости.
-     *
-     * @param ArticleRequest $request
-     *
-     * @return string
-     */
-    public function uploadImage(ArticleRequest $request);
 }

@@ -34,24 +34,6 @@
 
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
-                    <!-- Locales -->
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            Locales <span class="caret"></span>
-                        </a>
-
-                        <ul class="dropdown-menu" role="menu">
-                            <li>
-                                <a href="/locale/ru">Russian</a>
-                            </li>
-                            <li>
-                                <a href="/locale/uk">Ukraine</a>
-                            </li>
-                            <li>
-                                <a href="/locale/en">English</a>
-                            </li>
-                        </ul>
-                    </li>
                     <li class="dropdown" v-if="authLoadStatus === 2">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                             {{ this.$root.auth.name }} <span class="caret"></span>
