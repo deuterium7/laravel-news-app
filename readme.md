@@ -5,7 +5,7 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-<a href="https://styleci.io/repos/107368111"><img src="https://styleci.io/repos/107368111/shield?branch=master" alt="StyleCI"></a>
+<a href="https://styleci.io/repos/113008347"><img src="https://styleci.io/repos/113008347/shield?branch=master" alt="StyleCI"></a>
 </p>
 
 ## About Laravel
