@@ -14,7 +14,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-9">
-                                    <div class="right">{{ user.updated_at }}</div>
+                                    <div class="right">{{ user.updated_at | moment('kk:mm - DD.MM.YY') }}</div>
                                     <div v-if="user.admin">{{ trans('catalog.role') }}: admin</div>
                                     <div v-else>{{ trans('catalog.role') }}: user</div>
                                     <div v-if="user.email">{{ trans('catalog.emailAddress') }}: {{ user.email }}</div>

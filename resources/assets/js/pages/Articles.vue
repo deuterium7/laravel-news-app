@@ -20,7 +20,7 @@
                                 {{ trans('catalog.read') }}
                             </router-link>
                             <div class="article-date">
-                                <span>{{ article.updated_at }}</span>
+                                <span>{{ article.updated_at | moment('kk:mm:ss - DD.MM.YYYY') }}</span>
                             </div>
                         </div>
                     </div>

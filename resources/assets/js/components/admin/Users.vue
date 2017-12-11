@@ -31,7 +31,7 @@
                         <td v-if="user.ban">{{ trans('catalog.yes') }}</td>
                         <td v-else>{{ trans('catalog.no') }}</td>
 
-                        <td>{{ user.created_at }}</td>
+                        <td>{{ user.created_at | moment('kk:mm:ss - DD.MM.YYYY') }}</td>
                         <td>
                             <button class="btn btn-warning" @click="initBan(index)">{{ trans('catalog.ban') }}</button>
                             <button class="btn btn-danger" @click="setAdmin(index)" v-if="!user.admin">{{ trans('catalog.admin') }}</button>
