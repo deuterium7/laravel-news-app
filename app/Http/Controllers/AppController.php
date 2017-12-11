@@ -17,7 +17,6 @@ class AppController extends Controller
         return view('app');
     }
 
-
     /**
      * Display the login resource.
      *
@@ -56,7 +55,7 @@ class AppController extends Controller
         $this->dispatch(new ContactFormWasSubmitted($request->all()));
 
         return response()->json([
-            'message' => 'Contact was submitted!'
+            'message' => 'Contact was submitted!',
         ], 200);
     }
 }

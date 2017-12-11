@@ -2,9 +2,6 @@
 
 namespace App\Providers;
 
-use App\Models\Article;
-use App\Models\Category;
-use App\Observers\CacheObserver;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider

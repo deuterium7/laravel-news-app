@@ -52,11 +52,11 @@ class AuthController extends Controller
 
         if ($user === null) {
             $user = $this->users->create([
-                'name' => $socialUser->getName(),
-                'email' => $socialUser->getEmail() === '' ?: $socialUser->getEmail(),
-                'provider' => $provider,
+                'name'        => $socialUser->getName(),
+                'email'       => $socialUser->getEmail() === '' ?: $socialUser->getEmail(),
+                'provider'    => $provider,
                 'provider_id' => $socialUser->getId(),
-                'avatar' => $socialUser->getAvatar()
+                'avatar'      => $socialUser->getAvatar(),
             ]);
         }
 

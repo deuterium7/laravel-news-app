@@ -3,9 +3,9 @@
 namespace App\Providers;
 
 use App\Models\Comment;
-use Laravel\Passport\Passport;
 use App\Policies\CommentPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Laravel\Passport\Passport;
 
 class AuthServiceProvider extends ServiceProvider
 {

@@ -77,7 +77,7 @@ class UserController extends Controller
         $this->users->update($id, $request->all());
 
         return response()->json([
-            'message' => 'User updated successfully!'
+            'message' => 'User updated successfully!',
         ], 200);
     }
 
@@ -93,7 +93,7 @@ class UserController extends Controller
         $this->users->update($id, ['admin' => true]);
 
         return response()->json([
-            'message' => 'User updated successfully!'
+            'message' => 'User updated successfully!',
         ], 200);
     }
 }

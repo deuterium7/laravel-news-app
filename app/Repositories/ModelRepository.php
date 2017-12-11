@@ -82,8 +82,8 @@ abstract class ModelRepository implements RepositoryContract
         $decoded = base64_decode($exploded[1]);
 
         $extension = str_contains($exploded[0], 'jpeg') ? 'jpg' : 'png';
-        $filename = str_random(). '.' .$extension;
-        $upload = public_path() . '/' . $filename;
+        $filename = str_random().'.'.$extension;
+        $upload = public_path().'/'.$filename;
 
         file_put_contents($upload, $decoded);
 

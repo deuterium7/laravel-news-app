@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Controllers\Controller;
 use App\Contracts\Article as ArticleContract;
 use App\Contracts\Category as CategoryContract;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
 
@@ -92,7 +92,7 @@ class CategoryController extends Controller
         $this->categories->update($id, $attributes);
 
         return response()->json([
-            'message' => 'Category updated successfully!'
+            'message' => 'Category updated successfully!',
         ], 200);
     }
 
@@ -108,7 +108,7 @@ class CategoryController extends Controller
         $this->categories->delete($id);
 
         return response()->json([
-            'message' => 'Category destroy successfully!'
+            'message' => 'Category destroy successfully!',
         ], 200);
     }
 }
