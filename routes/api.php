@@ -1,9 +1,7 @@
 <?php
 
 Route::group(['namespace' => 'API', 'middleware' => 'auth:api'], function () {
-
     Route::middleware('ban')->group(function () {
-
         Route::middleware('admin')->group(function () {
             Route::resource('articles', 'ArticleController', ['except' => ['create', 'edit']]);
             Route::get('/admin/articles', 'ArticleController@articlesAdmin');

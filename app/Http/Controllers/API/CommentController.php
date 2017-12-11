@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Controllers\Controller;
 use App\Contracts\Comment as CommentContract;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\CommentRequest;
 use App\Models\Comment;
 
@@ -72,7 +72,7 @@ class CommentController extends Controller
         $this->comments->update($id, $request->all());
 
         return response()->json([
-            'message' => 'Comment updated successfully!'
+            'message' => 'Comment updated successfully!',
         ], 200);
     }
 
@@ -88,7 +88,7 @@ class CommentController extends Controller
         $this->comments->delete($id);
 
         return response()->json([
-            'message' => 'Comment destroy successfully!'
+            'message' => 'Comment destroy successfully!',
         ], 200);
     }
 }

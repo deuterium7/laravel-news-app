@@ -18,7 +18,7 @@ class SocialController extends Controller
     {
         try {
             return Socialite::with($provider)->redirect();
-        } catch (\InvalidArgumentException $e){
+        } catch (\InvalidArgumentException $e) {
             return redirect('/login');
         }
     }

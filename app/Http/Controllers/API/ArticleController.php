@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Controllers\Controller;
 use App\Contracts\Article as ArticleContract;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\ArticleRequest;
 
 class ArticleController extends Controller
@@ -16,7 +16,7 @@ class ArticleController extends Controller
     /**
      * ArticleController constructor.
      *
-     * @param ArticleContract  $articles
+     * @param ArticleContract $articles
      */
     public function __construct(ArticleContract $articles)
     {
@@ -93,7 +93,7 @@ class ArticleController extends Controller
         $this->articles->update($id, $attributes);
 
         return response()->json([
-            'message' => 'Article updated successfully!'
+            'message' => 'Article updated successfully!',
         ], 200);
     }
 
@@ -109,7 +109,7 @@ class ArticleController extends Controller
         $this->articles->delete($id);
 
         return response()->json([
-            'message' => 'Article destroy successfully!'
+            'message' => 'Article destroy successfully!',
         ], 200);
     }
 }
