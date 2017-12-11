@@ -1,6 +1,6 @@
 <template>
     <div id="comments" v-if="commentsLoadStatus === 2 && comments.data.length > 0">
-        <h4 class="comment-title">Latest comments</h4>
+        <h4 class="comment-title">{{ trans('catalog.lastComments') }}</h4>
         <div v-for="(comment, index) in comments.data">
             <h5 v-if="from === 'article'">
                 [
@@ -26,7 +26,7 @@
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                     aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title">Update Comment</h4>
+                            <h4 class="modal-title">{{ trans('catalog.updateComment') }}</h4>
                         </div>
                         <div class="modal-body">
                             <errors :content="errors"></errors>
@@ -35,8 +35,8 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="button" @click="updateComment" class="btn btn-primary">Submit</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">{{ trans('catalog.close') }}</button>
+                            <button type="button" @click="updateComment" class="btn btn-primary">{{ trans('catalog.update') }}</button>
                         </div>
                     </div>
                 </div>

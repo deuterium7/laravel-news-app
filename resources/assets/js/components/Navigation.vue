@@ -13,7 +13,7 @@
 
                 <!-- Branding Image -->
                 <router-link class="navbar-brand" :to="{ name: 'articles' }">
-                    News
+                    {{ trans('catalog.news') }}
                 </router-link>
             </div>
 
@@ -22,18 +22,35 @@
                 <ul class="nav navbar-nav">
                     <li>
                         <router-link :to="{ name: 'categories' }">
-                            Categories
+                            {{ trans('catalog.categories') }}
                         </router-link>
                     </li>
                     <li>
                         <router-link :to="{ name: 'contact' }">
-                            Contact
+                            {{ trans('catalog.contact') }}
                         </router-link>
                     </li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            {{ trans('catalog.locales') }} <span class="caret"></span>
+                        </a>
+
+                        <ul class="dropdown-menu" role="menu">
+                            <li>
+                                <a href="/locale/ru">{{ trans('catalog.russian') }}</a>
+                            </li>
+                            <li>
+                                <a href="/locale/uk">{{ trans('catalog.ukraine') }}</a>
+                            </li>
+                            <li>
+                                <a href="/locale/en">{{ trans('catalog.english') }}</a>
+                            </li>
+                        </ul>
+                    </li>
                     <li class="dropdown" v-if="authLoadStatus === 2">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                             {{ this.$root.auth.name }} <span class="caret"></span>
@@ -42,16 +59,16 @@
                         <ul class="dropdown-menu" role="menu">
                             <li v-if="this.$root.auth.admin">
                                 <router-link :to="{ name: 'admin' }">
-                                    Admin
+                                    {{ trans('catalog.admin') }}
                                 </router-link>
                             </li>
                             <li>
                                 <router-link :to="{ name: 'user', params: { id: this.$root.auth.id } }">
-                                    My Profile
+                                    {{ trans('catalog.profile') }}
                                 </router-link>
                             </li>
                             <li>
-                                <a href="/logout">Logout</a>
+                                <a href="/logout">{{ trans('catalog.logout') }}</a>
                             </li>
                         </ul>
                     </li>

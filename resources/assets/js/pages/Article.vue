@@ -7,12 +7,12 @@
                     <div class="col-md-8">
                         <div class="article-date">{{ article.updated_at }}</div>
                         <h3 class="article-title">{{ article.title }}</h3>
-                        <h4>Category:
+                        <h4>{{ trans('catalog.category') }}:
                             <router-link :to="{ name: 'category', params: { id: article.category_id } }">
                                 {{ article.category.name }}
                             </router-link>
                         </h4>
-                        <h4>Author:
+                        <h4>{{ trans('catalog.author') }}:
                             <router-link :to="{ name: 'user', params: { id: article.user_id } }">
                                 {{ article.user.name }}
                             </router-link>

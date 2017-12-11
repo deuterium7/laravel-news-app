@@ -1,6 +1,6 @@
 <template>
     <div id="category-create">
-        <input type="submit" class="btn btn-success" value="Create" @click="initAddCategory">
+        <button type="button" class="btn btn-success" @click="initAddArticle">{{ trans('catalog.create') }}</button>
 
         <div class="modal fade" tabindex="-1" role="dialog" id="add_category_modal">
             <div class="modal-dialog" role="document">
@@ -9,7 +9,7 @@
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
-                        <h4 class="modal-title">Create New Category</h4>
+                        <h4 class="modal-title">{{ trans('catalog.createCategory') }}</h4>
                     </div>
                     <form enctype="multipart/form-data">
                         <div class="modal-body">
@@ -22,8 +22,8 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" @click="createCategory">Submit</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">{{ trans('catalog.close') }}</button>
+                            <button type="button" class="btn btn-primary" @click="createCategory">{{ trans('catalog.submit') }}</button>
                         </div>
                     </form>
                 </div>
