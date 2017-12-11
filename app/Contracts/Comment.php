@@ -20,13 +20,4 @@ interface Comment extends Repository
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
     public function getCommentsClient($id, $from);
-
-    /**
-     * Получить комментарии по ключевым словам.
-     *
-     * @param string $keywords
-     *
-     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
-     */
-    public function getCommentsWithKeywords($keywords);
 }

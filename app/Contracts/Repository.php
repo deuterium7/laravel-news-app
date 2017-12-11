@@ -38,4 +38,13 @@ interface Repository
      * @return bool
      */
     public function delete(int $id);
+
+    /**
+     * Загрузить изображение.
+     *
+     * @param $image
+     *
+     * @return string
+     */
+    public function uploadImage($image);
 }

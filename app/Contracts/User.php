@@ -29,13 +29,4 @@ interface User extends Repository
      * @return User
      */
     public function getUserProvider($id, $provider);
-
-    /**
-     * Получить пользователей по ключевым словам.
-     *
-     * @param string $keywords
-     *
-     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
-     */
-    public function getUsersWithKeywords($keywords);
 }

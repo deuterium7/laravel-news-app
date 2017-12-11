@@ -82,9 +82,10 @@ class CategoryController extends Controller
     public function update(CategoryRequest $request, $id)
     {
         $attributes = $request->all();
+        $upload = $request->imageNew;
 
-        if ($request->hasFile('image')) {
-            $image = $this->categories->uploadImage($request);
+        if ($upload) {
+            $image = $this->categories->uploadImage($upload);
             $attributes['image'] = $image;
         }
 

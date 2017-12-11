@@ -65,18 +65,6 @@ class UserController extends Controller
     }
 
     /**
-     * Показать форму для бана Пользователя.
-     *
-     * @param User $user
-     *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function ban(User $user)
-    {
-        return view('users.ban', compact('user'));
-    }
-
-    /**
      * Обновить статус Пользователя.
      *
      * @param UserStatusRequest $request

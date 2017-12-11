@@ -15,7 +15,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="comment in comments.data">
+                    <tr v-for="(comment, index) in comments.data">
                         <td>{{ comment.body }}</td>
                         <td>
                             <router-link :to="{ name: 'article', params: { id: comment.article_id } }">
@@ -28,9 +28,7 @@
                             </router-link>
                         </td>
                         <td>
-                            <form>
-                                <input type="submit" class="btn btn-danger" value="Delete">
-                            </form>
+                            <button class="btn btn-danger" @click="deleteComment(index)">Delete</button>
                         </td>
                     </tr>
                     </tbody>
@@ -67,6 +65,13 @@
                     .then((response) => {
                         this.comments = response.data;
                         this.commentsLoadStatus = 2;
+                    });
+            },
+
+            deleteComment(index) {
+                axios.delete('api/comments/' + this.comments.data[index].id)
+                    .then(() => {
+                        location.reload();
                     });
             }
         }

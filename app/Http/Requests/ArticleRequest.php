@@ -32,7 +32,7 @@ class ArticleRequest extends FormRequest
             case 'POST':
                 return [
                     'title'  => 'required|max:255|unique:articles',
-                    'image'  => 'required|mimes:jpeg,png,jpg|dimensions:max_width=300,max_height=300',
+                    'image'  => 'required',
                     'body'   => 'required|min:100',
                 ];
 
@@ -42,7 +42,7 @@ class ArticleRequest extends FormRequest
 
                 return [
                     'title'  => 'required|max:255|'.Rule::unique('articles')->ignore($id),
-                    'image'  => 'mimes:jpeg,png,jpg|dimensions:max_width=300,max_height=300',
+                    'image'  => '',
                     'body'   => 'required|min:100',
                 ];
 

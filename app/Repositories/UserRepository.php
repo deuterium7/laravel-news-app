@@ -54,19 +54,4 @@ class UserRepository extends ModelRepository implements UserContract
             ->where('provider', $provider)
             ->first();
     }
-
-    /**
-     * Получить пользователей по ключевым словам.
-     *
-     * @param string $keywords
-     *
-     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
-     */
-    public function getUsersWithKeywords($keywords)
-    {
-        return $this->model->where('id', '<>', auth()->user()->id)
-            ->where('name', 'LIKE', '%'.$keywords.'%')
-            ->orderBy('id', 'desc')
-            ->paginate(10);
-    }
 }
