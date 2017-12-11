@@ -5,7 +5,7 @@
                 <div class="clearfix">
                     <div class="col-md-4"><img :src="article.image"></div>
                     <div class="col-md-8">
-                        <div class="article-date">{{ article.updated_at }}</div>
+                        <div class="article-date">{{ article.updated_at | moment('kk:mm - DD.MM.YY') }}</div>
                         <h3 class="article-title">{{ article.title }}</h3>
                         <h4>{{ trans('catalog.category') }}:
                             <router-link :to="{ name: 'category', params: { id: article.category_id } }">

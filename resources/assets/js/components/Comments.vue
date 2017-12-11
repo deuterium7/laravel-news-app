@@ -18,7 +18,7 @@
                 </router-link>
             </h5>
             <p>{{ comment.body }}</p>
-            <div class="comment-date">{{ comment.updated_at }}</div>
+            <div class="comment-date">{{ comment.updated_at | moment('kk:mm:ss - DD.MM.YYYY') }}</div>
 
             <div v-if="from === 'article'" class="modal fade" tabindex="-1" role="dialog" id="update_comment_modal">
                 <div class="modal-dialog" role="document">
