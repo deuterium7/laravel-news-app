@@ -1,6 +1,6 @@
 <template>
     <div id="article-create">
-        <input type="submit" class="btn btn-success" value="Create" @click="initAddArticle">
+        <button type="button" class="btn btn-success" @click="initAddArticle">{{ trans('catalog.create') }}</button>
 
         <div class="modal fade" tabindex="-1" role="dialog" id="add_article_modal">
             <div class="modal-dialog" role="document">
@@ -9,7 +9,7 @@
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
-                        <h4 class="modal-title">Create New Article</h4>
+                        <h4 class="modal-title">{{ trans('catalog.createArticle') }}</h4>
                     </div>
                     <form enctype="multipart/form-data">
                         <div class="modal-body">
@@ -29,13 +29,13 @@
                             <div class="form-group">
                                 <label class="from-check-label">
                                     <input type="checkbox" name="visibility" class="form-check-input" v-model="article.visibility">
-                                    Enter Article Visibility
+                                    {{ trans('catalog.enterArticleVisible') }}
                                 </label>
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" @click="createArticle">Submit</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">{{ trans('catalog.close') }}</button>
+                            <button type="button" class="btn btn-primary" @click="createArticle">{{ trans('catalog.submit') }}</button>
                         </div>
                     </form>
                 </div>

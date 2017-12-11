@@ -2,15 +2,15 @@
     <div id="categories" v-if="categoriesLoadStatus === 2">
         <div class="panel panel-default">
             <div class="panel-heading">
-                Categories
+                {{ trans('catalog.categories') }}
             </div>
             <div class="panel-body">
                 <table class="table table-condensed">
                     <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Image</th>
-                        <th>Actions</th>
+                        <th>{{ trans('catalog.name') }}</th>
+                        <th>{{ trans('catalog.image') }}</th>
+                        <th>{{ trans('catalog.actions') }}</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -24,8 +24,8 @@
                             {{ category.image }}
                         </td>
                         <td>
-                            <button class="btn btn-warning" @click="initUpdate(index)">Edit</button>
-                            <button class="btn btn-danger" @click="deleteCategory(index)">Delete</button>
+                            <button class="btn btn-warning" @click="initUpdate(index)">{{ trans('catalog.edit') }}</button>
+                            <button class="btn btn-danger" @click="deleteCategory(index)">{{ trans('catalog.destroy') }}</button>
                         </td>
                     </tr>
                     </tbody>
@@ -38,7 +38,7 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
-                                <h4 class="modal-title">Update Category</h4>
+                                <h4 class="modal-title">{{ trans('catalog.updateCategory') }}</h4>
                             </div>
                             <form enctype="multipart/form-data">
                                 <div class="modal-body">
@@ -51,8 +51,8 @@
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary" @click="updateCategory">Submit</button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">{{ trans('catalog.close') }}</button>
+                                    <button type="button" class="btn btn-primary" @click="updateCategory">{{ trans('catalog.update') }}</button>
                                 </div>
                             </form>
                         </div>

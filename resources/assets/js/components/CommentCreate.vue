@@ -1,7 +1,7 @@
 <template>
     <div id="comment-create">
         <button @click="initAddComment" class="btn btn-primary btn-xs pull-right">
-            + Add New Comment
+            + {{ trans('catalog.addComment') }}
         </button>
 
         <div class="modal fade" tabindex="-1" role="dialog" id="add_comment_modal">
@@ -11,17 +11,18 @@
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
-                        <h4 class="modal-title">Create New Comment</h4>
+                        <h4 class="modal-title">{{ trans('catalog.createComment') }}</h4>
                     </div>
                     <div class="modal-body">
                         <errors :content="errors"></errors>
                         <div class="form-group">
-                            <textarea name="body" cols="30" rows="5" class="form-control" placeholder="Enter Your Comment" v-model="comment.body"></textarea>
+                            <label for="body">{{ trans('catalog.enterComment') }}</label>
+                            <textarea id="body" name="body" cols="30" rows="5" class="form-control" v-model="comment.body"></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" @click="createComment">Submit</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">{{ trans('catalog.close') }}</button>
+                        <button type="button" class="btn btn-primary" @click="createComment">{{ trans('catalog.submit') }}</button>
                     </div>
                 </div>
             </div>

@@ -2,18 +2,18 @@
     <div id="articles" v-if="usersLoadStatus === 2">
         <div class="panel panel-default">
             <div class="panel-heading">
-                Users
+                {{ trans('catalog.users') }}
             </div>
             <div class="panel-body">
                 <table class="table table-condensed">
                     <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Admin</th>
-                        <th>Ban</th>
-                        <th>Registred At</th>
-                        <th>Actions</th>
+                        <th>{{ trans('catalog.name') }}</th>
+                        <th>{{ trans('catalog.emailAddress') }}</th>
+                        <th>{{ trans('catalog.admin') }}</th>
+                        <th>{{ trans('catalog.ban') }}</th>
+                        <th>{{ trans('catalog.registeredAt') }}</th>
+                        <th>{{ trans('catalog.actions') }}</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -25,16 +25,16 @@
                         </td>
                         <td>{{ user.email}}</td>
 
-                        <td v-if="user.admin">Yes</td>
-                        <td v-else>No</td>
+                        <td v-if="user.admin">{{ trans('catalog.yes') }}</td>
+                        <td v-else>{{ trans('catalog.no') }}</td>
 
-                        <td v-if="user.ban">Yes</td>
-                        <td v-else>No</td>
+                        <td v-if="user.ban">{{ trans('catalog.yes') }}</td>
+                        <td v-else>{{ trans('catalog.no') }}</td>
 
                         <td>{{ user.created_at }}</td>
                         <td>
-                            <button class="btn btn-warning" @click="initBan(index)">Ban</button>
-                            <button class="btn btn-danger" @click="setAdmin(index)" v-if="!user.admin">Admin</button>
+                            <button class="btn btn-warning" @click="initBan(index)">{{ trans('catalog.ban') }}</button>
+                            <button class="btn btn-danger" @click="setAdmin(index)" v-if="!user.admin">{{ trans('catalog.admin') }}</button>
                         </td>
                     </tr>
                     </tbody>
@@ -46,7 +46,7 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
-                                <h4 class="modal-title">Ban User</h4>
+                                <h4 class="modal-title">{{ trans('catalog.banUser') }}</h4>
                             </div>
                             <form enctype="multipart/form-data">
                                 <div class="modal-body">
@@ -54,13 +54,13 @@
                                     <div class="form-group">
                                         <input type="text" name="ban" class="form-control" placeholder="Enter User Ban" v-model="user_ban.ban">
                                         <p class="form-text text-muted">
-                                            Format: yyyy-mm-dd hh:ii:ss
+                                            {{ trans('catalog.format') }}: yyyy-mm-dd hh:ii:ss
                                         </p>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary" @click="banUser">Submit</button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">{{ trans('catalog.close') }}</button>
+                                    <button type="button" class="btn btn-primary" @click="banUser">{{ trans('catalog.ban') }}</button>
                                 </div>
                             </form>
                         </div>

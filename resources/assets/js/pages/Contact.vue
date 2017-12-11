@@ -1,15 +1,15 @@
 <template>
     <div class="container">
         <div class="row">
-            <h3 class="center">Contact Us</h3>
+            <h3 class="center">{{ trans('catalog.contactUs') }}</h3>
             <errors :content="errors"></errors>
             <form @submit.prevent="formSubmit">
                 <div class="form-group">
-                    <label for="title">Title *</label>
+                    <label for="title">{{ trans('catalog.title') }} *</label>
                     <input type="text" id="title" name="title" class="form-control" placeholder="Enter Your Title" v-model="contact.title"/>
                 </div>
                 <div class="form-group">
-                    <label for="message">Message *</label>
+                    <label for="message">{{ trans('catalog.message') }} *</label>
                     <textarea id="message" name="message" class="form-control" placeholder="Enter Your Message" v-model="contact.message"></textarea>
                 </div>
                 <div class="form-group">
@@ -17,7 +17,7 @@
                 </div>
                 <div class="form-group">
                     <div class="submit">
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary">{{ trans('catalog.send') }}</button>
                     </div>
                 </div>
             </form>

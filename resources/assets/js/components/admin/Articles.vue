@@ -2,16 +2,16 @@
     <div id="articles" v-if="articlesLoadStatus === 2">
         <div class="panel panel-default">
             <div class="panel-heading">
-                Articles
+                {{ trans('catalog.news') }}
             </div>
             <div class="panel-body">
                 <table class="table table-condensed">
                     <thead>
                     <tr>
-                        <th>Title</th>
-                        <th>Category</th>
-                        <th>Visibility</th>
-                        <th>Actions</th>
+                        <th>{{ trans('catalog.title') }}</th>
+                        <th>{{ trans('catalog.category') }}</th>
+                        <th>{{ trans('catalog.visibility') }}</th>
+                        <th>{{ trans('catalog.actions') }}</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -27,12 +27,12 @@
                             </router-link>
                         </td>
 
-                        <td v-if="article.visibility">Yes</td>
-                        <td v-else>No</td>
+                        <td v-if="article.visibility">{{ trans('catalog.yes') }}</td>
+                        <td v-else>{{ trans('catalog.no') }}</td>
 
                         <td>
-                            <button class="btn btn-warning" @click="initUpdate(index)">Edit</button>
-                            <button class="btn btn-danger" @click="deleteArticle(index)">Delete</button>
+                            <button class="btn btn-warning" @click="initUpdate(index)">{{ trans('catalog.edit') }}</button>
+                            <button class="btn btn-danger" @click="deleteArticle(index)">{{ trans('catalog.destroy') }}</button>
                         </td>
                     </tr>
                     </tbody>
@@ -45,7 +45,7 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
-                                <h4 class="modal-title">Update Article</h4>
+                                <h4 class="modal-title">{{ trans('catalog.updateNews') }}</h4>
                             </div>
                             <form enctype="multipart/form-data">
                                 <div class="modal-body">
@@ -62,13 +62,13 @@
                                     <div class="form-group">
                                         <label class="from-check-label">
                                             <input type="checkbox" name="visibility" class="form-check-input" v-model="update_article.visibility">
-                                            Enter Article Visibility
+                                            {{ trans('catalog.enterArticleVisible') }}
                                         </label>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary" @click="updateArticle">Submit</button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">{{ trans('catalog.close') }}</button>
+                                    <button type="button" class="btn btn-primary" @click="updateArticle">{{ trans('catalog.update') }}</button>
                                 </div>
                             </form>
                         </div>

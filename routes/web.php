@@ -9,6 +9,7 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/', 'AppController@app');
+    Route::get('/locale/{locale}', 'AppController@locale');
     Route::post('/contact', 'AppController@send');
 
     Route::get('/logout', 'AuthController@logout');

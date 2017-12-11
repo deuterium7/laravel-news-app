@@ -3,11 +3,11 @@
         <div class="container-fluid main-container">
             <div class="col-md-2 sidebar">
                 <ul class="nav nav-pills nav-stacked">
-                    <li><a @click="toggle = 'articles'">Articles</a></li>
-                    <li><a @click="toggle = 'categories'">Categories</a></li>
-                    <li><a @click="toggle = 'comments'">Comments</a></li>
-                    <li><a @click="toggle = 'users'">Users</a></li>
-                    <li><a href="/logs">Logs</a></li>
+                    <li><a @click="toggle = 'articles'">{{ trans('catalog.news') }}</a></li>
+                    <li><a @click="toggle = 'categories'">{{ trans('catalog.categories') }}</a></li>
+                    <li><a @click="toggle = 'comments'">{{ trans('catalog.comments') }}</a></li>
+                    <li><a @click="toggle = 'users'">{{ trans('catalog.users') }}</a></li>
+                    <li><a href="/logs">{{ trans('catalog.logs') }}</a></li>
                 </ul>
             </div>
             <div class="col-md-10 content">

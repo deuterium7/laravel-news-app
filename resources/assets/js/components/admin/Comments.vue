@@ -2,16 +2,16 @@
     <div id="comments" v-if="commentsLoadStatus === 2">
         <div class="panel panel-default">
             <div class="panel-heading">
-                Comments
+                {{ trans('catalog.comments') }}
             </div>
             <div class="panel-body">
                 <table class="table table-condensed">
                     <thead>
                     <tr>
-                        <th>Comment</th>
-                        <th>Article</th>
-                        <th>User</th>
-                        <th>Actions</th>
+                        <th>{{ trans('catalog.comment') }}</th>
+                        <th>{{ trans('catalog.article') }}</th>
+                        <th>{{ trans('catalog.user') }}</th>
+                        <th>{{ trans('catalog.actions') }}</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -28,7 +28,7 @@
                             </router-link>
                         </td>
                         <td>
-                            <button class="btn btn-danger" @click="deleteComment(index)">Delete</button>
+                            <button class="btn btn-danger" @click="deleteComment(index)">{{ trans('catalog.destroy') }}</button>
                         </td>
                     </tr>
                     </tbody>

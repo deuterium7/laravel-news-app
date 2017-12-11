@@ -17,7 +17,7 @@
                             </h3>
                             <p>{{ article.body }}</p>
                             <router-link :to="{ name: 'article', params: { id: article.id } }">
-                                Read more
+                                {{ trans('catalog.read') }}
                             </router-link>
                             <div class="article-date">
                                 <span>{{ article.updated_at }}</span>

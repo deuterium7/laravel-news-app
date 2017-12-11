@@ -6,6 +6,10 @@ import router from './routes.js'
 
 Vue.component('pagination', require('laravel-vue-pagination'));
 
+Vue.prototype.trans = (key) => {
+    return _.get(window.trans, key, key);
+};
+
 new Vue({
     router
 }).$mount('#app');
