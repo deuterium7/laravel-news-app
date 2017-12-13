@@ -71,7 +71,7 @@
             deleteComment(index) {
                 axios.delete('api/comments/' + this.comments.data[index].id)
                     .then(() => {
-                        location.reload();
+                        this.getComments();
                     });
             }
         }

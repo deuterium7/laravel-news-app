@@ -21,7 +21,6 @@
                     </div>
                 </div>
 
-                <comment-create></comment-create>
                 <comments :from="'article'"></comments>
             </div>
         </div>
@@ -29,7 +28,6 @@
 </template>
 
 <script>
-    import CommentCreate from '../components/CommentCreate';
     import Comments from '../components/Comments';
 
     export default {
@@ -56,7 +54,6 @@
         },
 
         components: {
-            CommentCreate,
             Comments
         }
     }

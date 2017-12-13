@@ -15,7 +15,10 @@
                         <div class="modal-body">
                             <errors :content="errors"></errors>
                             <div class="form-group">
-                                <input type="text" name="category_id" class="form-control" placeholder="Enter Category ID" v-model="article.category_id">
+                                <label for="category_id">{{ trans('catalog.category') }}</label>
+                                <select name="category_id" id="category_id" class="form-control" v-model="article.category_id">
+                                    <option v-for="category in categories" :value="category.id">{{ category.name }}</option>
+                                </select>
                             </div>
                             <div class="form-group">
                                 <input type="text" name="title" class="form-control" placeholder="Enter Article Title" v-model="article.title">
@@ -58,11 +61,23 @@
                     body: '',
                     visibility: true
                 },
+                categories: {},
                 errors: []
             }
         },
 
+        created() {
+            this.getCategories();
+        },
+
         methods: {
+            getCategories() {
+                axios.get('api/categories')
+                    .then((response) => {
+                        this.categories = response.data;
+                    });
+            },
+
             initAddArticle() {
                 this.errors = [];
                 $('#add_article_modal').modal('show');
@@ -87,7 +102,7 @@
                         this.article.visibility = true;
                         $('#add_article_modal').modal('hide');
 
-                        location.reload();
+                        this.$parent.getArticles();
                     })
                     .catch((error) => {
                         this.errors = [];

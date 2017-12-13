@@ -53,7 +53,7 @@ class CategoryController extends Controller
     {
         $attributes = $request->all();
 
-        $image = $this->categories->uploadImage($request);
+        $image = $this->categories->uploadImage($request->image);
         $attributes['image'] = $image;
 
         return $this->categories->create($attributes);
@@ -85,8 +85,8 @@ class CategoryController extends Controller
         $upload = $request->imageNew;
 
         if ($upload) {
-            $image = $this->categories->uploadImage($upload);
-            $attributes['image'] = $image;
+            $attributes['image'] = $this->categories->uploadImage($upload);
+            $this->categories->deleteFile($request->image);
         }
 
         $this->categories->update($id, $attributes);

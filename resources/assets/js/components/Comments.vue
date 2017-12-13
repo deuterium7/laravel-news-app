@@ -1,54 +1,58 @@
 <template>
-    <div id="comments" v-if="commentsLoadStatus === 2 && comments.data.length > 0">
-        <h4 class="comment-title">{{ trans('catalog.lastComments') }}</h4>
-        <div v-for="(comment, index) in comments.data">
-            <h5 v-if="from === 'article'">
-                [
-                <router-link :to="{ name: 'user', params: { id: comment.user_id } }">
-                    {{ comment.user.name }}
-                </router-link>
-                ]
-                <div class="comment-edit" v-if="comment.user_id === $root.auth.id">
-                    : <button @click="initUpdate(index)" class="btn btn-success btn-xs">Edit</button>
-                </div>
-            </h5>
-            <h5 v-else>
-                <router-link :to="{ name: 'article', params: { id: comment.article_id } }">
-                    {{ comment.article.title}}
-                </router-link>
-            </h5>
-            <p>{{ comment.body }}</p>
-            <div class="comment-date">{{ comment.updated_at | moment('kk:mm:ss - DD.MM.YYYY') }}</div>
+    <div id="comments">
+        <comment-create v-if="from === 'article'"></comment-create>
+        <div v-if="commentsLoadStatus === 2 && comments.data.length > 0">
+            <h4 class="comment-title">{{ trans('catalog.lastComments') }}</h4>
+            <div v-for="(comment, index) in comments.data">
+                <h5 v-if="from === 'article'">
+                    [
+                    <router-link :to="{ name: 'user', params: { id: comment.user_id } }">
+                        {{ comment.user.name }}
+                    </router-link>
+                    ]
+                    <div class="comment-edit" v-if="comment.user_id === $root.auth.id">
+                        : <button @click="initUpdate(index)" class="btn btn-success btn-xs">Edit</button>
+                    </div>
+                </h5>
+                <h5 v-else>
+                    <router-link :to="{ name: 'article', params: { id: comment.article_id } }">
+                        {{ comment.article.title}}
+                    </router-link>
+                </h5>
+                <p>{{ comment.body }}</p>
+                <div class="comment-date">{{ comment.updated_at | moment('kk:mm:ss - DD.MM.YYYY') }}</div>
 
-            <div v-if="from === 'article'" class="modal fade" tabindex="-1" role="dialog" id="update_comment_modal">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                    aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title">{{ trans('catalog.updateComment') }}</h4>
-                        </div>
-                        <div class="modal-body">
-                            <errors :content="errors"></errors>
-                            <div class="form-group">
-                                <textarea cols="30" rows="5" class="form-control" placeholder="Task Description" v-model="update_comment.body"></textarea>
+                <div v-if="from === 'article'" class="modal fade" tabindex="-1" role="dialog" id="update_comment_modal">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title">{{ trans('catalog.updateComment') }}</h4>
                             </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">{{ trans('catalog.close') }}</button>
-                            <button type="button" @click="updateComment" class="btn btn-primary">{{ trans('catalog.update') }}</button>
+                            <div class="modal-body">
+                                <errors :content="errors"></errors>
+                                <div class="form-group">
+                                    <textarea cols="30" rows="5" class="form-control" placeholder="Task Description" v-model="update_comment.body"></textarea>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">{{ trans('catalog.close') }}</button>
+                                <button type="button" @click="updateComment" class="btn btn-primary">{{ trans('catalog.update') }}</button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="paginator">
-            <pagination :data="comments" :limit="5" v-on:pagination-change-page="getComments"></pagination>
+            <div class="paginator">
+                <pagination :data="comments" :limit="5" v-on:pagination-change-page="getComments"></pagination>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
+    import CommentCreate from '../components/CommentCreate';
     import Errors from '../components/Errors';
 
     export default {
@@ -103,6 +107,7 @@
         },
 
         components: {
+            CommentCreate,
             Errors
         }
     }

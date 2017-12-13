@@ -40,6 +40,15 @@ interface Repository
     public function delete(int $id);
 
     /**
+     * Удалить файл.
+     *
+     * @param string $filename
+     *
+     * @return bool
+     */
+    public function deleteFile($filename);
+
+    /**
      * Загрузить изображение.
      *
      * @param $image

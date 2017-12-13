@@ -66,7 +66,24 @@ abstract class ModelRepository implements RepositoryContract
      */
     public function delete(int $id)
     {
-        return $this->model->find($id)->delete();
+        $model = $this->model->find($id);
+        $this->deleteFile($model->image);
+
+        return $model->delete();
+    }
+
+    /**
+     * Удалить файл.
+     *
+     * @param string $filename
+     *
+     * @return bool
+     */
+    public function deleteFile($filename)
+    {
+        $pathToFile = public_path().'/'.$filename;
+
+        return unlink($pathToFile);
     }
 
     /**

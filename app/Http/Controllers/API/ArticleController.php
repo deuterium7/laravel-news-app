@@ -86,8 +86,8 @@ class ArticleController extends Controller
         $upload = $request->imageNew;
 
         if ($upload) {
-            $image = $this->articles->uploadImage($upload);
-            $attributes['image'] = $image;
+            $attributes['image'] = $this->articles->uploadImage($upload);
+            $this->articles->deleteFile($request->image);
         }
 
         $this->articles->update($id, $attributes);

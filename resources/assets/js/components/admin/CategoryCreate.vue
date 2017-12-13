@@ -1,6 +1,6 @@
 <template>
     <div id="category-create">
-        <button type="button" class="btn btn-success" @click="initAddArticle">{{ trans('catalog.create') }}</button>
+        <button type="button" class="btn btn-success" @click="initAddCategory">{{ trans('catalog.create') }}</button>
 
         <div class="modal fade" tabindex="-1" role="dialog" id="add_category_modal">
             <div class="modal-dialog" role="document">
@@ -68,7 +68,7 @@
                         this.category.image = '';
                         $('#add_category_modal').modal('hide');
 
-                        location.reload();
+                        this.$parent.getCategories();
                     })
                     .catch((error) => {
                         this.errors = [];

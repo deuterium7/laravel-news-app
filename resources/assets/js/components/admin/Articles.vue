@@ -150,7 +150,7 @@
             deleteArticle(index) {
                 axios.delete('api/articles/' + this.articles.data[index].id)
                     .then(() => {
-                        location.reload();
+                        this.getArticles();
                     });
             }
         },
