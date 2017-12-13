@@ -127,7 +127,7 @@
             deleteCategory(index) {
                 axios.delete('api/categories/' + this.categories[index].id)
                     .then(() => {
-                        location.reload();
+                        this.getCategories();
                     });
             }
         },

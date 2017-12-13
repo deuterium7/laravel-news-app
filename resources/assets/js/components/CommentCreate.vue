@@ -57,7 +57,7 @@
                         this.comment.body = '';
                         $('#add_comment_modal').modal('hide');
 
-                        location.reload();
+                        this.$parent.getComments();
                     })
                     .catch((error) => {
                         this.errors = [];

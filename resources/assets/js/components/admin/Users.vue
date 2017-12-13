@@ -128,7 +128,7 @@
             setAdmin(index) {
                 axios.put('api/users/' + this.users.data[index].id + '/admin')
                     .then(() => {
-                        location.reload();
+                        this.getUsers();
                     });
             }
         },
