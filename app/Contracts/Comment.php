@@ -5,11 +5,13 @@ namespace App\Contracts;
 interface Comment extends Repository
 {
     /**
-     * Получить все комметарии администратора.
+     * Получить все комментарии для администратора.
+     *
+     * @param string $keywords
      *
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public function getCommentsAdmin();
+    public function getCommentsAdmin($keywords);
 
     /**
      * Получить все комментарии клиента.

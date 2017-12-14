@@ -5,6 +5,9 @@
                 {{ trans('catalog.comments') }}
             </div>
             <div class="panel-body">
+                <form @submit.prevent="getComments">
+                    <search description="Search By Comment"></search>
+                </form>
                 <table class="table table-condensed">
                     <thead>
                     <tr>
@@ -42,11 +45,14 @@
 </template>
 
 <script>
+    import Search from '../Search';
+
     export default {
         data() {
             return {
                 comments: {},
-                commentsLoadStatus: 0
+                commentsLoadStatus: 0,
+                keywords: ''
             }
         },
 
@@ -61,7 +67,7 @@
                 }
 
                 this.commentsLoadStatus = 1;
-                axios.get('api/admin/comments/?page=' + page)
+                axios.get('api/admin/comments/?page=' + page + '&keywords=' + this.keywords)
                     .then((response) => {
                         this.comments = response.data;
                         this.commentsLoadStatus = 2;
@@ -74,6 +80,10 @@
                         this.getComments();
                     });
             }
+        },
+
+        components: {
+            Search
         }
     }
 </script>

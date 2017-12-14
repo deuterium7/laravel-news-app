@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Contracts\Article as ArticleContract;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ArticleRequest;
+use Illuminate\Http\Request;
 
 class ArticleController extends Controller
 {
@@ -38,9 +39,9 @@ class ArticleController extends Controller
      *
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public function articlesAdmin()
+    public function articlesAdmin(Request $request)
     {
-        return $this->articles->getArticlesAdmin();
+        return $this->articles->getArticlesAdmin($request->keywords);
     }
 
     /**

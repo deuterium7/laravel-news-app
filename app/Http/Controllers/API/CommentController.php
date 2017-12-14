@@ -6,6 +6,7 @@ use App\Contracts\Comment as CommentContract;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CommentRequest;
 use App\Models\Comment;
+use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
@@ -25,13 +26,15 @@ class CommentController extends Controller
     }
 
     /**
-     * Получить все комментарии администратора.
+     * Получить все комментарии для администратора.
      *
-     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     * @param Request $request
+     *
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public function commentsAdmin()
+    public function commentsAdmin(Request $request)
     {
-        return $this->comments->getCommentsAdmin();
+        return $this->comments->getCommentsAdmin($request->keywords);
     }
 
     /**

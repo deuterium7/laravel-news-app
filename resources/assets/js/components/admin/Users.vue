@@ -5,6 +5,9 @@
                 {{ trans('catalog.users') }}
             </div>
             <div class="panel-body">
+                <form @submit.prevent="getUsers">
+                    <search description="Search By Name"></search>
+                </form>
                 <table class="table table-condensed">
                     <thead>
                     <tr>
@@ -76,6 +79,7 @@
 
 <script>
     import Errors from '../Errors';
+    import Search from '../Search';
 
     export default {
         data() {
@@ -83,7 +87,8 @@
                 users: {},
                 usersLoadStatus: 0,
                 user_ban: {},
-                errors: []
+                errors: [],
+                keywords: ''
             }
         },
 
@@ -98,7 +103,7 @@
                 }
 
                 this.usersLoadStatus = 1;
-                axios.get('api/admin/users/?page=' + page)
+                axios.get('api/admin/users/?page=' + page + '&keywords=' + this.keywords)
                     .then((response) => {
                         this.users = response.data;
                         this.usersLoadStatus = 2;
@@ -134,7 +139,8 @@
         },
 
         components: {
-            Errors
+            Errors,
+            Search
         }
     }
 </script>
