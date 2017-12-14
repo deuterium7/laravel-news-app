@@ -5,11 +5,13 @@ namespace App\Contracts;
 interface User extends Repository
 {
     /**
-     * Получить всех пользователей.
+     * Получить всех пользователей для администратора.
+     *
+     * @param string $keywords
      *
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public function getUsers();
+    public function getUsersAdmin($keywords);
 
     /**
      * Получить профиль пользователя.

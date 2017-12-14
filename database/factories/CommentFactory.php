@@ -9,9 +9,11 @@ $factory->define(Comment::class, function (Faker $faker) {
     return [
         'article_id' => function () {
             return factory(Article::class)->create()->id;
+            // return Article::all()->random()
         },
         'user_id'    => function () {
             return factory(User::class)->create()->id;
+            // return User::all()->random()
         },
         'body' => $faker->paragraph,
     ];

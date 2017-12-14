@@ -7,6 +7,7 @@ use App\Contracts\User as UserContract;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserStatusRequest;
 use App\Models\User;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -43,13 +44,15 @@ class UserController extends Controller
     }
 
     /**
-     * Получить всех пользователей для админа.
+     * Получить всех пользователей для администратора.
+     *
+     * @param Request $request
      *
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public function usersAdmin()
+    public function usersAdmin(Request $request)
     {
-        return $this->users->getUsers();
+        return $this->users->getUsersAdmin($request->keywords);
     }
 
     /**

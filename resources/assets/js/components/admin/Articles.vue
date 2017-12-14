@@ -5,6 +5,9 @@
                 {{ trans('catalog.news') }}
             </div>
             <div class="panel-body">
+                <form @submit.prevent="getArticles">
+                    <search description="Search By Title"></search>
+                </form>
                 <table class="table table-condensed">
                     <thead>
                     <tr>
@@ -85,6 +88,7 @@
 <script>
     import ArticleCreate from './ArticleCreate';
     import Errors from '../Errors';
+    import Search from '../Search';
 
     export default {
         data() {
@@ -92,7 +96,8 @@
                 articles: {},
                 articlesLoadStatus: 0,
                 update_article: {},
-                errors: []
+                errors: [],
+                keywords: ''
             }
         },
 
@@ -107,7 +112,7 @@
                 }
 
                 this.articlesLoadStatus = 1;
-                axios.get('api/admin/articles/?page=' + page)
+                axios.get('api/admin/articles/?page=' + page + '&keywords=' + this.keywords)
                     .then((response) => {
                         this.articles = response.data;
                         this.articlesLoadStatus = 2;
@@ -157,11 +162,27 @@
 
         components: {
             ArticleCreate,
-            Errors
+            Errors,
+            Search
         }
     }
 </script>
 
 <style>
     div.paginator { text-align: center; }
+
+    .stylish-input-group .input-group-addon{
+        background: white !important;
+    }
+
+    .stylish-input-group .form-control{
+        border-right:0;
+        box-shadow:0 0 0;
+        border-color:#ccc;
+    }
+
+    .stylish-input-group button{
+        border:0;
+        background:transparent;
+    }
 </style>

@@ -18,13 +18,16 @@ class CommentRepository extends ModelRepository implements CommentContract
     }
 
     /**
-     * Получить все коментарии для администратора.
+     * Получить все комментарии для администратора.
+     *
+     * @param string $keywords
      *
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public function getCommentsAdmin()
+    public function getCommentsAdmin($keywords)
     {
         return $this->model->with(['article', 'user'])
+            ->where('body', 'LIKE', '%'.$keywords.'%')
             ->latest()
             ->paginate(10);
     }

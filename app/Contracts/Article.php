@@ -14,9 +14,11 @@ interface Article extends Repository
     /**
      * Получить все новости для администратора.
      *
+     * @param string $keywords
+     *
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public function getArticlesAdmin();
+    public function getArticlesAdmin($keywords);
 
     /**
      * Получить новость с комментариями.
