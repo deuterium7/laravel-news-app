@@ -1,9 +1,6 @@
 <template>
-    <div id="home" v-if="articlesLoadStatus === 2">
-        <articles :data="articles.data"></articles>
-        <div class="paginator">
-            <pagination :data="articles" :limit="5" v-on:pagination-change-page="getArticles"></pagination>
-        </div>
+    <div id="articles_favorite" v-if="articlesLoadStatus === 2">
+        <articles :data="articles"></articles>
     </div>
 </template>
 
@@ -23,13 +20,9 @@
         },
 
         methods: {
-            getArticles(page) {
-                if (typeof page === 'undefined') {
-                    page = 1;
-                }
-
+            getArticles() {
                 this.articlesLoadStatus = 1;
-                axios.get('api/categories/' + this.$route.params.id + '/?page=' + page)
+                axios.get('api/favorite/articles')
                     .then((response) => {
                         this.articles = response.data;
                         this.articlesLoadStatus = 2;
@@ -42,7 +35,3 @@
         }
     }
 </script>
-
-<style>
-    div.paginator { text-align: center; }
-</style>

@@ -14,6 +14,7 @@
                         <th>{{ trans('catalog.title') }}</th>
                         <th>{{ trans('catalog.category') }}</th>
                         <th>{{ trans('catalog.visibility') }}</th>
+                        <th>{{ trans('catalog.favorite') }}</th>
                         <th>{{ trans('catalog.actions') }}</th>
                     </tr>
                     </thead>
@@ -31,6 +32,9 @@
                         </td>
 
                         <td v-if="article.visibility">{{ trans('catalog.yes') }}</td>
+                        <td v-else>{{ trans('catalog.no') }}</td>
+
+                        <td v-if="article.favorite">{{ trans('catalog.yes') }}</td>
                         <td v-else>{{ trans('catalog.no') }}</td>
 
                         <td>
@@ -66,6 +70,10 @@
                                         <label class="from-check-label">
                                             <input type="checkbox" name="visibility" class="form-check-input" v-model="update_article.visibility">
                                             {{ trans('catalog.enterArticleVisible') }}
+                                        </label>
+                                        <label class="from-check-label">
+                                            <input type="checkbox" name="favorite" class="form-check-input" v-model="update_article.favorite">
+                                            {{ trans('catalog.enterArticleFavorite') }}
                                         </label>
                                     </div>
                                 </div>

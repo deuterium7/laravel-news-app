@@ -34,6 +34,10 @@
                                     <input type="checkbox" name="visibility" class="form-check-input" v-model="article.visibility">
                                     {{ trans('catalog.enterArticleVisible') }}
                                 </label>
+                                <label class="from-check-label">
+                                    <input type="checkbox" name="favorite" class="form-check-input" v-model="article.favorite">
+                                    {{ trans('catalog.enterArticleFavorite') }}
+                                </label>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -59,7 +63,8 @@
                     title: '',
                     image: '',
                     body: '',
-                    visibility: true
+                    visibility: true,
+                    favorite: false
                 },
                 categories: {},
                 errors: []

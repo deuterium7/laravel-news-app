@@ -113,4 +113,6 @@ return [
     'banUser'               => 'Забанить пользователя',
     'format'                => 'Формат',
     'views'                 => 'Просмотров',
+    'enterArticleFavorite'  => 'Избранная новость',
+    'favorite'              => 'Избранное',
 ];

@@ -46,6 +46,16 @@ class ArticleController extends Controller
     }
 
     /**
+     * Получить последние избранные новости.
+     *
+     * @return ArticleContract
+     */
+    public function articlesFavorite()
+    {
+        return $this->articles->getArticlesFavorite();
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param ArticleRequest $request

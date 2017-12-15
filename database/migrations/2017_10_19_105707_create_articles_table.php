@@ -22,6 +22,7 @@ class CreateArticlesTable extends Migration
             $table->string('image');
             $table->text('body');
             $table->integer('views')->unsigned()->default(0);
+            $table->boolean('favorite')->default(false);
             $table->boolean('visibility')->default(true);
 
             $table->timestamps();

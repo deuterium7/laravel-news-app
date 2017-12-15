@@ -30,7 +30,12 @@ export default new VueRouter({
                 {
                     path: 'articles',
                     name: 'articles',
-                    component: Vue.component('Articles', require('./pages/Articles.vue'))
+                    component: Vue.component('Home', require('./pages/Home.vue'))
+                },
+                {
+                    path: 'favorite/articles',
+                    name: 'articlesFavorite',
+                    component: Vue.component('ArticlesFavorite', require('./pages/ArticlesFavorite.vue'))
                 },
                 {
                     path: 'articles/:id',

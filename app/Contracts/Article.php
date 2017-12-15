@@ -37,4 +37,11 @@ interface Article extends Repository
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
     public function getArticlesCategory($id);
+
+    /**
+     * Получить последние избранные новости.
+     *
+     * @return Article
+     */
+    public function getArticlesFavorite();
 }
