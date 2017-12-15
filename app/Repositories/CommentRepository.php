@@ -69,12 +69,12 @@ class CommentRepository extends ModelRepository implements CommentContract
             $like->delete();
 
             return response()->json([
-                'unliked' => true
+                'unliked' => true,
             ]);
         } else {
             return Like::create([
                 'comment_id' => $id,
-                'user_id' => $userId
+                'user_id'    => $userId,
             ]);
         }
     }
