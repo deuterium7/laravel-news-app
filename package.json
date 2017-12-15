@@ -20,6 +20,7 @@
         "vue-router": "^3.0.1"
     },
     "dependencies": {
+        "font-awesome": "^4.7.0",
         "laravel-vue-pagination": "^1.0.6",
         "vue-moment": "^3.1.0"
     }

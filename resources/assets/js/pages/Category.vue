@@ -19,9 +19,7 @@
                             <router-link :to="{ name: 'article', params: { id: article.id } }">
                                 {{ trans('catalog.read') }}
                             </router-link>
-                            <div class="article-date">
-                                <span>{{ article.updated_at | moment('kk:mm:ss - DD.MM.YYYY') }}</span>
-                            </div>
+                            <span class="article-views"><i class="fa fa-eye" aria-hidden="true"></i> {{ article.views }}</span>
                         </div>
                     </div>
                     <hr>
@@ -66,5 +64,5 @@
 
 <style>
     .article-title, div.paginator { text-align: center; }
-    .article-date { text-align: right; }
+    .article-views { float: right; }
 </style>

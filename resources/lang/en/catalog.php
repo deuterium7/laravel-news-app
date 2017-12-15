@@ -113,4 +113,5 @@ return [
     'registeredAt'          => 'Registered At',
     'banUser'               => 'Ban The User',
     'format'                => 'Format',
+    'views'                 => 'Views',
 ];

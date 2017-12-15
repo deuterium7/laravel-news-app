@@ -25,6 +25,9 @@ class EventServiceProvider extends ServiceProvider
         'App\Mail\UserRegistrationWasConfirmed' => [
             'App\Listeners\NotifyUserAnRegistration',
         ],
+        'App\Events\ArticleWasViewed' => [
+            'App\Listeners\IncrementArticleViewCount',
+        ],
     ];
 
     /**
