@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Contracts\Comment as CommentContract;
 use App\Models\Comment;
+use App\Models\Like;
 
 class CommentRepository extends ModelRepository implements CommentContract
 {
@@ -44,9 +45,37 @@ class CommentRepository extends ModelRepository implements CommentContract
     {
         $toggle = $from === 'article' ? 'user' : 'article';
 
-        return $this->model->with($toggle)
+        return $this->model->with([$toggle, 'likes'])
             ->where($from.'_id', $id)
             ->latest()
             ->paginate(5);
+    }
+
+    /**
+     * Поставить лайк/дизлайк комментарию.
+     *
+     * @param $id
+     *
+     * @return mixed
+     */
+    public function handleCommentLike($id)
+    {
+        $userId = auth()->id();
+        $like = Like::where('comment_id', $id)
+            ->where('user_id', $userId)
+            ->first();
+
+        if ($like) {
+            $like->delete();
+
+            return response()->json([
+                'unliked' => true
+            ]);
+        } else {
+            return Like::create([
+                'comment_id' => $id,
+                'user_id' => $userId
+            ]);
+        }
     }
 }

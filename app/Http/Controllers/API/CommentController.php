@@ -51,6 +51,18 @@ class CommentController extends Controller
     }
 
     /**
+     * Лайк/дизлайк комментария.
+     *
+     * @param $id
+     *
+     * @return mixed
+     */
+    public function commentLikeHandle($id)
+    {
+        return $this->comments->handleCommentLike($id);
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param CommentRequest $request

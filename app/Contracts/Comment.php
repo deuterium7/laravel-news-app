@@ -22,4 +22,11 @@ interface Comment extends Repository
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
     public function getCommentsClient($id, $from);
+
+    /**
+     * Поставить лайк/дизлайк комментарию.
+     *
+     * @param $id
+     */
+    public function handleCommentLike($id);
 }

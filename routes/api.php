@@ -24,6 +24,7 @@ Route::group(['namespace' => 'API', 'middleware' => 'auth:api'], function () {
         Route::get('/users/{user}', 'UserController@show');
         Route::get('/auth', 'UserController@auth');
 
+        Route::post('/like/comments/{comment}', 'CommentController@commentLikeHandle');
         Route::post('/comments', 'CommentController@store');
 
         Route::put('/comments/{comment}', 'CommentController@update');
