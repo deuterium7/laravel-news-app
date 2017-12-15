@@ -1,8 +1,8 @@
 <template>
-    <div id="articles" v-if="articlesLoadStatus === 2">
+    <div id="articles">
         <div class="container">
             <div class="row">
-                <div v-for="article in articles.data">
+                <div v-for="article in data">
                     <div class="clearfix">
                         <div class="col-md-4">
                             <router-link :to="{ name: 'article', params: { id: article.id } }">
@@ -19,15 +19,10 @@
                             <router-link :to="{ name: 'article', params: { id: article.id } }">
                                 {{ trans('catalog.read') }}
                             </router-link>
-                            <div class="article-date">
-                                <span>{{ article.updated_at | moment('kk:mm:ss - DD.MM.YYYY') }}</span>
-                            </div>
+                            <span class="article-views"><i class="fa fa-eye" aria-hidden="true"></i> {{ article.views }}</span>
                         </div>
                     </div>
                     <hr>
-                </div>
-                <div class="paginator">
-                    <pagination :data="articles" :limit="5" v-on:pagination-change-page="getArticles"></pagination>
                 </div>
             </div>
         </div>
@@ -36,36 +31,11 @@
 
 <script>
     export default {
-        data() {
-            return {
-                articles: {},
-                articlesLoadStatus: 0
-            }
-        },
-
-        created() {
-            this.getArticles();
-        },
-
-        methods: {
-            getArticles(page) {
-                if (typeof page === 'undefined') {
-                    page = 1;
-                }
-
-                this.articlesLoadStatus = 1;
-                axios.get('api/articles/?page=' + page)
-                    .then((response) => {
-                        this.articles = response.data;
-                        this.articlesLoadStatus = 2;
-                    });
-            }
-        }
+        props: ['data']
     }
 </script>
 
 <style>
     .article-title { text-align: center; }
-    .article-date { text-align: right; }
-    div.paginator { text-align: center; }
+    .article-views { float: right; }
 </style>

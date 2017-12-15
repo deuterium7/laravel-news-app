@@ -16,6 +16,5 @@
 </script>
 
 <style>
-    * { font-family: sans-serif; }
     p { text-align: justify; }
 </style>

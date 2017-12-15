@@ -113,4 +113,7 @@ return [
     'registeredAt'          => 'Registered At',
     'banUser'               => 'Ban The User',
     'format'                => 'Format',
+    'views'                 => 'Views',
+    'enterArticleFavorite'  => 'Enter Article Favorite',
+    'favorite'              => 'Favorite',
 ];

@@ -112,4 +112,7 @@ return [
     'registeredAt'          => 'Дата регистрации',
     'banUser'               => 'Забанить пользователя',
     'format'                => 'Формат',
+    'views'                 => 'Просмотров',
+    'enterArticleFavorite'  => 'Избранная новость',
+    'favorite'              => 'Избранное',
 ];

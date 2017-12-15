@@ -112,4 +112,7 @@ return [
     'registeredAt'          => 'Дата реєстрації',
     'banUser'               => 'Забанити користувача',
     'format'                => 'Формат',
+    'views'                 => 'Переглядів',
+    'enterArticleFavorite'  => 'Обрана новина',
+    'favorite'              => 'Обрано',
 ];

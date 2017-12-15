@@ -13,7 +13,7 @@
     <link rel="shortcut icon" href="{{ asset('favicon.png') }}">
 
     <!-- Scripts -->
-    <script src='https://www.google.com/recaptcha/api.js'></script>
+    <script src="https://www.google.com/recaptcha/api.js"></script>
 </head>
 <body>
     <div id="app">

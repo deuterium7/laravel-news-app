@@ -20,6 +20,7 @@ Route::group(['namespace' => 'API', 'middleware' => 'auth:api'], function () {
         Route::get('/articles/{article}', 'ArticleController@show');
         Route::get('/categories', 'CategoryController@index');
         Route::get('/articles', 'ArticleController@index');
+        Route::get('/favorite/articles', 'ArticleController@articlesFavorite');
         Route::get('/users/{user}', 'UserController@show');
         Route::get('/auth', 'UserController@auth');
 

@@ -26,7 +26,7 @@ class CreateUsersTable extends Migration
             $table->text('avatar');
 
             // user is admin
-            $table->boolean('admin')->nullable();
+            $table->boolean('admin')->default(false);
 
             // user haven't ban
             $table->timestamp('ban')->nullable();

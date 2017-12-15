@@ -29,7 +29,7 @@
                 }
 
                 this.articlesLoadStatus = 1;
-                axios.get('api/categories/' + this.$route.params.id + '/?page=' + page)
+                axios.get('api/articles/?page=' + page)
                     .then((response) => {
                         this.articles = response.data;
                         this.articlesLoadStatus = 2;

@@ -26,6 +26,11 @@
                         </router-link>
                     </li>
                     <li>
+                        <router-link :to="{ name: 'articlesFavorite' }">
+                            {{ trans('catalog.favorite') }}
+                        </router-link>
+                    </li>
+                    <li>
                         <router-link :to="{ name: 'contact' }">
                             {{ trans('catalog.contact') }}
                         </router-link>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Contracts\Article as ArticleContract;
+use App\Events\ArticleWasViewed;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ArticleRequest;
 use Illuminate\Http\Request;
@@ -45,6 +46,16 @@ class ArticleController extends Controller
     }
 
     /**
+     * Получить последние избранные новости.
+     *
+     * @return ArticleContract
+     */
+    public function articlesFavorite()
+    {
+        return $this->articles->getArticlesFavorite();
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param ArticleRequest $request
@@ -70,7 +81,10 @@ class ArticleController extends Controller
      */
     public function show($id)
     {
-        return $this->articles->getArticle($id);
+        $article = $this->articles->getArticle($id);
+        event(new ArticleWasViewed($article));
+
+        return $article;
     }
 
     /**

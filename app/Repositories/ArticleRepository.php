@@ -36,7 +36,7 @@ class ArticleRepository extends ModelRepository implements ArticleContract
     /**
      * Получить видимые новости.
      *
-     * @return Article
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
     public function getVisibleArticles()
     {
@@ -88,6 +88,22 @@ class ArticleRepository extends ModelRepository implements ArticleContract
             ->where('visibility', true)
             ->latest()
             ->paginate(5);
+
+        return $this->cutBody($articles);
+    }
+
+    /**
+     * Получить последние избранные новости.
+     *
+     * @return Article
+     */
+    public function getArticlesFavorite()
+    {
+        $articles = $this->model->where('favorite', true)
+            ->where('visibility', true)
+            ->latest()
+            ->limit(5)
+            ->get();
 
         return $this->cutBody($articles);
     }
