@@ -42,8 +42,8 @@
         methods: {
             formSubmit() {
                 axios.post('contact', {
-                    user: this.$store.getters.getAuth.name,
-                    email: this.$store.getters.getAuth.email,
+                    user: this.$root.auth.name,
+                    email: this.$root.auth.email,
                     title: this.contact.title,
                     message: this.contact.message,
                     recaptcha: grecaptcha.getResponse(),
