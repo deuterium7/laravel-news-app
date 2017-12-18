@@ -38,11 +38,13 @@ class ArticleController extends Controller
     /**
      * Получить все новости для администратора.
      *
+     * @param Request $request
+     *
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
     public function articlesAdmin(Request $request)
     {
-        return $this->articles->getArticlesAdmin($request->keywords);
+        return $this->articles->getArticlesAdmin($request->keywords, $request->field, $request->direction);
     }
 
     /**

@@ -22,14 +22,16 @@ class CommentRepository extends ModelRepository implements CommentContract
      * Получить все комментарии для администратора.
      *
      * @param string $keywords
+     * @param string $field [body, article_id, user_id]
+     * @param string $direction [asc, desc]
      *
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public function getCommentsAdmin($keywords)
+    public function getCommentsAdmin($keywords, $field, $direction)
     {
         return $this->model->with(['article', 'user'])
             ->where('body', 'LIKE', '%'.$keywords.'%')
-            ->latest()
+            ->orderBy($field, $direction)
             ->paginate(10);
     }
 
@@ -52,7 +54,7 @@ class CommentRepository extends ModelRepository implements CommentContract
     }
 
     /**
-     * Поставить лайк/дизлайк комментарию.
+     * Поставить лайк/анлайк комментарию.
      *
      * @param $id
      *

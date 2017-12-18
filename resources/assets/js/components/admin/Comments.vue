@@ -11,9 +11,21 @@
                 <table class="table table-condensed">
                     <thead>
                     <tr>
-                        <th>{{ trans('catalog.comment') }}</th>
-                        <th>{{ trans('catalog.article') }}</th>
-                        <th>{{ trans('catalog.user') }}</th>
+                        <th>
+                            <a class="button" @click="initSort('body')">
+                                {{ trans('catalog.comment') }}
+                            </a>
+                        </th>
+                        <th>
+                            <a class="button" @click="initSort('article_id')">
+                                {{ trans('catalog.article') }}
+                            </a>
+                        </th>
+                        <th>
+                            <a class="button" @click="initSort('user_id')">
+                                {{ trans('catalog.user') }}
+                            </a>
+                        </th>
                         <th>{{ trans('catalog.actions') }}</th>
                     </tr>
                     </thead>
@@ -52,7 +64,11 @@
             return {
                 comments: {},
                 commentsLoadStatus: 0,
-                keywords: ''
+                keywords: '',
+                sort: {
+                    field: 'updated_at',
+                    direction: 'desc',
+                }
             }
         },
 
@@ -67,11 +83,21 @@
                 }
 
                 this.commentsLoadStatus = 1;
-                axios.get('api/admin/comments/?page=' + page + '&keywords=' + this.keywords)
+                axios.get('api/admin/comments/?page='+page+'&keywords='+this.keywords+'&field='+this.sort.field+'&direction='+this.sort.direction)
                     .then((response) => {
                         this.comments = response.data;
                         this.commentsLoadStatus = 2;
                     });
+            },
+
+            switchDirection() {
+                this.sort.direction = this.sort.direction === 'desc' ? 'asc' : 'desc';
+            },
+
+            initSort(field) {
+                this.sort.field = field;
+                this.switchDirection();
+                this.getComments();
             },
 
             deleteComment(index) {

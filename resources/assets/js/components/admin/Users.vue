@@ -11,11 +11,31 @@
                 <table class="table table-condensed">
                     <thead>
                     <tr>
-                        <th>{{ trans('catalog.name') }}</th>
-                        <th>{{ trans('catalog.emailAddress') }}</th>
-                        <th>{{ trans('catalog.admin') }}</th>
-                        <th>{{ trans('catalog.ban') }}</th>
-                        <th>{{ trans('catalog.registeredAt') }}</th>
+                        <th>
+                            <a class="button" @click="initSort('name')">
+                                {{ trans('catalog.name') }}
+                            </a>
+                        </th>
+                        <th>
+                            <a class="button" @click="initSort('email')">
+                                {{ trans('catalog.emailAddress') }}
+                            </a>
+                        </th>
+                        <th>
+                            <a class="button" @click="initSort('admin')">
+                                {{ trans('catalog.admin') }}
+                            </a>
+                        </th>
+                        <th>
+                            <a class="button" @click="initSort('ban')">
+                                {{ trans('catalog.ban') }}
+                            </a>
+                        </th>
+                        <th>
+                            <a class="button" @click="initSort('created_at')">
+                                {{ trans('catalog.registeredAt') }}
+                            </a>
+                        </th>
                         <th>{{ trans('catalog.actions') }}</th>
                     </tr>
                     </thead>
@@ -88,7 +108,11 @@
                 usersLoadStatus: 0,
                 user_ban: {},
                 errors: [],
-                keywords: ''
+                keywords: '',
+                sort: {
+                    field: 'updated_at',
+                    direction: 'desc',
+                }
             }
         },
 
@@ -103,11 +127,21 @@
                 }
 
                 this.usersLoadStatus = 1;
-                axios.get('api/admin/users/?page=' + page + '&keywords=' + this.keywords)
+                axios.get('api/admin/users/?page='+page+'&keywords='+this.keywords+'&field='+this.sort.field+'&direction='+this.sort.direction)
                     .then((response) => {
                         this.users = response.data;
                         this.usersLoadStatus = 2;
                     });
+            },
+
+            switchDirection() {
+                this.sort.direction = this.sort.direction === 'desc' ? 'asc' : 'desc';
+            },
+
+            initSort(field) {
+                this.sort.field = field;
+                this.switchDirection();
+                this.getUsers();
             },
 
             initBan(index) {

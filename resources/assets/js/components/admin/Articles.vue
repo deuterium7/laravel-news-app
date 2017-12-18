@@ -11,10 +11,26 @@
                 <table class="table table-condensed">
                     <thead>
                     <tr>
-                        <th>{{ trans('catalog.title') }}</th>
-                        <th>{{ trans('catalog.category') }}</th>
-                        <th>{{ trans('catalog.visibility') }}</th>
-                        <th>{{ trans('catalog.favorite') }}</th>
+                        <th>
+                            <a class="button" @click="initSort('title')">
+                                {{ trans('catalog.title') }}
+                            </a>
+                        </th>
+                        <th>
+                            <a class="button" @click="initSort('category_id')">
+                                {{ trans('catalog.category') }}
+                            </a>
+                        </th>
+                        <th>
+                            <a class="button" @click="initSort('visibility')">
+                                {{ trans('catalog.visibility') }}
+                            </a>
+                        </th>
+                        <th>
+                            <a class="button" @click="initSort('favorite')">
+                                {{ trans('catalog.favorite') }}
+                            </a>
+                        </th>
                         <th>{{ trans('catalog.actions') }}</th>
                     </tr>
                     </thead>
@@ -105,7 +121,11 @@
                 articlesLoadStatus: 0,
                 update_article: {},
                 errors: [],
-                keywords: ''
+                keywords: '',
+                sort: {
+                    field: 'updated_at',
+                    direction: 'desc',
+                }
             }
         },
 
@@ -120,11 +140,21 @@
                 }
 
                 this.articlesLoadStatus = 1;
-                axios.get('api/admin/articles/?page=' + page + '&keywords=' + this.keywords)
+                axios.get('api/admin/articles/?page='+page+'&keywords='+this.keywords+'&field='+this.sort.field+'&direction='+this.sort.direction)
                     .then((response) => {
                         this.articles = response.data;
                         this.articlesLoadStatus = 2;
                     });
+            },
+
+            switchDirection() {
+                this.sort.direction = this.sort.direction === 'desc' ? 'asc' : 'desc';
+            },
+
+            initSort(field) {
+                this.sort.field = field;
+                this.switchDirection();
+                this.getArticles();
             },
 
             initUpdate(index) {
@@ -177,20 +207,16 @@
 </script>
 
 <style>
-    div.paginator { text-align: center; }
-
-    .stylish-input-group .input-group-addon{
-        background: white !important;
+    div.paginator {
+        text-align: center;
     }
 
-    .stylish-input-group .form-control{
-        border-right:0;
-        box-shadow:0 0 0;
-        border-color:#ccc;
-    }
-
-    .stylish-input-group button{
+    .stylish-input-group button {
         border:0;
         background:transparent;
+    }
+
+    .button {
+        cursor: pointer;
     }
 </style>
