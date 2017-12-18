@@ -18,17 +18,19 @@ class UserRepository extends ModelRepository implements UserContract
     }
 
     /**
-     * Получить всех польхователей для администратора.
+     * Получить всех пользователей для администратора.
      *
      * @param string $keywords
+     * @param string $field [name, email, admin, ban, created_at]
+     * @param string $direction [asc, desc]
      *
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public function getUsersAdmin($keywords)
+    public function getUsersAdmin($keywords, $field, $direction)
     {
         return $this->model
             ->where('name', 'LIKE', '%'.$keywords.'%')
-            ->latest()
+            ->orderBy($field, $direction)
             ->paginate(10);
     }
 

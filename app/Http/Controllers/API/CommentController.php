@@ -34,7 +34,7 @@ class CommentController extends Controller
      */
     public function commentsAdmin(Request $request)
     {
-        return $this->comments->getCommentsAdmin($request->keywords);
+        return $this->comments->getCommentsAdmin($request->keywords, $request->field, $request->direction);
     }
 
     /**

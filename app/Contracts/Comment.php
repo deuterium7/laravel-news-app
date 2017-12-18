@@ -8,10 +8,12 @@ interface Comment extends Repository
      * Получить все комментарии для администратора.
      *
      * @param string $keywords
+     * @param string $field [body, article_id, user_id]
+     * @param string $direction [asc, desc]
      *
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public function getCommentsAdmin($keywords);
+    public function getCommentsAdmin($keywords, $field, $direction);
 
     /**
      * Получить все комментарии клиента.

@@ -51,14 +51,16 @@ class ArticleRepository extends ModelRepository implements ArticleContract
      * Получить все новости для администратора.
      *
      * @param string $keywords
+     * @param string $field [title, category_id, visibility, favorite]
+     * @param string $direction [asc, desc]
      *
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public function getArticlesAdmin($keywords)
+    public function getArticlesAdmin($keywords, $field, $direction)
     {
         return $this->model->with('category')
             ->where('title', 'LIKE', '%'.$keywords.'%')
-            ->latest()
+            ->orderBy($field, $direction)
             ->paginate(10);
     }
 

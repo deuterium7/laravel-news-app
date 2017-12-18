@@ -52,7 +52,7 @@ class UserController extends Controller
      */
     public function usersAdmin(Request $request)
     {
-        return $this->users->getUsersAdmin($request->keywords);
+        return $this->users->getUsersAdmin($request->keywords, $request->field, $request->direction);
     }
 
     /**
