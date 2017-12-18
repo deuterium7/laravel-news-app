@@ -21,7 +21,7 @@ class UserRepository extends ModelRepository implements UserContract
      * Получить всех пользователей для администратора.
      *
      * @param string $keywords
-     * @param string $field [name, email, admin, ban, created_at]
+     * @param string $field     [name, email, admin, ban, created_at]
      * @param string $direction [asc, desc]
      *
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator

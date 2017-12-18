@@ -51,7 +51,7 @@ class ArticleRepository extends ModelRepository implements ArticleContract
      * Получить все новости для администратора.
      *
      * @param string $keywords
-     * @param string $field [title, category_id, visibility, favorite]
+     * @param string $field     [title, category_id, visibility, favorite]
      * @param string $direction [asc, desc]
      *
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
